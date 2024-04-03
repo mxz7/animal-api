@@ -26,10 +26,12 @@ export const images = sqliteTable(
   "images",
   {
     id: text("id").primaryKey(),
-    type: text("type"),
+    type: text("type").notNull(),
     verified: integer("verified").default(0),
     name: text("name"),
     uploadedBy: text("uploaded_by").references(() => users.id, { onDelete: "set null" }),
+    createdAt: integer("created_at").notNull(),
+    uploadedIp: text("uploaded_ip").notNull(),
   },
   (table) => ({
     typeIdx: index("type_idx").on(table.type),
