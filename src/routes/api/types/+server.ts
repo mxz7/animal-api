@@ -6,7 +6,7 @@ import { eq, sql } from "drizzle-orm";
 export async function GET({ setHeaders }) {
   setHeaders({ "cache-control": "s-maxage=3600, stale-while-revalidate" });
 
-  const [query] = await db
+  const query = await db
     .select({ type: images.type, count: sql`count()` })
     .from(images)
     .groupBy(images.type)
