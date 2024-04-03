@@ -1,0 +1,86 @@
+import { discord, lucia } from "$lib/server/auth.js";
+import db from "$lib/server/database/database.js";
+import { users } from "$lib/server/database/schema.js";
+import { redirect } from "@sveltejs/kit";
+import { OAuth2RequestError } from "arctic";
+import { eq } from "drizzle-orm";
+import { nanoid } from "nanoid";
+
+export async function GET({ cookies, url, getClientAddress }) {
+  const code = url.searchParams.get("code");
+  const state = url.searchParams.get("state");
+  const storedState = cookies.get("oauth_state") ?? null;
+  const next = cookies.get("next") ?? null;
+
+  if (!code || !state || !storedState || state !== storedState) {
+    console.warn("invalid callback");
+    return new Response(null, {
+      status: 400,
+    });
+  }
+
+  try {
+    const tokens = await discord.validateAuthorizationCode(code);
+    const response = await fetch("https://discord.com/api/users/@me", {
+      headers: {
+        Authorization: `Bearer ${tokens.accessToken}`,
+      },
+    });
+    const user: DiscordUser = await response.json();
+
+    const [existingUser] = await db
+      .select({ id: users.id })
+      .from(users)
+      .where(eq(users.discordId, user.id))
+      .limit(1);
+
+    if (existingUser) {
+      const session = await lucia.createSession(existingUser.id, {});
+
+      const sessionCookie = lucia.createSessionCookie(session.id);
+      cookies.set(sessionCookie.name, sessionCookie.value, {
+        path: ".",
+        ...sessionCookie.attributes,
+      });
+    } else {
+      const [newUser] = await db
+        .insert(users)
+        .values({
+          id: nanoid(),
+          discordId: user.id,
+          createdAt: Date.now(),
+          createdIp: getClientAddress(),
+        })
+        .returning({ id: users.id });
+
+      const session = await lucia.createSession(newUser.id, {});
+
+      const sessionCookie = lucia.createSessionCookie(session.id);
+      cookies.set(sessionCookie.name, sessionCookie.value, {
+        path: ".",
+        ...sessionCookie.attributes,
+      });
+    }
+  } catch (e) {
+    console.error(e);
+    // the specific error message depends on the provider
+    if (e instanceof OAuth2RequestError) {
+      // invalid code
+      return new Response(null, {
+        status: 400,
+      });
+    }
+    return new Response(null, {
+      status: 500,
+    });
+  }
+
+  return redirect(302, next || "/");
+}
+
+interface DiscordUser {
+  id: string;
+  username: string;
+  email: string;
+  avatar: string;
+}

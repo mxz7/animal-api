@@ -7,6 +7,7 @@ export const users = sqliteTable(
     discordId: text("discord_id").notNull(),
     createdAt: integer("created_at").notNull(),
     createdIp: text("created_ip").notNull(),
+    type: text("type").default("user"), // types: user, mod, admin
   },
   (table) => ({
     discordIdx: index("discord_idx").on(table.discordId),
