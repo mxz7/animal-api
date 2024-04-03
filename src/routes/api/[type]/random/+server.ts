@@ -8,10 +8,13 @@ export async function GET({ params, fetch }) {
   const res = await fetch(`/api/${params.type.toLowerCase()}/count`);
 
   if (res.status === 404)
-    return json({
-      error: 404,
-      message: `${params.type.toLowerCase()} not a supported animal type`,
-    });
+    return json(
+      {
+        error: 404,
+        message: `${params.type.toLowerCase()} not a supported animal type`,
+      },
+      { status: 404 },
+    );
 
   const { count } = await res.json();
 
