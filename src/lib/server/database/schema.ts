@@ -51,8 +51,7 @@ export const imageLikes = sqliteTable("image_likes", {
 });
 
 export const requests = sqliteTable("requests", {
-  id: text("id").primaryKey(),
-  path: text("path").notNull(),
-  served: integer("served").default(0),
+  type: text("path").primaryKey(),
+  served: integer("served").default(1),
   createdAt: integer("created_at").notNull(),
 });

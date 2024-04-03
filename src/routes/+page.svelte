@@ -10,5 +10,7 @@
 
 <h1 class="mt-16 w-full text-center text-4xl font-bold text-primary sm:text-6xl">animal API</h1>
 <p class="text-center italic text-accent">
-  served {data.served} random animals since {dayjs(data.since).format("YYYY-MM-DD")}
+  served {data.served.toLocaleString()} random animals since {dayjs(data.since).format(
+    "YYYY-MM-DD",
+  )}
 </p>

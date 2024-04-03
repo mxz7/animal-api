@@ -1,6 +1,6 @@
 import { CDN_URL, URL } from "$env/static/private";
 import db from "$lib/server/database/database.js";
-import { imageLikes, imageReports, images } from "$lib/server/database/schema.js";
+import { imageLikes, imageReports, images, requests } from "$lib/server/database/schema.js";
 import { json } from "@sveltejs/kit";
 import { eq, sql } from "drizzle-orm";
 
@@ -33,6 +33,14 @@ export async function GET({ params, fetch }) {
     .groupBy(images.id)
     .limit(1)
     .offset(Math.floor(Math.random() * count));
+
+  await db
+    .insert(requests)
+    .values({ type: params.type, createdAt: Date.now() })
+    .onConflictDoUpdate({
+      set: { served: sql`${requests.served} + 1` },
+      target: requests.type,
+    });
 
   return json({
     ...query,
