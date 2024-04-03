@@ -33,4 +33,5 @@ interface DatabaseUserAttributes {
   id: string;
   discordId: string;
   type: string;
+  banned: number;
 }

@@ -13,6 +13,8 @@ export async function POST({ locals, getClientAddress }) {
 
   if (!auth) return error(401);
 
+  if (auth.user.banned) return error(402);
+
   const [{ rowCount }] = await db
     .select({ rowCount: count() })
     .from(images)

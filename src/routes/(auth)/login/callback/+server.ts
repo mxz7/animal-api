@@ -1,9 +1,9 @@
 import { discord, lucia } from "$lib/server/auth.js";
 import db from "$lib/server/database/database.js";
 import { users } from "$lib/server/database/schema.js";
-import { redirect } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
 import { OAuth2RequestError } from "arctic";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
 export async function GET({ cookies, url, getClientAddress }) {
@@ -29,10 +29,19 @@ export async function GET({ cookies, url, getClientAddress }) {
     const user: DiscordUser = await response.json();
 
     const [existingUser] = await db
-      .select({ id: users.id })
+      .select({ id: users.id, banned: users.banned })
       .from(users)
       .where(eq(users.discordId, user.id))
       .limit(1);
+
+    if (existingUser.banned) return error(402);
+
+    const banned = await db
+      .select({})
+      .from(users)
+      .where(and(eq(users.banned, 1), eq(users.createdIp, getClientAddress())));
+
+    if (banned.length > 0) return error(402);
 
     if (existingUser) {
       const session = await lucia.createSession(existingUser.id, {});
@@ -52,6 +61,13 @@ export async function GET({ cookies, url, getClientAddress }) {
           createdIp: getClientAddress(),
         })
         .returning({ id: users.id });
+
+      const banned = await db
+        .select({})
+        .from(users)
+        .where(and(eq(users.banned, 1), eq(users.createdIp, getClientAddress())));
+
+      if (banned.length > 0) return error(402);
 
       const session = await lucia.createSession(newUser.id, {});
 
