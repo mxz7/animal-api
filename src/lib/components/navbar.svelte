@@ -3,7 +3,9 @@
 </script>
 
 <header class="flex w-full justify-center">
-  <nav class="flex w-full max-w-4xl items-center gap-8 p-4 text-lg">
+  <nav
+    class="flex w-full max-w-4xl items-center gap-8 rounded-full bg-secondary bg-opacity-15 p-4 px-6 text-lg shadow"
+  >
     <a href="/" class="hidden pr-8 text-2xl font-bold text-primary sm:block">animals</a>
     <a href="/" class="sm:hidden">
       <Home color="#EC3C62" strokeWidth={2.5} size={28} />

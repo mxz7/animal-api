@@ -8,7 +8,7 @@ import dayjs from "dayjs";
 import { and, count, eq, gt, or } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
-export async function POST({ locals, getClientAddress }) {
+export async function POST({ locals, getClientAddress, request }) {
   const auth = await locals.validate();
 
   if (!auth) return error(401);
@@ -27,7 +27,17 @@ export async function POST({ locals, getClientAddress }) {
 
   if (rowCount > 200) return error(429);
 
-  const key = nanoid();
+  let type: string;
+
+  try {
+    const body = await request.json();
+
+    type = body.type;
+  } catch {
+    return error(400);
+  }
+
+  const key = `${type}/${nanoid()}`;
 
   const url = await getSignedUrl(
     s3,
