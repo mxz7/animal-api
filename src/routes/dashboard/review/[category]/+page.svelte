@@ -14,6 +14,17 @@
     <input type="hidden" name="id" value={data.image.id} />
     <button class="btn btn-error">Deny</button>
   </form>
+
+  {#if data.user.type === "admin"}
+    <form action="?/denyAll" method="post" use:enhance>
+      <button class="btn btn-warning">Deny All</button>
+    </form>
+
+    <form action="?/deny" method="post" use:enhance>
+      <input type="hidden" name="userid" value={data.image.uploadedBy} />
+      <button class="btn btn-warning">Ban User</button>
+    </form>
+  {/if}
 </div>
 
 <p>name: {data.image.name}</p>
