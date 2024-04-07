@@ -9,9 +9,7 @@
 </svelte:head>
 
 {#await data.images}
-  <div class="h-fit w-fit">
-    <Loader2 class="animate-spin text-primary" />
-  </div>
+  <span class="loading loading-spinner"></span>
 {:then images}
   {#if images.length === 0}
     <p>You have no uploaded images</p>

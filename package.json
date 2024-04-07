@@ -16,6 +16,7 @@
 		"@sveltejs/kit": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^3.0.0",
 		"autoprefixer": "^10.4.16",
+		"daisyui": "^4.10.1",
 		"dotenv": "^16.4.5",
 		"drizzle-kit": "^0.20.14",
 		"lucide-svelte": "^0.364.0",

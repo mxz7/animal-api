@@ -19,17 +19,33 @@
           {#if perms}
             {#each perms as perm}
               {#if data.user.type === perm}
-                <a class={$page.url.pathname === href ? "text-accent underline" : ""} {href}
-                  >{text}</a
+                <a
+                  class={$page.url.pathname.split("/")[2] === text ? "text-accent underline" : ""}
+                  {href}>{text}</a
                 >
               {/if}
             {/each}
           {:else}
-            <a class={$page.url.pathname === href ? "text-accent underline" : ""} {href}>{text}</a>
+            <a
+              class={$page.url.pathname.split("/")[2] === text ? "text-accent underline" : ""}
+              {href}>{text}</a
+            >
           {/if}
         {/each}
       </div>
-      <div class="grow py-4"><slot /></div>
+      <div class="grow">
+        <div class="breadcrumbs pb-4 text-sm">
+          <ul>
+            {#each $page.url.pathname.split("/") as path, i}
+              {#if path}
+                {@const paths = $page.url.pathname.split("/")}
+                <li><a href="/{paths.slice(1, i + 1).join('/')}">{path}</a></li>
+              {/if}
+            {/each}
+          </ul>
+        </div>
+        <slot />
+      </div>
     </div>
   </div>
 </div>

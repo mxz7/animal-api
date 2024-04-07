@@ -8,12 +8,12 @@
   >
     <a href="/" class="hidden pr-8 text-2xl font-bold text-primary sm:block">animals</a>
     <a href="/" class="sm:hidden">
-      <Home color="#EC3C62" strokeWidth={2.5} size={28} />
+      <Home class="text-primary" strokeWidth={2.5} size={28} />
     </a>
     <a href="/docs">docs</a>
     <div class="grow" />
     <a href="/dashboard">
-      <CircleUser color="#EC3C62" strokeWidth={2.5} size={28} />
+      <CircleUser class="text-primary" strokeWidth={2.5} size={28} />
     </a>
   </nav>
 </header>
