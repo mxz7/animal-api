@@ -12,8 +12,8 @@
 
 <div class="mt-14 flex w-full justify-center">
   <div class="w-full px-4 md:max-w-3xl md:px-0">
-    <h1 class="text-center text-3xl font-semibold text-primary">animals API dashboard</h1>
-    <div class="mt-4 flex w-full gap-8">
+    <!-- <h1 class="text-center text-3xl font-semibold text-primary">animals dashboard</h1> -->
+    <div class=" flex w-full gap-8">
       <div class="flex flex-col gap-3 rounded-sm border-r border-secondary py-2 pr-4">
         {#each routes as { href, text, perms }}
           {#if perms}

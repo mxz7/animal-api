@@ -21,6 +21,8 @@ export async function load({ parent, params }) {
     .where(and(eq(images.verified, 0), eq(images.type, params.category)))
     .limit(1);
 
+  if (!image) return redirect(302, "/dashboard/review");
+
   return {
     image,
   };

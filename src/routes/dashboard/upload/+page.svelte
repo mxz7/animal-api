@@ -59,11 +59,6 @@
 
       uploadCount++;
 
-      console.log(uploadResponse);
-      console.log((await uploadResponse.body?.getReader().read())?.value?.toString());
-
-      console.log(Array.from(uploadResponse.headers.entries()));
-
       if (!uploadResponse.ok) {
         toast.error(`failed uploading ${file.name}`);
         console.error(uploadResponse);

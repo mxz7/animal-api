@@ -2,7 +2,6 @@
   export let data;
 </script>
 
-<h2 class="ml-4 text-3xl font-medium text-primary">Images for review</h2>
 {#if data.categories.length > 0}
   <div class="mt-14 grid w-full grid-cols-3 gap-4">
     {#each data.categories as category}
