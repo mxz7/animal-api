@@ -1,6 +1,6 @@
 import db from "$lib/server/database/database.js";
 import { images } from "$lib/server/database/schema.js";
-import { eq } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 
 export async function load({ setHeaders, parent }) {
   setHeaders({ "cache-control": "max-age=300" });
@@ -11,6 +11,7 @@ export async function load({ setHeaders, parent }) {
     images: db
       .select({ id: images.id, type: images.type })
       .from(images)
-      .where(eq(images.uploadedBy, user.id)),
+      .where(eq(images.uploadedBy, user.id))
+      .orderBy(desc(images.createdAt)),
   };
 }
