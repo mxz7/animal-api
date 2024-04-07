@@ -2,7 +2,7 @@
   import { CircleUser, Home } from "lucide-svelte";
 </script>
 
-<header class="flex w-full justify-center">
+<header class="flex w-full justify-center pt-4">
   <nav
     class="flex w-full max-w-4xl items-center gap-8 rounded-full bg-secondary bg-opacity-15 p-4 px-6 text-lg shadow"
   >
