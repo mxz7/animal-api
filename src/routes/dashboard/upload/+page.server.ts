@@ -1,9 +1,10 @@
 import db from "$lib/server/database/database.js";
 import { images } from "$lib/server/database/schema.js";
+import { createPresignedUpload } from "$lib/server/s3.js";
 import { imageUpload } from "$lib/zod.js";
 import { error, redirect } from "@sveltejs/kit";
-import { inArray } from "drizzle-orm";
-import { fail, message, superValidate } from "sveltekit-superforms";
+import { nanoid } from "nanoid";
+import { fail, message, setError, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 
 export async function load({ locals, url }) {
@@ -17,7 +18,7 @@ export async function load({ locals, url }) {
 }
 
 export const actions = {
-  default: async ({ locals, request }) => {
+  default: async ({ locals, request, getClientAddress }) => {
     const auth = await locals.validate();
 
     if (!auth) return error(402);
@@ -28,13 +29,40 @@ export const actions = {
       return fail(400, { form });
     }
 
-    const ids = form.data.ids.split("|");
+    const types = form.data.types.split("||");
+    const sizes = form.data.sizes.split("||");
 
-    await db
-      .update(images)
-      .set({ type: form.data.type, name: form.data.name })
-      .where(inArray(images.id, ids));
+    console.log(types);
+    console.log(sizes);
 
-    return message(form, { message: `Successfully uploaded ${ids.length} image` });
+    if (types.length !== sizes.length) {
+      return setError(form, "types", "Mismatched types and sizes. Please refresh and try again");
+    }
+
+    const urls: string[] = [];
+
+    for (let i = 0; i < types.length; i++) {
+      const size = sizes[i];
+      const type = types[i];
+
+      if (!["image/jpeg", "image/png"].includes(type)) {
+        return setError(form, "types", "Invalid file type. Only JPEG and PNG supported");
+      }
+
+      const id = `${form.data.name}/${nanoid()}`;
+
+      urls.push(await createPresignedUpload(type, size, id));
+      await db.insert(images).values({
+        id: id,
+        createdAt: Date.now(),
+        type: form.data.category,
+        uploadedIp: getClientAddress(),
+        uploadedBy: auth.user.id,
+        name: form.data.name,
+        verified: 0,
+      });
+    }
+
+    return message(form, { urls: urls });
   },
 };

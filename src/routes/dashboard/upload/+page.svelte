@@ -1,19 +1,21 @@
 <script lang="ts">
-  import { sleep } from "$lib/utils.js";
+  import { goto } from "$app/navigation";
   import Compressor from "compressorjs";
   import { CloudUpload, Loader2, X } from "lucide-svelte";
-  import { onMount } from "svelte";
   import { toast } from "svelte-french-toast";
   import { superForm } from "sveltekit-superforms";
 
   export let data;
 
   let status: "waiting" | "compressing" | "uploading" | "posting" = "waiting";
-  let formElement: HTMLFormElement;
   let uploadCount = 0;
   let files: File[] = [];
   let formFiles: FileList;
-  const { form, errors, constraints, enhance, message } = superForm(data.form);
+  const { form, errors, constraints, enhance, message } = superForm(data.form, {
+    onSubmit() {
+      status = "posting";
+    },
+  });
 
   async function compress(file: File): Promise<File> {
     return new Promise((resolve) => {
@@ -29,7 +31,7 @@
     });
   }
 
-  async function fileUpload() {
+  async function fileUpload(urls: string[]) {
     let promises = [];
     const newFiles: File[] = [];
 
@@ -57,57 +59,51 @@
     await Promise.all(promises);
     promises = [];
 
-    $form.ids = "";
+    if (newFiles.length !== urls.length) {
+      return toast.error("Not enough presigned urls");
+    }
 
     status = "uploading";
-    for (const file of newFiles) {
-      const response = await fetch("/api/upload", { method: "POST" });
+    for (let i = 0; i < newFiles.length; i++) {
+      const file = newFiles[0];
+      const url = urls[0];
+      const func = async () => {
+        const uploadResponse = await fetch(url, {
+          method: "PUT",
+          body: file,
+          mode: "cors",
+        });
 
-      if (!response.ok) {
-        console.error(response);
-        console.error(Array.from(response.headers.entries()));
-        toast.error("Failed to generate presigned URL");
-        if (response.status === 429)
-          toast.error("You've uploaded too many pictures today. Try again tomorrow.");
-        return;
-      }
+        uploadCount++;
 
-      const { url, key } = await response.json();
+        if (!uploadResponse.ok) {
+          toast.error(`failed uploading ${file.name}`);
+          console.error(uploadResponse);
+        }
+      };
 
-      const uploadResponse = await fetch(url, {
-        method: "PUT",
-        body: file,
-        mode: "cors",
-      });
-
-      console.log(`uploaded: ${key} / ${file.name}`);
-      uploadCount++;
-
-      if (uploadResponse.ok) {
-        $form.ids = [...$form.ids.split("|").filter((i) => Boolean(i)), key].join("|");
-      } else {
-        toast.error(`Failed to upload image: ${file.name}`);
-      }
+      promises.push(func());
     }
 
-    status = "posting";
-    await sleep(500); // needed so that the input element updates quick enough or some shit
+    await Promise.all(promises);
 
-    formElement.submit();
+    goto("/dashboard/images");
   }
 
-  onMount(async () => {
-    await sleep(500);
-    console.log("meow");
-    console.log($message);
-    if ($message) {
-      toast.success($message.message);
+  message.subscribe((value) => {
+    if (value?.urls) {
+      fileUpload(value.urls);
     }
   });
+
+  $: {
+    $form.sizes = files.map((file) => file.size).join("||");
+    $form.types = files.map((file) => file.type).join("||");
+  }
 </script>
 
 <svelte:head>
-  <title>Gallery Upload / HRCT</title>
+  <title>upload / dashboard / animals API</title>
 </svelte:head>
 
 <label
@@ -158,7 +154,7 @@
   {/each}
 </div>
 
-<form method="post" class="mt-2" use:enhance bind:this={formElement}>
+<form method="post" class="mt-2" use:enhance>
   {#if files.length < 2}
     <input
       class=" rounded-lg border-secondary bg-secondary bg-opacity-20 p-1 text-text placeholder:text-accent focus:outline-none"
@@ -174,36 +170,34 @@
     {/if}
   {/if}
 
+  <br />
+
   <input
-    class=" rounded-lg border-secondary bg-secondary bg-opacity-20 p-1 text-text placeholder:text-accent focus:outline-none"
+    class="mt-2 rounded-lg border-secondary bg-secondary bg-opacity-20 p-1 text-text placeholder:text-accent focus:outline-none"
     type="text"
     name="type"
     id="type"
     placeholder="type"
-    bind:value={$form.type}
-    {...$constraints.type}
+    bind:value={$form.category}
+    {...$constraints.category}
   />
-  {#if $errors.type && $errors.type[0]}
-    <p class="-mt-4 text-center text-red-400">{$errors.type[0]}</p>
+  {#if $errors.category && $errors.category[0]}
+    <p class="-mt-4 text-center text-red-400">{$errors.category[0]}</p>
   {/if}
 
-  <input class="hidden" type="text" name="id" id="id" bind:value={$form.ids} />
+  <input type="hidden" name="types" bind:value={$form.types} />
+  {#if $errors.types && $errors.types[0]}
+    <p class="-mt-4 text-center text-red-400">{$errors.types[0]}</p>
+  {/if}
+
+  <input type="hidden" name="sizes" bind:value={$form.sizes} />
+  {#if $errors.sizes && $errors.sizes[0]}
+    <p class="-mt-4 text-center text-red-400">{$errors.sizes[0]}</p>
+  {/if}
 
   <br />
 
   <button
-    on:click|preventDefault={() => {
-      if (!files || files.length < 1) {
-        $errors.type = ["You need to upload an image"];
-        return;
-      }
-      if (!$form.type || $form.type.length < 3) {
-        $errors.type = ["A type is required"];
-        return;
-      }
-
-      fileUpload();
-    }}
     class="{status === 'waiting'
       ? null
       : 'hidden'}  mt-4 rounded-lg border-secondary bg-secondary bg-opacity-20 p-2 text-primary placeholder:text-accent focus:outline-none"
@@ -212,7 +206,7 @@
   </button>
 
   {#if status !== "waiting"}
-    <div class="mt-12 flex flex-col items-center justify-center">
+    <div class="mt-12 flex w-fit items-center gap-2">
       <p>
         {status}
         {#if status === "uploading"}
@@ -220,7 +214,7 @@
         {/if}
       </p>
       <div class="animate-spin">
-        <Loader2 />
+        <Loader2 size={16} strokeWidth={2.5} />
       </div>
     </div>
   {/if}
