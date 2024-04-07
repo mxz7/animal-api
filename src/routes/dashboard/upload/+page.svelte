@@ -138,7 +138,7 @@
 <form method="post" class="mt-2" use:enhance>
   {#if files.length < 2}
     <input
-      class="input input-bordered"
+      class="input input-bordered min-w-0"
       type="text"
       name="name"
       id="name"
@@ -152,7 +152,7 @@
   {/if}
 
   <input
-    class="input input-bordered mt-4"
+    class="input input-bordered mt-4 min-w-0"
     type="text"
     name="category"
     id="category"
