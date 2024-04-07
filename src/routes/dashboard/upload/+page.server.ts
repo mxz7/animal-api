@@ -32,9 +32,6 @@ export const actions = {
     const types = form.data.types.split("||");
     const sizes = form.data.sizes.split("||");
 
-    console.log(types);
-    console.log(sizes);
-
     if (types.length !== sizes.length) {
       return setError(form, "types", "Mismatched types and sizes. Please refresh and try again");
     }
