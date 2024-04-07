@@ -175,9 +175,9 @@
   <input
     class="mt-2 rounded-lg border-secondary bg-secondary bg-opacity-20 p-1 text-text placeholder:text-accent focus:outline-none"
     type="text"
-    name="type"
-    id="type"
-    placeholder="type"
+    name="category"
+    id="category"
+    placeholder="animal type"
     bind:value={$form.category}
     {...$constraints.category}
   />
