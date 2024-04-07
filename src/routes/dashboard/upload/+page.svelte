@@ -1,5 +1,6 @@
 <script lang="ts">
   import { goto } from "$app/navigation";
+  import { sleep } from "$lib/utils.js";
   import Compressor from "compressorjs";
   import { CloudUpload, Loader2, X } from "lucide-svelte";
   import { toast } from "svelte-french-toast";
@@ -7,6 +8,7 @@
 
   export let data;
 
+  let formButton: HTMLButtonElement;
   let status: "waiting" | "compressing" | "uploading" | "posting" = "waiting";
   let uploadCount = 0;
   let files: File[] = [];
@@ -17,75 +19,58 @@
     },
   });
 
-  async function compress(file: File): Promise<File> {
-    return new Promise((resolve) => {
-      new Compressor(file, {
-        quality: 0.95,
-        retainExif: false,
-        maxWidth: 2560,
-        maxHeight: 1440,
-        success(file: File) {
-          resolve(file);
-        },
-      });
-    });
-  }
-
-  async function fileUpload(urls: string[]) {
-    let promises = [];
-    const newFiles: File[] = [];
-
+  async function compress() {
+    console.log("compressing");
     status = "compressing";
-    for (let file of files) {
-      const fun = async () => {
-        console.log(`before: ${file.size / 1024 / 1024}mb`);
-        file = await compress(file);
-        console.log(`after: ${file.size / 1024 / 1024}mb`);
+    for (let i = 0; i < files.length; i++) {
+      const newFile = await new Promise((resolve) => {
+        new Compressor(files[i], {
+          quality: 0.95,
+          retainExif: false,
+          maxWidth: 2560,
+          maxHeight: 1440,
+          success(file: File) {
+            resolve(file);
+          },
+        });
+      });
 
-        if (file.size > 10000000) {
-          toast.error(`file: ${file.name} too large, must be below 10mb`);
-        }
-
-        newFiles.push(file);
-      };
-
-      if (file.size > 1000000) {
-        promises.push(fun());
-      } else {
-        newFiles.push(file);
-      }
+      files[i] = newFile as File;
     }
 
-    await Promise.all(promises);
-    promises = [];
+    await sleep(500);
+  }
 
-    if (newFiles.length !== urls.length) {
+  async function fileUpload(urls: string) {
+    if (files.length !== urls.length) {
       return toast.error("Not enough presigned urls");
     }
 
+    console.log("uploading");
     status = "uploading";
-    for (let i = 0; i < newFiles.length; i++) {
-      const file = newFiles[0];
+    for (let i = 0; i < files.length; i++) {
+      const file = files[0];
       const url = urls[0];
-      const func = async () => {
-        const uploadResponse = await fetch(url, {
-          method: "PUT",
-          body: file,
-          mode: "cors",
-        });
 
-        uploadCount++;
+      const uploadResponse = await fetch(url, {
+        method: "PUT",
+        body: file,
+      });
 
-        if (!uploadResponse.ok) {
-          toast.error(`failed uploading ${file.name}`);
-          console.error(uploadResponse);
-        }
-      };
+      uploadCount++;
 
-      promises.push(func());
+      console.log(uploadResponse);
+      console.log((await uploadResponse.body?.getReader().read())?.value?.toString());
+
+      console.log(Array.from(uploadResponse.headers.entries()));
+
+      if (!uploadResponse.ok) {
+        toast.error(`failed uploading ${file.name}`);
+        console.error(uploadResponse);
+      }
     }
 
-    await Promise.all(promises);
+    toast.success("Images uploaded");
 
     goto("/dashboard/images");
   }
@@ -114,7 +99,7 @@
     <CloudUpload class="mb-3 text-primary" />
     <p class="mb-2 text-sm font-medium text-accent">Click to upload</p>
     <p class="text-xs text-accent">PNG or JPEG only</p>
-    <p class="text-xs text-accent">10MB per image, max of 50 images per upload</p>
+    <p class="text-xs text-accent">5MB per image, max of 50 images per upload</p>
   </div>
   <input
     id="dropzone-file"
@@ -122,13 +107,15 @@
     class="hidden"
     accept="image/png, image/jpeg"
     bind:files={formFiles}
-    multiple
     on:change={() => {
-      console.log(files);
       for (const file of formFiles) {
         if (files.length >= 50) {
           toast.error("You can upload a max of 50 files at a time");
           return;
+        }
+        if (file.size > 5000000) {
+          toast.error(`${file.name} is too big, max file size: 5mb`);
+          continue;
         }
         files = [...files, file];
       }
@@ -197,13 +184,7 @@
 
   <br />
 
-  <button
-    class="{status === 'waiting'
-      ? null
-      : 'hidden'}  mt-4 rounded-lg border-secondary bg-secondary bg-opacity-20 p-2 text-primary placeholder:text-accent focus:outline-none"
-  >
-    Upload
-  </button>
+  <button bind:this={formButton} class="hidden"></button>
 
   {#if status !== "waiting"}
     <div class="mt-12 flex w-fit items-center gap-2">
@@ -219,3 +200,17 @@
     </div>
   {/if}
 </form>
+
+<button
+  on:click|preventDefault={async () => {
+    await compress();
+
+    console.log("posting");
+    formButton.click();
+  }}
+  class="{status === 'waiting'
+    ? null
+    : 'hidden'}  mt-4 rounded-lg border-secondary bg-secondary bg-opacity-20 p-2 text-primary placeholder:text-accent focus:outline-none"
+>
+  Upload
+</button>
