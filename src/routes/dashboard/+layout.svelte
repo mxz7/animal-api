@@ -3,10 +3,10 @@
 
   export let data;
 
-  const routes: { href: string; text: string; type?: ("mod" | "admin")[] }[] = [
+  const routes: { href: string; text: string; perms?: ("mod" | "admin")[] }[] = [
     { href: "/dashboard/images", text: "images" },
     { href: "/dashboard/upload", text: "upload" },
-    { href: "/dashboard/review", text: "review", type: ["mod", "admin"] },
+    { href: "/dashboard/review", text: "review", perms: ["mod", "admin"] },
   ];
 </script>
 
@@ -15,10 +15,10 @@
     <h1 class="text-center text-3xl font-semibold text-primary">animals API dashboard</h1>
     <div class="mt-4 flex w-full gap-8">
       <div class="flex flex-col gap-3 rounded-sm border-r border-secondary py-2 pr-4">
-        {#each routes as { href, text, type }, _}
-          {#if type}
-            {#each type as type}
-              {#if data.user.type === type}
+        {#each routes as { href, text, perms }}
+          {#if perms}
+            {#each perms as perm}
+              {#if data.user.type === perm}
                 <a class={$page.url.pathname === href ? "text-accent underline" : ""} {href}
                   >{text}</a
                 >
