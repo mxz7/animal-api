@@ -1,6 +1,4 @@
 <script>
-  import { Loader2 } from "lucide-svelte";
-
   export let data;
 </script>
 
@@ -21,6 +19,7 @@
             class="w-full rounded-lg"
             src="https://animalscdn.maxz.dev/{image.id}"
             alt="user uploaded {image.type}"
+            loading="lazy"
           />
         </a>
       {/each}
