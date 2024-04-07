@@ -1,9 +1,14 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
+  import { page } from "$app/stores";
   import dayjs from "dayjs";
 
   export let data;
 </script>
+
+<svelte:head>
+  <title>reviewing {$page.params.category} images / animals api</title>
+</svelte:head>
 
 <div class="flex w-fit justify-center gap-4 py-4">
   <form action="?/accept" method="post" use:enhance>

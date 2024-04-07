@@ -2,6 +2,10 @@
   export let data;
 </script>
 
+<svelte:head>
+  <title>review images / animals api</title>
+</svelte:head>
+
 {#if data.categories.length > 0}
   <div class="mt-14 grid w-full grid-cols-3 gap-4">
     {#each data.categories as category}
