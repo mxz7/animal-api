@@ -34,10 +34,10 @@ export async function GET({ cookies, url, getClientAddress }) {
       .where(eq(users.discordId, user.id))
       .limit(1);
 
-    if (existingUser.banned) return error(402);
+    if (existingUser?.banned) return error(402);
 
     const banned = await db
-      .select({})
+      .select({ id: users.id })
       .from(users)
       .where(and(eq(users.banned, 1), eq(users.createdIp, getClientAddress())));
 
@@ -63,7 +63,7 @@ export async function GET({ cookies, url, getClientAddress }) {
         .returning({ id: users.id });
 
       const banned = await db
-        .select({})
+        .select({ id: users.id })
         .from(users)
         .where(and(eq(users.banned, 1), eq(users.createdIp, getClientAddress())));
 
