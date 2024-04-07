@@ -93,13 +93,12 @@
 
 <label
   for="dropzone-file"
-  class="flex h-fit w-3/4 cursor-pointer flex-col items-center justify-center rounded-lg bg-secondary bg-opacity-30 duration-300 hover:bg-opacity-20"
+  class="flex h-fit w-3/4 cursor-pointer flex-col items-center justify-center rounded-lg bg-secondary bg-opacity-20 duration-300 hover:bg-opacity-20"
 >
   <div class="flex flex-col items-center justify-center pb-6 pt-5 text-center">
-    <CloudUpload class="mb-3 text-primary" />
-    <p class="mb-2 text-sm font-medium text-accent">Click to upload</p>
-    <p class="text-xs text-accent">PNG or JPEG only</p>
-    <p class="text-xs text-accent">5MB per image, max of 50 images per upload</p>
+    <CloudUpload strokeWidth={2.7} size={32} class="mb-3 text-primary" />
+    <p class="mb-2 font-medium text-primary">Click to upload</p>
+    <p class="text-sm text-accent">PNG/JPEG - 5MB limit</p>
   </div>
   <input
     id="dropzone-file"
@@ -144,7 +143,7 @@
 <form method="post" class="mt-2" use:enhance>
   {#if files.length < 2}
     <input
-      class=" rounded-lg border-secondary bg-secondary bg-opacity-20 p-1 text-text placeholder:text-accent focus:outline-none"
+      class="input input-bordered"
       type="text"
       name="name"
       id="name"
@@ -157,10 +156,8 @@
     {/if}
   {/if}
 
-  <br />
-
   <input
-    class="mt-2 rounded-lg border-secondary bg-secondary bg-opacity-20 p-1 text-text placeholder:text-accent focus:outline-none"
+    class="input input-bordered mt-4"
     type="text"
     name="category"
     id="category"
@@ -208,9 +205,7 @@
     console.log("posting");
     formButton.click();
   }}
-  class="{status === 'waiting'
-    ? null
-    : 'hidden'}  mt-4 rounded-lg border-secondary bg-secondary bg-opacity-20 p-2 text-primary placeholder:text-accent focus:outline-none"
+  class="{status === 'waiting' ? null : 'hidden'}  btn btn-neutral mt-4"
 >
   Upload
 </button>
