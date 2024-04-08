@@ -10,8 +10,8 @@
 
   function enhanceFunction() {
     loading = true;
-    return () => {
-      invalidate("reviewimage");
+    return async () => {
+      await invalidate("reviewimage");
       loading = false;
     };
   }
