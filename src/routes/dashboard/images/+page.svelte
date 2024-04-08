@@ -7,14 +7,14 @@
 </svelte:head>
 
 {#await data.images}
-  <span class="loading loading-spinner"></span>
+  <span class="loading loading-spinner text-accent"></span>
 {:then images}
   {#if images.length === 0}
     <p>You have no uploaded images</p>
   {:else}
     <div class="w-full columns-2 break-inside-avoid gap-2">
       {#each images as image}
-        <a href="/img/{image.id}" class="block break-inside-avoid-column pb-2">
+        <a href="/{image.id}" class="block break-inside-avoid-column pb-2">
           <img
             class="w-full rounded-lg"
             src="https://animalscdn.maxz.dev/{image.id}"
