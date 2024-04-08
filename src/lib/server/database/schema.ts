@@ -1,4 +1,4 @@
-import { index, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { index, integer, sqliteTable, text, unique } from "drizzle-orm/sqlite-core";
 
 export const users = sqliteTable(
   "users",
@@ -47,12 +47,18 @@ export const imageReports = sqliteTable("image_reports", {
   content: text("content").notNull(),
 });
 
-export const imageLikes = sqliteTable("image_likes", {
-  id: text("id").primaryKey(),
-  createdAt: integer("created_at").notNull(),
-  createdIp: text("created_ip").notNull(),
-  imageId: text("image_id").references(() => images.id, { onDelete: "cascade" }),
-});
+export const imageLikes = sqliteTable(
+  "image_likes",
+  {
+    id: text("id").primaryKey(),
+    createdAt: integer("created_at").notNull(),
+    createdIp: text("created_ip").notNull(),
+    imageId: text("image_id").references(() => images.id, { onDelete: "cascade" }),
+  },
+  (table) => ({
+    unq: unique().on(table.createdIp, table.imageId),
+  }),
+);
 
 export const requests = sqliteTable("requests", {
   type: text("path").primaryKey(),
