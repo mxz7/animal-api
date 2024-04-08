@@ -47,4 +47,4 @@
 <p>created at: {dayjs(data.image.createdAt).format("YYYY-MM-DD")}</p>
 <p>ip address: {data.image.ip}</p>
 
-<img src="https://animalscdn.maxz.dev/{data.image.id}" alt="" />
+<img loading="lazy" src="https://animalscdn.maxz.dev/{data.image.id}" alt="" />
