@@ -12,7 +12,7 @@ export const config = {
 
 export const actions = {
   delete: async ({ locals, params }) => {
-    const auth = await locals.validate();
+    const auth = await locals.validate(false);
 
     if (!auth || auth.user.type !== "admin") return fail(400);
 

@@ -36,7 +36,7 @@ export async function load({ parent, params, depends }) {
 
 export const actions = {
   accept: async ({ request, locals }) => {
-    const auth = await locals.validate();
+    const auth = await locals.validate(false);
 
     if (!auth || !auth.user || auth.user.type === "user") return redirect(302, "/dashboard");
 
@@ -49,7 +49,7 @@ export const actions = {
     await db.update(images).set({ verified: 1 }).where(eq(images.id, id));
   },
   deny: async ({ request, locals }) => {
-    const auth = await locals.validate();
+    const auth = await locals.validate(false);
 
     if (!auth || !auth.user || auth.user.type === "user") return redirect(302, "/dashboard");
 
@@ -63,7 +63,7 @@ export const actions = {
     await s3.send(new DeleteObjectCommand({ Bucket: "maxzdev-animals", Key: id }));
   },
   denyAll: async ({ locals, params }) => {
-    const auth = await locals.validate();
+    const auth = await locals.validate(false);
 
     if (!auth || !auth.user || auth.user.type !== "admin") return redirect(302, "/dashboard");
 
@@ -77,7 +77,7 @@ export const actions = {
     }
   },
   ban: async ({ locals, request }) => {
-    const auth = await locals.validate();
+    const auth = await locals.validate(false);
 
     if (!auth || !auth.user || auth.user.type !== "admin") return redirect(302, "/dashboard");
 

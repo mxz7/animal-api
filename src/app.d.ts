@@ -4,7 +4,7 @@ declare global {
   namespace App {
     // interface Error {}
     interface Locals {
-      validate: () => Promise<{
+      validate: (useApi = true) => Promise<{
         user: import("lucia").User;
         session: import("lucia").Session;
       } | null>;
