@@ -11,7 +11,7 @@ export const config = {
 };
 
 export async function load({ locals }) {
-  return { user: locals.validate().then((auth) => auth?.user) };
+  return { user: await locals.validate().then((auth) => auth?.user) };
 }
 
 export const actions = {
