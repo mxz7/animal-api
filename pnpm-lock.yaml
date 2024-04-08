@@ -9,8 +9,8 @@ dependencies:
     specifier: ^3.550.0
     version: 3.550.0
   '@aws-sdk/s3-request-presigner':
-    specifier: ^3.540.0
-    version: 3.540.0
+    specifier: ^3.550.0
+    version: 3.550.0
   '@libsql/client':
     specifier: ^0.6.0
     version: 0.6.0
@@ -651,8 +651,8 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@aws-sdk/s3-request-presigner@3.540.0:
-    resolution: {integrity: sha512-alm+PiQOzAIfNrabxOG/Fk9uimQq8VCdqmhRvZRG7iDwtl4yrW+ZinoDssWFUgeZgPZQTymLcslC2hvMKHgY9g==}
+  /@aws-sdk/s3-request-presigner@3.550.0:
+    resolution: {integrity: sha512-aH+5bwOQrUphcyIFDmePU/pB9pfK5leG5hus1awVJE09+zrmKnQQWyt1nkcJOWFFh/89Ukb6/xop+YWK5xZpSw==}
     engines: {node: '>=14.0.0'}
     dependencies:
       '@aws-sdk/signature-v4-multi-region': 3.535.0
