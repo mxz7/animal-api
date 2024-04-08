@@ -5,6 +5,10 @@ import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { error, fail, redirect } from "@sveltejs/kit";
 import { and, eq } from "drizzle-orm";
 
+export const config = {
+  runtime: "nodejs20.x",
+};
+
 export async function load({ parent, params }) {
   const { user } = await parent();
 
