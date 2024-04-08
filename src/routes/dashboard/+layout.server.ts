@@ -1,7 +1,7 @@
 import { error, redirect } from "@sveltejs/kit";
 
 export async function load({ locals, url }) {
-  const auth = await locals.validate();
+  const auth = await locals.validate(false);
 
   if (!auth) return redirect(302, `/login?next=${encodeURIComponent(url.pathname)}`);
 

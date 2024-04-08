@@ -3,7 +3,7 @@ import { redirect } from "@sveltejs/kit";
 import { generateState } from "arctic";
 
 export async function GET({ cookies, locals, url }) {
-  if (await locals.validate()) return redirect(302, "/");
+  if (await locals.validate(false)) return redirect(302, "/");
 
   const state = generateState();
   const oauthUrl = await discord.createAuthorizationURL(state, { scopes: ["identify"] });

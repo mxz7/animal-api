@@ -8,7 +8,7 @@ import { fail, message, setError, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 
 export async function load({ locals, url }) {
-  const auth = await locals.validate();
+  const auth = await locals.validate(false);
 
   if (!auth) return redirect(302, `/login?next={${encodeURIComponent(url.pathname)}`);
 
@@ -19,7 +19,7 @@ export async function load({ locals, url }) {
 
 export const actions = {
   default: async ({ locals, request, getClientAddress }) => {
-    const auth = await locals.validate();
+    const auth = await locals.validate(false);
 
     if (!auth) return error(402);
 
