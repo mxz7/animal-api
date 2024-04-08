@@ -1,10 +1,18 @@
-<script>
+<script lang="ts">
   import { enhance } from "$app/forms";
   import dayjs from "dayjs";
   import { ThumbsUp, Trash } from "lucide-svelte";
+  import { onMount } from "svelte";
   import toast from "svelte-french-toast";
 
   export let data;
+  let user: { type: string };
+
+  onMount(async () => {
+    const auth = await fetch("/api/auth").then((r) => r.json());
+
+    if (auth && auth.user) user = auth.user;
+  });
 </script>
 
 <div class="mt-14 flex w-full justify-center">
@@ -64,18 +72,17 @@
               <Flag size={20} />
             </button>
           </form> -->
-          {#await data.user then user}
-            {#if user?.type === "admin"}
-              <form action="?/delete" method="post">
-                <button
-                  class="btn btn-ghost btn-outline btn-error tooltip tooltip-error flex items-center"
-                  data-tip="Delete"
-                >
-                  <Trash size={20} />
-                </button>
-              </form>
-            {/if}
-          {/await}
+
+          {#if user?.type === "admin"}
+            <form action="?/delete" method="post">
+              <button
+                class="btn btn-ghost btn-outline btn-error tooltip tooltip-error flex items-center"
+                data-tip="Delete"
+              >
+                <Trash size={20} />
+              </button>
+            </form>
+          {/if}
         </div>
       </div>
     </div>

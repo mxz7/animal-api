@@ -1,6 +1,6 @@
 import { error } from "@sveltejs/kit";
 
-export async function load({ data, fetch, params }) {
+export async function load({ fetch, params }) {
   const image = await fetch(`/api/${params.type}/${params.id}`);
 
   if (!image.ok) return error(image.status, { message: image.statusText });
@@ -14,5 +14,5 @@ export async function load({ data, fetch, params }) {
     createdAt: number;
   } = await image.json();
 
-  return { image: imageData, user: data.user };
+  return { image: imageData };
 }

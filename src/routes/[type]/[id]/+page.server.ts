@@ -10,10 +10,6 @@ export const config = {
   runtime: "nodejs20.x",
 };
 
-export async function load({ locals }) {
-  return { user: await locals.validate().then((auth) => auth?.user) };
-}
-
 export const actions = {
   delete: async ({ locals, params }) => {
     const auth = await locals.validate();
