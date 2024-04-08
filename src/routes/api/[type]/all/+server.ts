@@ -27,8 +27,8 @@ export async function GET({ setHeaders, params }) {
   return json(
     query.map((i) => ({
       ...i,
-      url: `${URL}/${i.type}/${i.id}`,
-      image: `${CDN_URL}/${i.type}/${i.id}`,
+      url: `${URL}/${i.id}`,
+      image: `${CDN_URL}/${i.id}`,
     })),
   );
 }

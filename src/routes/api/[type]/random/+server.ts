@@ -2,7 +2,7 @@ import { CDN_URL, URL } from "$env/static/private";
 import db from "$lib/server/database/database.js";
 import { imageLikes, imageReports, images, requests } from "$lib/server/database/schema.js";
 import { json } from "@sveltejs/kit";
-import { eq, sql } from "drizzle-orm";
+import { and, eq, sql } from "drizzle-orm";
 
 export async function GET({ params, fetch }) {
   const res = await fetch(`/api/${params.type.toLowerCase()}/count`);
@@ -27,7 +27,7 @@ export async function GET({ params, fetch }) {
       reports: sql`count(${imageReports.id})`,
     })
     .from(images)
-    .where(eq(images.type, params.type.toLowerCase()))
+    .where(and(eq(images.verified, 1), eq(images.type, params.type.toLowerCase())))
     .leftJoin(imageLikes, eq(images.id, imageLikes.imageId))
     .leftJoin(imageReports, eq(images.id, imageReports.imageId))
     .groupBy(images.id)
@@ -44,7 +44,7 @@ export async function GET({ params, fetch }) {
 
   return json({
     ...query,
-    url: `${URL}/${query.type}/${query.id}`,
-    image: `${CDN_URL}/${query.type}/${query.id}`,
+    url: `${URL}/${query.id}`,
+    image: `${CDN_URL}/${query.id}`,
   });
 }
