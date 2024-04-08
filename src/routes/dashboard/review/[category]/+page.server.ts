@@ -9,8 +9,9 @@ export const config = {
   runtime: "nodejs20.x",
 };
 
-export async function load({ parent, params }) {
+export async function load({ parent, params, depends }) {
   const { user } = await parent();
+  depends("reviewimage");
 
   if (user.type === "user") return redirect(302, "/dashboard");
 
