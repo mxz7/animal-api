@@ -10,7 +10,13 @@
 
 <h1 class="mt-16 w-full text-center text-4xl font-bold text-primary sm:text-6xl">animals API</h1>
 <p class="text-center italic text-secondary">
-  served {data.served.toLocaleString()} random animals since {dayjs(data.since).format(
-    "YYYY-MM-DD",
-  )}
+  served {#await data.served}
+    ...
+  {:then served}
+    {served.toLocaleString()}
+  {/await} random animals since {#await data.since}
+    ...
+  {:then since}
+    {dayjs(since).format("YYYY-MM-DD")}
+  {/await}
 </p>
