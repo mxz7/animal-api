@@ -74,7 +74,7 @@
           </form> -->
 
           {#if user?.type === "admin"}
-            <form action="?/delete" method="post">
+            <form action="?/delete" method="post" use:enhance>
               <button
                 class="btn btn-ghost btn-outline btn-error tooltip tooltip-error flex items-center"
                 data-tip="Delete"

@@ -2,7 +2,7 @@ import db from "$lib/server/database/database.js";
 import { imageLikes, images, users } from "$lib/server/database/schema.js";
 import { s3 } from "$lib/server/s3.js";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
-import { fail } from "@sveltejs/kit";
+import { fail, redirect } from "@sveltejs/kit";
 import { and, eq } from "drizzle-orm";
 import { nanoid } from "nanoid";
 
@@ -20,6 +20,7 @@ export const actions = {
     await s3.send(
       new DeleteObjectCommand({ Bucket: "maxzdev-animals", Key: `${params.type}/${params.id}` }),
     );
+    return redirect(302, "/");
   },
   addLike: async ({ getClientAddress, params }) => {
     if (await banCheck(getClientAddress())) return fail(400);
