@@ -15,6 +15,12 @@
   });
 </script>
 
+<svelte:head>
+  <title>{data.image.name || data.image.id} / animals API</title>
+  <meta property="og:title" content="{data.image.name || data.image.id} / animals API" />
+  <meta property="og:image" content="https://animalscdn.maxz.dev/{data.image.id}" />
+</svelte:head>
+
 <div class="mt-14 flex w-full justify-center">
   <div class="w-full max-w-4xl">
     <div class="flex w-full justify-center">
