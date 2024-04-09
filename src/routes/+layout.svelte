@@ -1,6 +1,7 @@
 <script>
   import { dev } from "$app/environment";
   import { page } from "$app/stores";
+  import Footer from "$lib/components/footer.svelte";
   import Navbar from "$lib/components/navbar.svelte";
   import { inject } from "@vercel/analytics";
   import { Toaster } from "svelte-french-toast";
@@ -17,4 +18,8 @@
 
 <Navbar />
 
-<slot />
+<div class="min-h-screen pb-40">
+  <slot />
+</div>
+
+<Footer />
