@@ -33,7 +33,7 @@ export const actions = {
         id: nanoid(),
         createdAt: Date.now(),
         createdIp: getClientAddress(),
-        imageId: `${params.type}/${params.id}`,
+        imageId: params.id,
       })
       .catch(() => (broke = true));
 
