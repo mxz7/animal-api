@@ -1,4 +1,4 @@
-import { CDN_URL } from "$env/static/private";
+import { CDN_URL, URL } from "$env/static/private";
 import db from "$lib/server/database/database.js";
 import { imageLikes, imageReports, images } from "$lib/server/database/schema.js";
 import { error, json } from "@sveltejs/kit";
