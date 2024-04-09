@@ -11,7 +11,7 @@
       <a href="/" class="sm:hidden">
         <Home class="text-primary" strokeWidth={2.5} size={28} />
       </a>
-      <a href="#usage">docs</a>
+      <a href="#usage">usage</a>
       <div class="grow" />
       <a href="/dashboard">
         <CircleUser class="text-primary" strokeWidth={2.5} size={28} />
