@@ -44,7 +44,7 @@ export async function GET({ params, fetch }) {
 
   return json({
     ...query,
-    url: `${URL}/${query.id}`,
-    image: `${CDN_URL}/${query.id}`,
+    url: `${URL}/${query.type}/${query.id}`,
+    image: `${CDN_URL}/${query.type}/${query.id}`,
   });
 }

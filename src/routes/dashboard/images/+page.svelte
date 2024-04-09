@@ -14,7 +14,7 @@
   {:else}
     <div class="w-full columns-2 break-inside-avoid gap-2">
       {#each images as image}
-        <a href="/{image.id}" class="block break-inside-avoid-column pb-2">
+        <a href="/{image.type}/{image.id}" class="block break-inside-avoid-column pb-2">
           <img
             class="w-full rounded-lg"
             src="https://animalscdn.maxz.dev/{image.id}"

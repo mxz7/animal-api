@@ -46,9 +46,9 @@ export const actions = {
         return setError(form, "types", "Invalid file type. Only JPEG and PNG supported");
       }
 
-      const id = `${form.data.category}/${nanoid()}`;
+      const id = nanoid();
 
-      urls.push(await createPresignedUpload(type, size, id));
+      urls.push(await createPresignedUpload(type, size, `${form.data.category}/${id}`));
       await db.insert(images).values({
         id: id,
         createdAt: Date.now(),

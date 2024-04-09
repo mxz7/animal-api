@@ -17,7 +17,7 @@ export async function GET({ params, setHeaders }) {
       createdAt: images.createdAt,
     })
     .from(images)
-    .where(and(eq(images.verified, 1), eq(images.id, `${params.type}/${params.id}`)))
+    .where(and(eq(images.verified, 1), eq(images.id, params.id), eq(images.type, params.type)))
     .leftJoin(imageLikes, eq(images.id, imageLikes.imageId))
     .leftJoin(imageReports, eq(images.id, imageReports.imageId))
     .groupBy(images.id)
@@ -27,7 +27,7 @@ export async function GET({ params, setHeaders }) {
 
   return json({
     ...image,
-    url: `${URL}/${image.id}`,
-    image: `${CDN_URL}/${image.id}`,
+    url: `${URL}/${image.type}/${image.id}`,
+    image: `${CDN_URL}/${image.type}/${image.id}`,
   });
 }

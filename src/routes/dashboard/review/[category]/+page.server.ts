@@ -48,7 +48,7 @@ export const actions = {
 
     await db.update(images).set({ verified: 1 }).where(eq(images.id, id));
   },
-  deny: async ({ request, locals }) => {
+  deny: async ({ request, locals, params }) => {
     const auth = await locals.validate(false);
 
     if (!auth || !auth.user || auth.user.type === "user") return redirect(302, "/dashboard");
@@ -60,7 +60,9 @@ export const actions = {
     if (!id) return fail(400);
 
     await db.delete(images).where(eq(images.id, id));
-    await s3.send(new DeleteObjectCommand({ Bucket: "maxzdev-animals", Key: id }));
+    await s3.send(
+      new DeleteObjectCommand({ Bucket: "maxzdev-animals", Key: `${params.category}/${id}` }),
+    );
   },
   denyAll: async ({ locals, params }) => {
     const auth = await locals.validate(false);
