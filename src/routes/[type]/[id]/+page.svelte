@@ -22,10 +22,10 @@
   <meta property="og:type" content="image" />
 </svelte:head>
 
-<div class="mt-14 flex w-full justify-center">
-  <div class="w-full max-w-4xl">
-    <div class="flex w-full justify-center">
-      <div class="w-2/5">
+<div class="mt-8 flex w-full justify-center">
+  <div class="w-fit md:w-full md:max-w-4xl">
+    <div class="flex w-fit flex-col-reverse justify-center gap-4 md:w-full md:flex-row">
+      <div class="px-4 md:w-2/5 md:px-0">
         <img
           class="w-full rounded-lg"
           src="https://animalscdn.maxz.dev/{data.image.type}/{data.image.id}"
@@ -33,7 +33,11 @@
         />
       </div>
       <div class="px-4">
-        <h1 class="font-semibold text-primary {data.image.name ? 'text-3xl' : 'text-lg'}">
+        <h1
+          class="font-semibold text-primary {data.image.name
+            ? 'text-2xl md:text-3xl'
+            : 'md:text-lg'}"
+        >
           {data.image.name || data.image.id}
         </h1>
         <p>Uploaded: {dayjs(data.image.createdAt).format("YYYY-MM-DD")}</p>
