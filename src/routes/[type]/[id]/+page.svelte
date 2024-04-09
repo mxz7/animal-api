@@ -28,7 +28,7 @@
       <div class="w-2/5">
         <img
           class="w-full rounded-lg"
-          src="https://animalscdn.maxz.dev/{data.image.id}"
+          src="https://animalscdn.maxz.dev/{data.image.type}/{data.image.id}"
           alt={data.image.name}
         />
       </div>
