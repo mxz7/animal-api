@@ -16,7 +16,7 @@ export const actions = {
 
     if (!auth || auth.user.type !== "admin") return fail(400);
 
-    await db.delete(images).where(eq(images.id, `${params.type}/${params.id}`));
+    await db.delete(images).where(eq(images.id, params.id));
     await s3.send(
       new DeleteObjectCommand({ Bucket: "maxzdev-animals", Key: `${params.type}/${params.id}` }),
     );
