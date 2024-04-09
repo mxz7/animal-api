@@ -9,6 +9,6 @@ export const imageUpload = object({
     .regex(/^[A-Za-z]+$/, "Letters only"),
   name: string()
     .trim()
-    .regex(/^[A-Za-z]+$/, "Letters only")
+    .regex(/^[A-Za-z\s]+$/, "Letters only")
     .optional(),
 });
