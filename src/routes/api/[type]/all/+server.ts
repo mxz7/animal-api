@@ -1,8 +1,8 @@
 import { PUBLIC_CDN_URL, PUBLIC_URL } from "$env/static/public";
 import db from "$lib/server/database/database.js";
-import { imageLikes, imageReports, images } from "$lib/server/database/schema.js";
+import { imageLikes, imageReports, images, requests } from "$lib/server/database/schema.js";
 import { json } from "@sveltejs/kit";
-import { and, count, eq } from "drizzle-orm";
+import { and, count, eq, sql } from "drizzle-orm";
 
 export async function GET({ setHeaders, params }) {
   setHeaders({ "cache-control": "s-maxage=3600, stale-while-revalidate" });
@@ -23,6 +23,14 @@ export async function GET({ setHeaders, params }) {
 
   if (query.length === 0)
     return json({ error: 404, message: `${params.type.toLowerCase()} unsuppoed animal type` });
+
+  await db
+    .insert(requests)
+    .values({ type: params.type, createdAt: Date.now() })
+    .onConflictDoUpdate({
+      set: { served: sql`${requests.served} + 1` },
+      target: requests.type,
+    });
 
   return json(
     query.map((i) => ({
