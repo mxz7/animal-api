@@ -43,7 +43,10 @@ export const imageReports = sqliteTable("image_reports", {
   id: text("id").primaryKey(),
   createdAt: integer("created_at").notNull(),
   createdIp: text("created_ip").notNull(),
-  imageId: text("image_id").references(() => images.id, { onDelete: "cascade" }),
+  imageId: text("image_id").references(() => images.id, {
+    onDelete: "cascade",
+    onUpdate: "cascade",
+  }),
   content: text("content").notNull(),
 });
 
@@ -53,7 +56,10 @@ export const imageLikes = sqliteTable(
     id: text("id").primaryKey(),
     createdAt: integer("created_at").notNull(),
     createdIp: text("created_ip").notNull(),
-    imageId: text("image_id").references(() => images.id, { onDelete: "cascade" }),
+    imageId: text("image_id").references(() => images.id, {
+      onDelete: "cascade",
+      onUpdate: "cascade",
+    }),
   },
   (table) => ({
     unq: unique().on(table.createdIp, table.imageId),
