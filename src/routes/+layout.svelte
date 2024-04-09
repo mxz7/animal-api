@@ -1,8 +1,12 @@
 <script>
+  import { dev } from "$app/environment";
   import { page } from "$app/stores";
   import Navbar from "$lib/components/navbar.svelte";
+  import { inject } from "@vercel/analytics";
   import { Toaster } from "svelte-french-toast";
   import "../app.css";
+
+  if (!dev) inject({ mode: "production" });
 </script>
 
 <svelte:head>
