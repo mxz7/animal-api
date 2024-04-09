@@ -1,5 +1,6 @@
 <script lang="ts">
   import Supported from "$lib/components/supported.svelte";
+  import Usage from "$lib/components/usage.svelte";
   import dayjs from "dayjs";
 
   export let data;
@@ -23,7 +24,9 @@
 </p>
 
 <div class="mt-48 flex w-full justify-center">
-  <div class="w-full max-w-4xl px-4 md:px-0">
+  <div class="w-full max-w-4xl px-4 pb-80 md:px-0">
     <Supported categories={data.categories} />
+
+    <Usage categories={data.categories} result={data.image} />
   </div>
 </div>

@@ -1,4 +1,4 @@
-import { CDN_URL, URL } from "$env/static/private";
+import { PUBLIC_CDN_URL, PUBLIC_URL } from "$env/static/public";
 import db from "$lib/server/database/database.js";
 import { imageLikes, imageReports, images } from "$lib/server/database/schema.js";
 import { error, json } from "@sveltejs/kit";
@@ -27,7 +27,7 @@ export async function GET({ params, setHeaders }) {
 
   return json({
     ...image,
-    url: `${URL}/${image.type}/${image.id}`,
-    image: `${CDN_URL}/${image.type}/${image.id}`,
+    url: `${PUBLIC_URL}/${image.type}/${image.id}`,
+    image: `${PUBLIC_CDN_URL}/${image.type}/${image.id}`,
   });
 }

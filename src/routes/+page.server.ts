@@ -1,6 +1,6 @@
 import db from "$lib/server/database/database.js";
 import { requests } from "$lib/server/database/schema.js";
-import type { Types } from "$lib/types/api.js";
+import type { Image, Types } from "$lib/types/api.js";
 import { asc, sum } from "drizzle-orm";
 
 export async function load({ setHeaders, request, fetch }) {
@@ -19,15 +19,17 @@ export async function load({ setHeaders, request, fetch }) {
     .limit(1)
     .then((r) => r[0]?.date ?? 0);
 
-  const categories = fetch("/api/types");
+  const categories = fetch("/api/types").then((r) => r.json() as Promise<Types>);
+  const cat = fetch(`/api/cat/random`).then((r) => r.json() as Promise<Image>);
 
   if (request.headers.get("user-agent")?.toLowerCase().includes("bot")) {
     return {
       served: await served,
       since: await since,
-      categories: await categories.then((r) => r.json() as Promise<Types>),
+      categories: await categories,
+      image: await cat,
     };
   }
 
-  return { served, since, categories: categories.then((r) => r.json() as Promise<Types>) };
+  return { served, since, categories: categories, image: cat };
 }
