@@ -14,7 +14,7 @@
     {#each categories as category}
       <a
         href="/{category.type}/random"
-        class="mt-2 rounded-lg border border-secondary bg-secondary bg-opacity-20 p-4 text-center"
+        class="mt-2 rounded-lg border border-secondary bg-secondary bg-opacity-20 p-4 text-center duration-300 hover:opacity-80"
       >
         <h3 class="text-2xl font-medium text-primary">{category.type}</h3>
         <p class="mt-2 text-lg text-accent">
