@@ -13,9 +13,13 @@
   let uploadCount = 0;
   let files: File[] = [];
   let formFiles: FileList;
-  const { form, errors, constraints, enhance, message } = superForm(data.form, {
+  let compressed = false;
+  const { form, errors, enhance, message } = superForm(data.form, {
     onSubmit() {
       status = "posting";
+    },
+    onResult(event) {
+      if (event.result.type === "failure") status = "waiting";
     },
   });
 
@@ -23,6 +27,7 @@
     console.log("compressing");
     status = "compressing";
     for (let i = 0; i < files.length; i++) {
+      if (files[i].size < 1000000) continue;
       const newFile = await new Promise((resolve) => {
         new Compressor(files[i], {
           quality: 0.95,
@@ -38,6 +43,7 @@
       files[i] = newFile as File;
     }
 
+    compressed = true;
     await sleep(500);
   }
 
@@ -88,7 +94,7 @@
 
 <label
   for="dropzone-file"
-  class="flex h-fit w-3/4 cursor-pointer flex-col items-center justify-center rounded-lg bg-secondary bg-opacity-20 duration-300 hover:bg-opacity-20"
+  class="flex h-fit w-full cursor-pointer flex-col items-center justify-center rounded-lg bg-secondary bg-opacity-20 duration-300 hover:bg-opacity-20 md:w-3/4"
 >
   <div class="flex flex-col items-center justify-center pb-6 pt-5 text-center">
     <CloudUpload strokeWidth={2.7} size={32} class="mb-3 text-primary" />
@@ -117,7 +123,7 @@
   />
 </label>
 
-<div class="mt-2 grid w-3/4 grid-cols-1 gap-3">
+<div class="mt-2 grid w-full grid-cols-1 gap-3 md:w-3/4">
   {#each files as file, i}
     <div class="flex w-full items-center rounded-lg border border-secondary p-1 pl-2">
       <h2 class="text-zinc-300">{file.name}</h2>
@@ -136,47 +142,61 @@
 </div>
 
 <form method="post" class="mt-2" use:enhance>
-  {#if files.length < 2}
+  <div class="flex w-full flex-col gap-2 md:w-3/4">
+    {#if files.length < 2}
+      <input
+        class="input input-bordered min-w-0"
+        type="text"
+        name="name"
+        id="name"
+        placeholder="name"
+        bind:value={$form.name}
+      />
+      {#if $errors.name && $errors.name[0]}
+        <p class="-mt-2 text-red-400">{$errors.name[0]}</p>
+      {/if}
+    {/if}
+
     <input
       class="input input-bordered min-w-0"
       type="text"
-      name="name"
-      id="name"
-      placeholder="name"
-      bind:value={$form.name}
-      {...$constraints.name}
+      name="category"
+      id="category"
+      placeholder="animal type"
+      bind:value={$form.category}
     />
-    {#if $errors.name && $errors.name[0]}
-      <p class="-mt-4 text-center text-red-400">{$errors.name[0]}</p>
+    {#if $errors.category && $errors.category[0]}
+      <p class="-mt-2 text-red-400">{$errors.category[0]}</p>
     {/if}
-  {/if}
 
-  <input
-    class="input input-bordered mt-4 min-w-0"
-    type="text"
-    name="category"
-    id="category"
-    placeholder="animal type"
-    bind:value={$form.category}
-    {...$constraints.category}
-  />
-  {#if $errors.category && $errors.category[0]}
-    <p class="-mt-4 text-center text-red-400">{$errors.category[0]}</p>
-  {/if}
+    <input type="hidden" name="types" bind:value={$form.types} />
+    {#if $errors.types && $errors.types[0]}
+      <p class="-mt-4 text-center text-red-400">{$errors.types[0]}</p>
+    {/if}
 
-  <input type="hidden" name="types" bind:value={$form.types} />
-  {#if $errors.types && $errors.types[0]}
-    <p class="-mt-4 text-center text-red-400">{$errors.types[0]}</p>
-  {/if}
+    <input type="hidden" name="sizes" bind:value={$form.sizes} />
+    {#if $errors.sizes && $errors.sizes[0]}
+      <p class="-mt-4 text-center text-red-400">{$errors.sizes[0]}</p>
+    {/if}
 
-  <input type="hidden" name="sizes" bind:value={$form.sizes} />
-  {#if $errors.sizes && $errors.sizes[0]}
-    <p class="-mt-4 text-center text-red-400">{$errors.sizes[0]}</p>
-  {/if}
+    <button
+      on:click={async (event) => {
+        if (files.length === 0) return event.preventDefault();
+        if (!compressed) event.preventDefault();
+        else return;
+        await compress();
 
-  <br />
-
-  <button bind:this={formButton} class="hidden"></button>
+        console.log("posting");
+        formButton.click();
+      }}
+      bind:this={formButton}
+      class="{status === 'waiting' ? null : 'hidden'} {files.length === 0
+        ? 'btn-disabled'
+        : ''} btn btn-neutral mt-4"
+    >
+      Upload
+    </button>
+  </div>
 
   {#if status !== "waiting"}
     <div class="mt-12 flex w-fit items-center gap-2">
@@ -192,15 +212,3 @@
     </div>
   {/if}
 </form>
-
-<button
-  on:click|preventDefault={async () => {
-    await compress();
-
-    console.log("posting");
-    formButton.click();
-  }}
-  class="{status === 'waiting' ? null : 'hidden'}  btn btn-neutral mt-4"
->
-  Upload
-</button>
