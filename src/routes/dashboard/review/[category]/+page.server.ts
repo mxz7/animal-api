@@ -22,6 +22,7 @@ export async function load({ parent, params, depends }) {
       createdAt: images.createdAt,
       name: images.name,
       uploadedBy: images.uploadedBy,
+      type: images.type,
     })
     .from(images)
     .where(and(eq(images.verified, 0), eq(images.type, params.category)))
