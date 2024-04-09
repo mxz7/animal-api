@@ -67,11 +67,15 @@ export const handle = async ({ event, resolve }) => {
 
   const res = await resolve(event);
 
-  if (
-    (res.redirected || res.status === 404 || res.status === 500) &&
-    res.headers.get("cache-control")
-  )
-    res.headers.delete("cache-control");
+  try {
+    if (
+      (res.redirected || res.status === 404 || res.status === 500) &&
+      res.headers.get("cache-control")
+    )
+      res.headers.delete("cache-control");
+  } catch {
+    // do nothing lol
+  }
 
   return res;
 };
