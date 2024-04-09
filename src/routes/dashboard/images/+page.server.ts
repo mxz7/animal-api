@@ -9,7 +9,7 @@ export async function load({ setHeaders, parent }) {
 
   return {
     images: db
-      .select({ id: images.id, type: images.type })
+      .select({ id: images.id, type: images.type, verified: images.verified })
       .from(images)
       .where(eq(images.uploadedBy, user.id))
       .orderBy(desc(images.createdAt)),

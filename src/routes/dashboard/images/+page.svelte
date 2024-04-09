@@ -1,4 +1,6 @@
 <script>
+  import TypeGroup from "./TypeGroup.svelte";
+
   export let data;
 </script>
 
@@ -6,23 +8,24 @@
   <title>images / dashboard / animals API</title>
 </svelte:head>
 
-{#await data.images}
-  <span class="loading loading-spinner text-accent"></span>
-{:then images}
-  {#if images.length === 0}
-    <p>You have no uploaded images</p>
-  {:else}
-    <div class="w-full columns-2 break-inside-avoid gap-2">
-      {#each images as image}
-        <a href="/{image.type}/{image.id}" class="block break-inside-avoid-column pb-2">
-          <img
-            class="w-full rounded-lg"
-            src="https://animalscdn.maxz.dev/{image.type}/{image.id}"
-            alt="user uploaded {image.type}"
-            loading="lazy"
-          />
-        </a>
-      {/each}
-    </div>
-  {/if}
-{/await}
+<div class="w-full">
+  {#await data.images}
+    <span class="loading loading-spinner text-accent"></span>
+  {:then images}
+    {#if images.length === 0}
+      <p>
+        No uploaded images. <a href="/dashboard/upload" class="link link-accent">Upload here</a>
+      </p>
+    {/if}
+    {@const verified = images.filter((i) => i.verified)}
+    {@const unverified = images.filter((i) => !i.verified)}
+    {#if verified.length > 0}
+      <div class="divider divider-success">Verified</div>
+      <TypeGroup verified={1} images={verified} />
+    {/if}
+    {#if unverified.length > 0}
+      <div class="divider divider-error">Unverified</div>
+      <TypeGroup verified={0} images={unverified} />
+    {/if}
+  {/await}
+</div>
