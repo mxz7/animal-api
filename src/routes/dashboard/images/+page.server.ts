@@ -2,9 +2,7 @@ import db from "$lib/server/database/database.js";
 import { images } from "$lib/server/database/schema.js";
 import { desc, eq } from "drizzle-orm";
 
-export async function load({ setHeaders, parent }) {
-  setHeaders({ "cache-control": "max-age=300" });
-
+export async function load({ parent }) {
   const { user } = await parent();
 
   return {
