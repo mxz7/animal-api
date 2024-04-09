@@ -1,7 +1,7 @@
 import db from "$lib/server/database/database.js";
 import { images, users } from "$lib/server/database/schema.js";
 import { s3 } from "$lib/server/s3.js";
-import { DeleteObjectCommand } from "@aws-sdk/client-s3";
+import { CopyObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { error, fail, redirect } from "@sveltejs/kit";
 import { and, eq } from "drizzle-orm";
 
@@ -63,6 +63,35 @@ export const actions = {
     await db.delete(images).where(eq(images.id, id));
     await s3.send(
       new DeleteObjectCommand({ Bucket: "maxzdev-animals", Key: `${params.category}/${id}` }),
+    );
+  },
+  changeType: async ({ request, locals }) => {
+    const auth = await locals.validate(false);
+
+    if (!auth || !auth.user || auth.user.type === "user") return redirect(302, "/dashboard");
+
+    const data = await request.formData();
+
+    const id = data.get("id")?.toString();
+    const type = data.get("type")?.toString();
+
+    if (!type || !id) return fail(400);
+
+    const [oldType] = await db.select({ type: images.type }).from(images).where(eq(images.id, id));
+
+    if (!oldType) return fail(400);
+    await db.update(images).set({ type }).where(eq(images.id, id));
+
+    await s3.send(
+      new CopyObjectCommand({
+        Bucket: "maxzdev-animals",
+        CopySource: `/maxzdev-animals/${oldType.type}/${id}`, // requires bucket at start for some reason
+        Key: `${type}/${id}`,
+      }),
+    );
+
+    await s3.send(
+      new DeleteObjectCommand({ Bucket: "maxzdev-animals", Key: `${oldType.type}/${id}` }),
     );
   },
   denyAll: async ({ locals, params }) => {

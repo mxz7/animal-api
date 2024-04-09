@@ -7,9 +7,11 @@
   export let data;
 
   let loading = false;
+  let modal: HTMLDialogElement;
 
   function enhanceFunction() {
     loading = true;
+    if (modal.open) modal.close();
     return async () => {
       await invalidate("reviewimage");
       loading = false;
@@ -21,6 +23,32 @@
   <title>reviewing {$page.params.category} images / animals api</title>
 </svelte:head>
 
+<dialog class="modal" bind:this={modal}>
+  <form
+    class="modal-box flex flex-col gap-4 p-4"
+    action="?/changeType"
+    method="post"
+    use:enhance={enhanceFunction}
+  >
+    <h2 class="text-center text-2xl font-semibold text-primary">Change Type</h2>
+    <input
+      type="text"
+      name="type"
+      id="type"
+      class="input input-secondary"
+      placeholder="New type"
+      value={data.image.type}
+    />
+    <input type="hidden" name="id" id="id" value={data.image.id} />
+
+    <button class="btn btn-primary">Change</button>
+  </form>
+
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>
+
 <div class="flex w-fit justify-center gap-4 py-4">
   <form action="?/accept" method="post" use:enhance={enhanceFunction}>
     <input type="hidden" name="id" value={data.image.id} />
@@ -30,6 +58,11 @@
     <input type="hidden" name="id" value={data.image.id} />
     <button class="btn btn-error {loading ? 'btn-disabled' : ''}">Deny</button>
   </form>
+
+  <button
+    on:click={() => modal.showModal()}
+    class="btn btn-secondary {loading ? 'btn-disabled' : ''}">Change Type</button
+  >
 
   {#if data.user.type === "admin"}
     <form action="?/denyAll" method="post" use:enhance={enhanceFunction}>
