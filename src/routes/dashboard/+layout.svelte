@@ -3,7 +3,7 @@
   import { ArrowLeft, ArrowRightFromLine } from "lucide-svelte";
 
   export let data;
-  let showNav = false;
+  let showNav = true;
 
   const routes: { href: string; text: string; perms?: ("mod" | "admin")[] }[] = [
     { href: "/dashboard/images", text: "images" },
