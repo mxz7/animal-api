@@ -1,10 +1,10 @@
+import { nanoid } from "$lib/nanoid.js";
 import db from "$lib/server/database/database.js";
 import { imageLikes, images, users } from "$lib/server/database/schema.js";
 import { s3 } from "$lib/server/s3.js";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { fail, redirect } from "@sveltejs/kit";
 import { and, eq } from "drizzle-orm";
-import { nanoid } from "nanoid";
 
 export const config = {
   runtime: "nodejs20.x",

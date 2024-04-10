@@ -1,9 +1,9 @@
+import { nanoid } from "$lib/nanoid.js";
 import db from "$lib/server/database/database.js";
 import { images } from "$lib/server/database/schema.js";
 import { createPresignedUpload } from "$lib/server/s3.js";
 import { imageUpload } from "$lib/zod.js";
 import { error, redirect } from "@sveltejs/kit";
-import { nanoid } from "nanoid";
 import { fail, message, setError, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 
@@ -31,6 +31,9 @@ export const actions = {
 
     const types = form.data.types.split("||");
     const sizes = form.data.sizes.split("||");
+
+    console.log(types);
+    console.log(sizes);
 
     if (types.length !== sizes.length) {
       return setError(form, "types", "Mismatched types and sizes. Please refresh and try again");
