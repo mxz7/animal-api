@@ -1,5 +1,9 @@
 import { error, redirect } from "@sveltejs/kit";
 
+export const config = {
+  runtime: "edge",
+};
+
 export async function load({ locals, url }) {
   const auth = await locals.validate(false);
 

@@ -1,3 +1,4 @@
+import { invalidateISR } from "$lib/server/cache.js";
 import db from "$lib/server/database/database.js";
 import { images, users } from "$lib/server/database/schema.js";
 import { s3 } from "$lib/server/s3.js";
@@ -36,7 +37,7 @@ export async function load({ parent, params, depends }) {
 }
 
 export const actions = {
-  accept: async ({ request, locals }) => {
+  accept: async ({ request, locals, fetch, params }) => {
     const auth = await locals.validate(false);
 
     if (!auth || !auth.user || auth.user.type === "user") return redirect(302, "/dashboard");
@@ -48,6 +49,7 @@ export const actions = {
     if (!id) return error(400);
 
     await db.update(images).set({ verified: 1 }).where(eq(images.id, id));
+    await invalidateISR(fetch, `/api/${params.category}/count`);
   },
   deny: async ({ request, locals, params }) => {
     const auth = await locals.validate(false);

@@ -1,12 +1,18 @@
+import { ISR_TOKEN } from "$env/static/private";
 import { PUBLIC_CDN_URL, PUBLIC_URL } from "$env/static/public";
 import db from "$lib/server/database/database.js";
 import { imageLikes, imageReports, images, requests } from "$lib/server/database/schema.js";
 import { json } from "@sveltejs/kit";
 import { and, count, eq, sql } from "drizzle-orm";
 
-export async function GET({ setHeaders, params }) {
-  setHeaders({ "cache-control": "s-maxage=3600, stale-while-revalidate" });
+export const config = {
+  isr: {
+    expiration: 3600,
+    bypassToken: ISR_TOKEN,
+  },
+};
 
+export async function GET({ params }) {
   const query = await db
     .select({
       id: images.id,
