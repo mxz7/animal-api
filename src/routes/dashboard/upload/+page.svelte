@@ -2,7 +2,7 @@
   import { goto } from "$app/navigation";
   import { sleep } from "$lib/utils.js";
   import Compressor from "compressorjs";
-  import { CloudUpload, Loader2, X } from "lucide-svelte";
+  import { Loader2 } from "lucide-svelte";
   import { toast } from "svelte-french-toast";
   import { superForm } from "sveltekit-superforms";
 
@@ -26,10 +26,13 @@
   async function compress() {
     console.log("compressing");
     status = "compressing";
-    for (let i = 0; i < files.length; i++) {
-      if (files[i].size < 1000000) continue;
+    for (const file of formFiles) {
+      if (file.size < 1000000) {
+        files.push(file);
+        continue;
+      }
       const newFile = await new Promise((resolve) => {
-        new Compressor(files[i], {
+        new Compressor(file, {
           quality: 0.95,
           retainExif: false,
           maxWidth: 2560,
@@ -40,7 +43,7 @@
         });
       });
 
-      files[i] = newFile as File;
+      files = [...files, newFile as File];
     }
 
     compressed = true;
@@ -92,38 +95,13 @@
   <title>upload / dashboard / animals API</title>
 </svelte:head>
 
-<label
-  for="dropzone-file"
-  class="flex h-fit w-full cursor-pointer flex-col items-center justify-center rounded-lg bg-secondary bg-opacity-20 duration-300 hover:bg-opacity-20 md:w-3/4"
->
-  <div class="flex flex-col items-center justify-center pb-6 pt-5 text-center">
-    <CloudUpload strokeWidth={2.7} size={32} class="mb-3 text-primary" />
-    <p class="mb-2 font-medium text-primary">Click to upload</p>
-    <p class="text-sm text-accent">PNG/JPEG - 5MB limit</p>
-  </div>
-  <input
-    id="dropzone-file"
-    type="file"
-    class="hidden"
-    accept="image/png, image/jpeg"
-    bind:files={formFiles}
-    on:change={() => {
-      for (const file of formFiles) {
-        if (files.length >= 50) {
-          toast.error("You can upload a max of 50 files at a time");
-          return;
-        }
-        if (file.size > 5000000) {
-          toast.error(`${file.name} is too big, max file size: 5mb`);
-          continue;
-        }
-        files = [...files, file];
-      }
-    }}
-  />
-</label>
+<input
+  type="file"
+  class="file-input file-input-bordered file-input-primary w-full max-w-xs"
+  bind:files={formFiles}
+/>
 
-<div class="mt-2 grid w-full grid-cols-1 gap-3 md:w-3/4">
+<!-- <div class="mt-2 grid w-full grid-cols-1 gap-3 md:w-3/4">
   {#each files as file, i}
     <div class="flex w-full items-center rounded-lg border border-secondary p-1 pl-2">
       <h2 class="text-zinc-300">{file.name}</h2>
@@ -139,7 +117,7 @@
       </button>
     </div>
   {/each}
-</div>
+</div> -->
 
 <form method="post" class="mt-2" use:enhance>
   <div class="flex w-full flex-col gap-2 md:w-3/4">
@@ -181,7 +159,7 @@
 
     <button
       on:click={async (event) => {
-        if (files.length === 0) return event.preventDefault();
+        if (formFiles.length === 0) return event.preventDefault();
         if (!compressed) event.preventDefault();
         else return;
         await compress();
@@ -190,9 +168,9 @@
         formButton.click();
       }}
       bind:this={formButton}
-      class="{status === 'waiting' ? null : 'hidden'} {files.length === 0
+      class="{status === 'waiting' ? null : 'hidden'} {formFiles?.length === 0 || !$form.category
         ? 'btn-disabled'
-        : ''} btn btn-neutral mt-4"
+        : ''} btn btn-primary mt-4"
     >
       Upload
     </button>
