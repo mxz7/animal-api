@@ -35,7 +35,7 @@
     {/each}
   </select>
   <div class="mt-4 w-full">
-    <div class="w-full overflow-scroll rounded-lg bg-base-200 p-4 md:w-fit">
+    <div class="w-full overflow-x-auto rounded-lg bg-base-200 p-4 md:w-fit">
       <code class="whitespace-pre-wrap text-xs md:text-base"
         >{PUBLIC_API_URL}/{selected}/random</code
       >
@@ -46,10 +46,10 @@
       {#await result}
         <span class="loading loading-spinner"></span>
       {:then result}
-        <div class="w-full overflow-scroll rounded-lg bg-base-200 p-4 md:w-fit">
-          <code class="whitespace-pre-wrap text-xs md:text-base"
-            >{JSON.stringify(result, null, 2)}</code
-          >
+        <div class="w-full overflow-x-auto rounded-lg bg-base-200 p-4 md:w-fit">
+          <code class="whitespace-pre-wrap text-xs md:text-base">
+            {JSON.stringify(result, null, 2)}
+          </code>
         </div>
       {/await}
     {/if}
