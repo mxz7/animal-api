@@ -8,4 +8,5 @@
       <Github size={32} class="text-secondary" />
     </a>
   </div>
+  <a href="https://maxz.dev" target="_blank" class="font-bold text-primary">maxz.dev</a>
 </footer>
