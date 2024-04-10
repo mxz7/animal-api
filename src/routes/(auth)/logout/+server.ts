@@ -1,6 +1,10 @@
 import { lucia } from "$lib/server/auth.js";
 import { redirect } from "@sveltejs/kit";
 
+export const config = {
+  runtime: "edge",
+};
+
 export async function GET({ locals }) {
   const auth = await locals.validate(false);
 

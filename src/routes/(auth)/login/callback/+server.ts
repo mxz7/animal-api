@@ -1,4 +1,3 @@
-
 import { nanoid } from "$lib/nanoid.js";
 import { discord, lucia } from "$lib/server/auth.js";
 import db from "$lib/server/database/database.js";
@@ -6,6 +5,10 @@ import { users } from "$lib/server/database/schema.js";
 import { error, redirect } from "@sveltejs/kit";
 import { OAuth2RequestError } from "arctic";
 import { and, eq } from "drizzle-orm";
+
+export const config = {
+  runtime: "edge",
+};
 
 export async function GET({ cookies, url, getClientAddress }) {
   const code = url.searchParams.get("code");

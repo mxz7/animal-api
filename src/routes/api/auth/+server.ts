@@ -1,6 +1,10 @@
 import { lucia } from "$lib/server/auth.js";
 import { json } from "@sveltejs/kit";
 
+export const config = {
+  runtime: "edge",
+};
+
 export async function GET({ cookies }) {
   const sessionId = cookies.get(lucia.sessionCookieName);
   if (!sessionId) {

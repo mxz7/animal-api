@@ -4,6 +4,10 @@ import { imageLikes, imageReports, images, requests } from "$lib/server/database
 import { json } from "@sveltejs/kit";
 import { and, eq, sql } from "drizzle-orm";
 
+export const config = {
+  runtime: "edge",
+};
+
 export async function GET({ params, fetch }) {
   const res = await fetch(`/api/${params.type.toLowerCase()}/count`);
 

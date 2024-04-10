@@ -3,6 +3,10 @@ import { requests } from "$lib/server/database/schema.js";
 import type { Image, Types } from "$lib/types/api.js";
 import { asc, sum } from "drizzle-orm";
 
+export const config = {
+  runtime: "edge",
+};
+
 export async function load({ setHeaders, request, fetch }) {
   setHeaders({ "cache-control": "s-maxage=43200, stale-while-revalidate, max-age=600" });
 

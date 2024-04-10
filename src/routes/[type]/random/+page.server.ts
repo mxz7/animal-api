@@ -1,5 +1,9 @@
 import { error, redirect } from "@sveltejs/kit";
 
+export const config = {
+  runtime: "edge",
+};
+
 export async function load({ fetch, params }) {
   const res = await fetch(`/api/${params.type.toLowerCase()}/random`);
 

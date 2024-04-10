@@ -2,6 +2,10 @@ import { discord } from "$lib/server/auth.js";
 import { redirect } from "@sveltejs/kit";
 import { generateState } from "arctic";
 
+export const config = {
+  runtime: "edge",
+};
+
 export async function GET({ cookies, locals, url }) {
   if (await locals.validate(false)) return redirect(302, "/");
 
