@@ -8,6 +8,10 @@
 
 <svelte:head>
   <title>animals API</title>
+  <meta
+    name="description"
+    content="Random animals API with multiple different types of animals including cats, dogs and capybaras. Upload your own pets to be seen by many."
+  />
 </svelte:head>
 
 <h1 class="mt-16 w-full text-center text-5xl font-bold text-primary md:text-6xl">animals API</h1>
