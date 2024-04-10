@@ -97,27 +97,9 @@
 
 <input
   type="file"
-  class="file-input file-input-bordered file-input-primary w-full max-w-xs"
+  class="file-input file-input-bordered file-input-primary w-full"
   bind:files={formFiles}
 />
-
-<!-- <div class="mt-2 grid w-full grid-cols-1 gap-3 md:w-3/4">
-  {#each files as file, i}
-    <div class="flex w-full items-center rounded-lg border border-secondary p-1 pl-2">
-      <h2 class="text-zinc-300">{file.name}</h2>
-      <div class="grow" />
-      <button
-        on:click={() => {
-          files.splice(i, 1);
-          files = [...files];
-        }}
-        class="rounded-lg border border-secondary border-opacity-0 p-1 duration-300 hover:border-opacity-75"
-      >
-        <X class="text-secondary" />
-      </button>
-    </div>
-  {/each}
-</div> -->
 
 <form method="post" class="mt-2" use:enhance>
   <div class="flex w-full flex-col gap-2 md:w-3/4">
