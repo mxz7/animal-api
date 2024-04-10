@@ -28,7 +28,7 @@
     status = "compressing";
     for (const file of formFiles) {
       if (file.size < 1000000) {
-        files.push(file);
+        files = [...files, file];
         continue;
       }
       const newFile = await new Promise((resolve) => {
