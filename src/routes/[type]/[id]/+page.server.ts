@@ -1,3 +1,4 @@
+import { ISR_TOKEN } from "$env/static/private";
 import { nanoid } from "$lib/nanoid.js";
 import db from "$lib/server/database/database.js";
 import { imageLikes, images, users } from "$lib/server/database/schema.js";
@@ -7,7 +8,10 @@ import { fail, redirect } from "@sveltejs/kit";
 import { and, eq } from "drizzle-orm";
 
 export const config = {
-  runtime: "nodejs20.x",
+  isr: {
+    expiration: 43200,
+    bypassToken: ISR_TOKEN,
+  },
 };
 
 export const actions = {
