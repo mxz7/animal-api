@@ -54,7 +54,7 @@ export async function load({ request, fetch }) {
       url: `${PUBLIC_URL}/${query.type}/${query.id}`,
       image: `${PUBLIC_CDN_URL}/${query.type}/${query.id}`,
     };
-  })(); // this cannot be the api route because serverless -> edge isnt good for some reason
+  })(); // api would go serverless -> edge -> serverless which vercel doesnt like
 
   if (request.headers.get("user-agent")?.toLowerCase().includes("bot")) {
     return {
