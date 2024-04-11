@@ -9,6 +9,7 @@
     { href: "/dashboard/images", text: "images" },
     { href: "/dashboard/upload", text: "upload" },
     { href: "/dashboard/review", text: "review", perms: ["mod", "admin"] },
+    { href: "/dashboard/reports", text: "reports", perms: ["mod", "admin"] },
   ];
 </script>
 
@@ -27,8 +28,17 @@
               {#if data.user.type === perm}
                 <a
                   class={$page.url.pathname.split("/")[2] === text ? "text-accent underline" : ""}
-                  {href}>{text}</a
+                  {href}
                 >
+                  <p class="whitespace-nowrap">
+                    {text}
+                    {#if text === "reports"}
+                      {#await data.reportCount then reportCount}
+                        ({reportCount.toLocaleString()})
+                      {/await}
+                    {/if}
+                  </p>
+                </a>
               {/if}
             {/each}
           {:else}
