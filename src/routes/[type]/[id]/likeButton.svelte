@@ -5,7 +5,7 @@
 </script>
 
 <form
-  action="?/addLike"
+  action="?/like"
   method="POST"
   use:enhance={() => {
     let done = 0;

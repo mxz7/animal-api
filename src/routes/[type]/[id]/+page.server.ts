@@ -36,7 +36,7 @@ export const actions = {
     );
     return redirect(302, "/");
   },
-  addLike: async ({ getClientAddress, params }) => {
+  like: async ({ getClientAddress, params }) => {
     if (await banCheck(getClientAddress())) return fail(400);
 
     let broke = false;
