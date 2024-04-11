@@ -1,7 +1,7 @@
 import db from "$lib/server/database/database.js";
-import { imageReports } from "$lib/server/database/schema.js";
+import { imageReports, images } from "$lib/server/database/schema.js";
 import { error, redirect } from "@sveltejs/kit";
-import { count } from "drizzle-orm";
+import { count, eq } from "drizzle-orm";
 
 export const config = {
   runtime: "edge",
@@ -14,11 +14,20 @@ export async function load({ locals, url }) {
 
   if (auth.user.banned) return error(402);
 
-  return {
-    user: auth.user,
-    reportCount: db
-      .select({ reports: count(imageReports.id) })
-      .from(imageReports)
-      .then((r) => r[0]?.reports || 0),
-  };
+  if (auth.user.type === "admin") {
+    return {
+      user: auth.user,
+      reviewCount: db
+        .select({ reviews: count(images.id) })
+        .from(images)
+        .where(eq(images.verified, 0))
+        .then((r) => r[0]?.reviews || 0),
+      reportCount: db
+        .select({ reports: count(imageReports.id) })
+        .from(imageReports)
+        .then((r) => r[0]?.reports || 0),
+    };
+  } else {
+    return { user: auth.user };
+  }
 }

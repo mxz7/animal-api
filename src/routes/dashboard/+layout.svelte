@@ -32,9 +32,17 @@
                 >
                   <p class="whitespace-nowrap">
                     {text}
-                    {#if text === "reports"}
+                    {#if text === "reports" && data.reportCount}
                       {#await data.reportCount then reportCount}
-                        ({reportCount.toLocaleString()})
+                        {#if reportCount > 0}
+                          ({reportCount.toLocaleString()})
+                        {/if}
+                      {/await}
+                    {:else if text === "review" && data.reviewCount}
+                      {#await data.reviewCount then reviewCount}
+                        {#if reviewCount > 0}
+                          ({reviewCount.toLocaleString()})
+                        {/if}
                       {/await}
                     {/if}
                   </p>
