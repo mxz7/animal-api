@@ -1,4 +1,3 @@
-import { ISR_TOKEN } from "$env/static/private";
 import { nanoid } from "$lib/nanoid.js";
 import db from "$lib/server/database/database.js";
 import { imageLikes, imageReports, images, users } from "$lib/server/database/schema.js";
@@ -11,23 +10,15 @@ import { and, eq, gt } from "drizzle-orm";
 import { message, setError, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 
-export const config = {
-  isr: {
-    expiration: 43200,
-    bypassToken: ISR_TOKEN,
-  },
-};
+export async function load({ params, setHeaders }) {
+  setHeaders({ "cache-control": "s-maxage=86400, stale-while-revalidate" });
 
-export async function load({ params }) {
   return {
     reportForm: await superValidate({ id: params.id }, zod(imageReport), { errors: false }),
   };
 }
 
 export const actions = {
-  default: () => {
-    console.log("default action did nothing");
-  },
   delete: async ({ locals, params }) => {
     const auth = await locals.validate(false);
 
