@@ -4,7 +4,7 @@
 
   export let categories: Types | Promise<Types>;
 
-  let selected: string;
+  let selected = "cat";
   export let result: Promise<Image> | Image | undefined;
 
   $: {
