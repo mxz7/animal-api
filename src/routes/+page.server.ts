@@ -26,7 +26,7 @@ export async function load({ request, fetch }) {
     .then((r) => r[0]?.date ?? 0);
 
   const categories = fetch("/api/types").then((r) => r.json() as Promise<Types>);
-  const cat = fetch(`/api/cat/random`).then((r) => r.json() as Promise<Image>);
+  const cat = fetch("/api/cat/random").then((r) => r.json() as Promise<Image>);
 
   if (request.headers.get("user-agent")?.toLowerCase().includes("bot")) {
     return {
