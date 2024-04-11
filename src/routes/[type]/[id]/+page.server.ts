@@ -25,6 +25,9 @@ export async function load({ params }) {
 }
 
 export const actions = {
+  default: () => {
+    console.log("default action did nothing");
+  },
   delete: async ({ locals, params }) => {
     const auth = await locals.validate(false);
 
