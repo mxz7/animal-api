@@ -1,7 +1,9 @@
-<script>
+<script lang="ts">
   import { enhance } from "$app/forms";
   import { ThumbsUp } from "lucide-svelte";
   import toast from "svelte-french-toast";
+
+  export let addLike: () => void;
 </script>
 
 <form
@@ -30,6 +32,7 @@
       if (result.status !== 200) {
         done = 2;
       } else {
+        addLike();
         done = 1;
       }
     };

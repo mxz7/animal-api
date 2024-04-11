@@ -43,7 +43,7 @@
         <p>Uploaded: {dayjs(data.image.createdAt).format("YYYY-MM-DD")}</p>
         <p>{data.image.likes.toLocaleString()} like{data.image.likes === 1 ? "" : "s"}</p>
         <div class="mt-4 flex gap-4">
-          <LikeButton />
+          <LikeButton addLike={() => data.image.likes++} />
           <ReportButton reportForm={data.reportForm} />
 
           {#if user?.type === "admin"}
