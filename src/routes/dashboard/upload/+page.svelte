@@ -102,7 +102,7 @@
   bind:files={formFiles}
 />
 
-<form method="post" class="mt-2" use:enhance>
+<form method="POST" class="mt-2" use:enhance>
   <div class="flex w-full flex-col gap-2 md:w-3/4">
     {#if files.length < 2}
       <input

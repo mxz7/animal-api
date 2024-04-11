@@ -24,7 +24,7 @@
       </div>
       <form
         action="?/delete"
-        method="post"
+        method="POST"
         use:enhance={() => {
           return ({ result }) => {
             data.reports.splice(

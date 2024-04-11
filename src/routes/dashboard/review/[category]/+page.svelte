@@ -27,7 +27,7 @@
   <form
     class="modal-box flex flex-col gap-4 p-4"
     action="?/changeType"
-    method="post"
+    method="POST"
     use:enhance={enhanceFunction}
   >
     <h2 class="text-center text-2xl font-semibold text-primary">Change Type</h2>
@@ -50,11 +50,11 @@
 </dialog>
 
 <div class="flex w-fit justify-center gap-4 py-4">
-  <form action="?/accept" method="post" use:enhance={enhanceFunction}>
+  <form action="?/accept" method="POST" use:enhance={enhanceFunction}>
     <input type="hidden" name="id" value={data.image.id} />
     <button class="btn {loading ? 'btn-disabled' : ''} btn-success">Accept</button>
   </form>
-  <form action="?/deny" method="post" use:enhance={enhanceFunction}>
+  <form action="?/deny" method="POST" use:enhance={enhanceFunction}>
     <input type="hidden" name="id" value={data.image.id} />
     <button class="btn btn-error {loading ? 'btn-disabled' : ''}">Deny</button>
   </form>
@@ -65,11 +65,11 @@
   >
 
   {#if data.user.type === "admin"}
-    <form action="?/denyAll" method="post" use:enhance={enhanceFunction}>
+    <form action="?/denyAll" method="POST" use:enhance={enhanceFunction}>
       <button class="btn btn-warning {loading ? 'btn-disabled' : ''}">Deny All</button>
     </form>
 
-    <form action="?/deny" method="post" use:enhance={enhanceFunction}>
+    <form action="?/deny" method="POST" use:enhance={enhanceFunction}>
       <input type="hidden" name="userid" value={data.image.uploadedBy} />
       <button class="btn btn-warning {loading ? 'btn-disabled' : ''}">Ban User</button>
     </form>

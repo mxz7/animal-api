@@ -20,7 +20,7 @@
 </script>
 
 <dialog class="modal" bind:this={modal}>
-  <form class="modal-box flex flex-col gap-4 p-4" action="?/report" method="post" use:enhance>
+  <form class="modal-box flex flex-col gap-4 p-4" action="?/report" method="POST" use:enhance>
     <div class="flex items-center justify-center gap-3 text-error">
       <Flag />
 

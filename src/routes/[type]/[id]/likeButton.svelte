@@ -6,7 +6,7 @@
 
 <form
   action="?/addLike"
-  method="post"
+  method="POST"
   use:enhance={() => {
     let done = 0;
 

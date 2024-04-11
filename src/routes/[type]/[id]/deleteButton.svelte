@@ -4,7 +4,7 @@
   import { Trash } from "lucide-svelte";
 </script>
 
-<form action="?/delete" method="post" use:enhance>
+<form action="?/delete" method="POST" use:enhance>
   <button
     class="btn btn-ghost btn-outline btn-error tooltip tooltip-error flex items-center"
     data-tip="Delete"
