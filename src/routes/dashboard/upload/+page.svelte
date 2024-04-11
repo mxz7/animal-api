@@ -98,6 +98,7 @@
 <input
   type="file"
   class="file-input file-input-bordered file-input-primary w-full"
+  accept="image/png, image/jpeg, image/gif"
   bind:files={formFiles}
 />
 
