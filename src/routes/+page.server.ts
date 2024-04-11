@@ -12,7 +12,9 @@ export const config = {
   },
 };
 
-export async function load({ request, fetch }) {
+export async function load({ request, fetch, setHeaders }) {
+  setHeaders({ "cache-control": "max-age=3600" });
+
   const served = db
     .select({ total: sum(requests.served) })
     .from(requests)

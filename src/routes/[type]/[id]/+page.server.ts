@@ -11,7 +11,7 @@ import { message, setError, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 
 export async function load({ params, setHeaders }) {
-  setHeaders({ "cache-control": "s-maxage=86400, stale-while-revalidate" });
+  setHeaders({ "cache-control": "s-maxage=86400, stale-while-revalidate, max-age=3600" });
 
   return {
     reportForm: await superValidate({ id: params.id }, zod(imageReport), { errors: false }),
