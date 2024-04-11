@@ -10,13 +10,8 @@
   $: {
     (async () => {
       if (typeof selected === "string") {
-        console.log(selected);
-
-        console.log(result);
-        console.log(await result);
-
         if (result && (await result).type === selected) {
-          console.log("doing nothing");
+          // do nothing
         } else {
           console.log("fetching new result");
           result = fetch(`/api/${selected}/random`).then((r) => r.json());
