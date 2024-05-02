@@ -24,11 +24,11 @@ dependencies:
     specifier: ^1.2.1
     version: 1.2.1
   dayjs:
-    specifier: ^1.11.10
-    version: 1.11.10
+    specifier: ^1.11.11
+    version: 1.11.11
   drizzle-orm:
-    specifier: ^0.30.9
-    version: 0.30.9(@libsql/client@0.6.0)
+    specifier: ^0.30.10
+    version: 0.30.10(@libsql/client@0.6.0)
   lucia:
     specifier: ^3.1.1
     version: 3.1.1
@@ -59,8 +59,8 @@ devDependencies:
     specifier: ^10.4.16
     version: 10.4.19(postcss@8.4.38)
   daisyui:
-    specifier: ^4.10.2
-    version: 4.10.2(postcss@8.4.38)
+    specifier: ^4.10.3
+    version: 4.10.3(postcss@8.4.38)
   dotenv:
     specifier: ^16.4.5
     version: 16.4.5
@@ -2429,8 +2429,8 @@ packages:
     dev: false
     optional: true
 
-  /@sinclair/typebox@0.32.22:
-    resolution: {integrity: sha512-4uH8BLhNbptL2UkfS/a63tQ6uZGGZ4DT6zFq7ZkE+KQi7/56ZYkkWniAqz4bUr4cZGfoR83zRvSh39ZpH8DKDw==}
+  /@sinclair/typebox@0.32.27:
+    resolution: {integrity: sha512-JHRrubCKiXi6VKlbBTpTQnExkUFasPMIaXCJYJhqVBGLliQVt1yBZZgiZo3/uSmvAdXlIIdGoTAT6RB09L0QqA==}
     requiresBuild: true
     dev: false
     optional: true
@@ -3061,7 +3061,7 @@ packages:
       '@types/validator': 13.11.9
       '@vinejs/compiler': 2.5.0
       camelcase: 8.0.0
-      dayjs: 1.11.10
+      dayjs: 1.11.11
       dlv: 1.1.3
       normalize-url: 8.0.1
       validator: 13.11.0
@@ -3412,8 +3412,8 @@ packages:
       type: 2.7.2
     dev: true
 
-  /daisyui@4.10.2(postcss@8.4.38):
-    resolution: {integrity: sha512-eCWS1W/JPyxW9IvlgW5m0R6rp9ZhRsBTW37rvEUthckkjsV04u8XipV519OoccSA46ixhSJa3q7XLI1WUFtRCA==}
+  /daisyui@4.10.3(postcss@8.4.38):
+    resolution: {integrity: sha512-LuxUmktsfO8nk0MKbg8NAth0K199pL2FzPMqhy7PGKFQ9LWIDdYVnc4f60Ior1bvbyZcXoH6/hhU068UuHksjA==}
     engines: {node: '>=16.9.0'}
     dependencies:
       css-selector-tokenizer: 0.8.0
@@ -3429,8 +3429,8 @@ packages:
     engines: {node: '>= 12'}
     dev: false
 
-  /dayjs@1.11.10:
-    resolution: {integrity: sha512-vjAczensTgRcqDERK0SR2XMwsF/tSvnvlv6VcF2GIhg6Sx4yOIt/irsr1RDJsKiIyBzJDpCoXiWWq28MqH2cnQ==}
+  /dayjs@1.11.11:
+    resolution: {integrity: sha512-okzr3f11N6WuqYtZSvm+F776mB41wRZMhKP+hc34YdW+KmtYYK9iqvHSwo2k9FEH3fhGXvOPV6yz2IcSrfRUDg==}
     dev: false
 
   /debug@4.3.4:
@@ -3522,8 +3522,8 @@ packages:
       - supports-color
     dev: true
 
-  /drizzle-orm@0.30.9(@libsql/client@0.6.0):
-    resolution: {integrity: sha512-VOiCFsexErmgqvNCOmbzmqDCZzZsHoz6SkWAjTFxsTr1AllKDbDJ2+GgedLXsXMDgpg/ljDG1zItIFeZtiO2LA==}
+  /drizzle-orm@0.30.10(@libsql/client@0.6.0):
+    resolution: {integrity: sha512-IRy/QmMWw9lAQHpwbUh1b8fcn27S/a9zMIzqea1WNOxK9/4EB8gIo+FZWLiPXzl2n9ixGSv8BhsLZiOppWEwBw==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -3893,8 +3893,8 @@ packages:
       minipass: 3.3.6
     dev: true
 
-  /fs-monkey@1.0.5:
-    resolution: {integrity: sha512-8uMbBjrhzW76TYgEV27Y5E//W2f/lTFmx78P2w19FZSxarhI/798APGQyuGCwmkNxgwGRhrLfvWyLBvNtuOmew==}
+  /fs-monkey@1.0.6:
+    resolution: {integrity: sha512-b1FMfwetIKymC0eioW7mTywihSQE4oLzQn1dB6rZB5fx/3NpNEdAWeCSMB+60/AeT0TCXsxzAlcYVEFCTAksWg==}
     requiresBuild: true
     dev: false
     optional: true
@@ -4261,7 +4261,7 @@ packages:
     engines: {node: '>= 4.0.0'}
     requiresBuild: true
     dependencies:
-      fs-monkey: 1.0.5
+      fs-monkey: 1.0.6
     dev: false
     optional: true
 
@@ -5131,7 +5131,7 @@ packages:
       ts-deepmerge: 7.0.0
     optionalDependencies:
       '@gcornut/valibot-json-schema': 0.0.27(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.20.2)(valibot@0.30.0)
-      '@sinclair/typebox': 0.32.22
+      '@sinclair/typebox': 0.32.27
       '@sodaru/yup-to-json-schema': 2.0.1
       '@vinejs/vine': 1.8.0
       arktype: 1.0.29-alpha
@@ -5139,8 +5139,8 @@ packages:
       superstruct: 1.0.4
       valibot: 0.30.0
       yup: 1.4.0
-      zod: 3.23.4
-      zod-to-json-schema: 3.23.0(zod@3.23.4)
+      zod: 3.23.5
+      zod-to-json-schema: 3.23.0(zod@3.23.5)
     transitivePeerDependencies:
       - '@types/json-schema'
       - esbuild
@@ -5452,21 +5452,21 @@ packages:
     dev: false
     optional: true
 
-  /zod-to-json-schema@3.23.0(zod@3.23.4):
+  /zod-to-json-schema@3.23.0(zod@3.23.5):
     resolution: {integrity: sha512-az0uJ243PxsRIa2x1WmNE/pnuA05gUq/JB8Lwe1EDCCL/Fz9MgjYQ0fPlyc2Tcv6aF2ZA7WM5TWaRZVEFaAIag==}
     requiresBuild: true
     peerDependencies:
       zod: ^3.23.3
     dependencies:
-      zod: 3.23.4
+      zod: 3.23.5
     dev: false
     optional: true
 
   /zod@3.22.4:
     resolution: {integrity: sha512-iC+8Io04lddc+mVqQ9AZ7OQ2MrUKGN+oIQyq1vemgt46jwCwLfhq7/pwnBnNXXXZb8VTVLKwp9EDkx+ryxIWmg==}
 
-  /zod@3.23.4:
-    resolution: {integrity: sha512-/AtWOKbBgjzEYYQRNfoGKHObgfAZag6qUJX1VbHo2PRBgS+wfWagEY2mizjfyAPcGesrJOcx/wcl0L9WnVrHFw==}
+  /zod@3.23.5:
+    resolution: {integrity: sha512-fkwiq0VIQTksNNA131rDOsVJcns0pfVUjHzLrNBiF/O/Xxb5lQyEXkhZWcJ7npWsYlvs+h0jFWXXy4X46Em1JA==}
     requiresBuild: true
     dev: false
     optional: true
