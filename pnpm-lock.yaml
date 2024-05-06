@@ -9,8 +9,8 @@ dependencies:
     specifier: ^3.556.0
     version: 3.556.0
   '@aws-sdk/s3-request-presigner':
-    specifier: ^3.564.0
-    version: 3.564.0
+    specifier: ^3.569.0
+    version: 3.569.0
   '@libsql/client':
     specifier: ^0.6.0
     version: 0.6.0
@@ -606,6 +606,21 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@aws-sdk/middleware-sdk-s3@3.569.0:
+    resolution: {integrity: sha512-qCmeG3qSq0Tv2sXJmtmEYHUFikRLa8OAkcGW/OXVUHf5XY06YFRPRCL5NFMayXusTEHb0Gb1ek3awZ4gix9gnQ==}
+    engines: {node: '>=16.0.0'}
+    dependencies:
+      '@aws-sdk/types': 3.567.0
+      '@aws-sdk/util-arn-parser': 3.568.0
+      '@smithy/node-config-provider': 2.3.0
+      '@smithy/protocol-http': 3.3.0
+      '@smithy/signature-v4': 2.3.0
+      '@smithy/smithy-client': 2.5.1
+      '@smithy/types': 2.12.0
+      '@smithy/util-config-provider': 2.3.0
+      tslib: 2.6.2
+    dev: false
+
   /@aws-sdk/middleware-signing@3.556.0:
     resolution: {integrity: sha512-kWrPmU8qd3gI5qzpuW9LtWFaH80cOz1ZJDavXx6PRpYZJ5JaKdUHghwfDlVTzzFYAeJmVsWIkPcLT5d5mY5ZTQ==}
     engines: {node: '>=14.0.0'}
@@ -651,13 +666,13 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@aws-sdk/s3-request-presigner@3.564.0:
-    resolution: {integrity: sha512-SLsh0pIYeFqzyG5VBdBM8mtXUsj1ZF2TTA1XABb/gP6WGthePVmDkKklmsmhIyJs91DxwrU6X2HH1d6RFYwQ9A==}
-    engines: {node: '>=14.0.0'}
+  /@aws-sdk/s3-request-presigner@3.569.0:
+    resolution: {integrity: sha512-jEU9PI6j83Dz9eYTjmmIEsmsyT6nK2bBCROmqeDZw1Et0izx374Z2SITtIsirKFsUpsfPtu/UMfl04LdwrT1Qg==}
+    engines: {node: '>=16.0.0'}
     dependencies:
-      '@aws-sdk/signature-v4-multi-region': 3.556.0
-      '@aws-sdk/types': 3.535.0
-      '@aws-sdk/util-format-url': 3.535.0
+      '@aws-sdk/signature-v4-multi-region': 3.569.0
+      '@aws-sdk/types': 3.567.0
+      '@aws-sdk/util-format-url': 3.567.0
       '@smithy/middleware-endpoint': 2.5.1
       '@smithy/protocol-http': 3.3.0
       '@smithy/smithy-client': 2.5.1
@@ -671,6 +686,18 @@ packages:
     dependencies:
       '@aws-sdk/middleware-sdk-s3': 3.556.0
       '@aws-sdk/types': 3.535.0
+      '@smithy/protocol-http': 3.3.0
+      '@smithy/signature-v4': 2.3.0
+      '@smithy/types': 2.12.0
+      tslib: 2.6.2
+    dev: false
+
+  /@aws-sdk/signature-v4-multi-region@3.569.0:
+    resolution: {integrity: sha512-uCf/7fDPcU3Q0hL+0jzoSodHJW+HZJTMP51egY3W+otMbr+6+JVfjlrKhHKsT3OtG5AUh+4cDU2k83oeGHxHVQ==}
+    engines: {node: '>=16.0.0'}
+    dependencies:
+      '@aws-sdk/middleware-sdk-s3': 3.569.0
+      '@aws-sdk/types': 3.567.0
       '@smithy/protocol-http': 3.3.0
       '@smithy/signature-v4': 2.3.0
       '@smithy/types': 2.12.0
@@ -700,9 +727,24 @@ packages:
       tslib: 2.6.2
     dev: false
 
+  /@aws-sdk/types@3.567.0:
+    resolution: {integrity: sha512-JBznu45cdgQb8+T/Zab7WpBmfEAh77gsk99xuF4biIb2Sw1mdseONdoGDjEJX57a25TzIv/WUJ2oABWumckz1A==}
+    engines: {node: '>=16.0.0'}
+    dependencies:
+      '@smithy/types': 2.12.0
+      tslib: 2.6.2
+    dev: false
+
   /@aws-sdk/util-arn-parser@3.535.0:
     resolution: {integrity: sha512-smVo29nUPAOprp8Z5Y3GHuhiOtw6c8/EtLCm5AVMtRsTPw4V414ZXL2H66tzmb5kEeSzQlbfBSBEdIFZoxO9kg==}
     engines: {node: '>=14.0.0'}
+    dependencies:
+      tslib: 2.6.2
+    dev: false
+
+  /@aws-sdk/util-arn-parser@3.568.0:
+    resolution: {integrity: sha512-XUKJWWo+KOB7fbnPP0+g/o5Ulku/X53t7i/h+sPHr5xxYTJJ9CYnbToo95mzxe7xWvkLrsNtJ8L+MnNn9INs2w==}
+    engines: {node: '>=16.0.0'}
     dependencies:
       tslib: 2.6.2
     dev: false
@@ -717,11 +759,11 @@ packages:
       tslib: 2.6.2
     dev: false
 
-  /@aws-sdk/util-format-url@3.535.0:
-    resolution: {integrity: sha512-ElbNkm0bddu53CuW44Iuux1ZbTV50fydbSh/4ypW3LrmUvHx193ogj0HXQ7X26kmmo9rXcsrLdM92yIeTjidVg==}
-    engines: {node: '>=14.0.0'}
+  /@aws-sdk/util-format-url@3.567.0:
+    resolution: {integrity: sha512-zqfuUrSFVYoT02mWnHaP0I7TRjjS3ZE8GhAVyHRUvVOv/O2dFWopFI9jFtMsT21vns7c9yQ1ACH/Kcn3s9t2EQ==}
+    engines: {node: '>=16.0.0'}
     dependencies:
-      '@aws-sdk/types': 3.535.0
+      '@aws-sdk/types': 3.567.0
       '@smithy/querystring-builder': 2.2.0
       '@smithy/types': 2.12.0
       tslib: 2.6.2
