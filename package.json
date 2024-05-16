@@ -18,7 +18,7 @@
 		"autoprefixer": "^10.4.16",
 		"daisyui": "^4.11.1",
 		"dotenv": "^16.4.5",
-		"drizzle-kit": "^0.20.17",
+		"drizzle-kit": "^0.21.2",
 		"lucide-svelte": "^0.378.0",
 		"postcss": "^8.4.32",
 		"postcss-load-config": "^5.1.0",
