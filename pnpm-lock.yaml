@@ -18,8 +18,8 @@ dependencies:
     specifier: ^1.0.7
     version: 1.0.7(lucia@3.2.0)
   arctic:
-    specifier: ^1.5.0
-    version: 1.5.0
+    specifier: ^1.8.1
+    version: 1.8.1
   compressorjs:
     specifier: ^1.2.1
     version: 1.2.1
@@ -2995,8 +2995,8 @@ packages:
     resolution: {integrity: sha512-lYe4Gx7QT+MKGbDsA+Z+he/Wtef0BiwDOlK/XkBrdfsh9J/jPPXbX0tE9x9cl27Tmu5gg3QUbUrQYa/y+KOHPQ==}
     dev: true
 
-  /arctic@1.5.0:
-    resolution: {integrity: sha512-ZBC3a7yFncIkeoavrOFi+Jq+Qc4ENsl1JViCMjFe2VEv30XEEHyUsWOO8MHmPFsCyRXbboWSHf+OGpc3WyR67A==}
+  /arctic@1.8.1:
+    resolution: {integrity: sha512-YmTcSfk8+NDSZt7qWYBX4HrikHZA3EQgmfFYlS4BwtYzPrji2VjAFrCFMElnjp72zmx3J3mz1ldjaXvjxmiW4Q==}
     dependencies:
       oslo: 1.2.0
     dev: false
