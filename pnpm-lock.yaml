@@ -39,8 +39,8 @@ dependencies:
     specifier: ^1.2.0
     version: 1.2.0(svelte@4.2.17)
   sveltekit-superforms:
-    specifier: ^2.13.1
-    version: 2.13.1(@sveltejs/kit@2.5.10)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.21.3)(svelte@4.2.17)
+    specifier: ^2.14.0
+    version: 2.14.0(@sveltejs/kit@2.5.10)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.21.3)(svelte@4.2.17)
   zod:
     specifier: ^3.23.8
     version: 3.23.8
@@ -117,6 +117,20 @@ packages:
     dependencies:
       '@jridgewell/gen-mapping': 0.3.5
       '@jridgewell/trace-mapping': 0.3.25
+
+  /@arktype/schema@0.1.7:
+    resolution: {integrity: sha512-xeaS/0EiuT5kUQGC9DqLv0vnjFpbEILmaBQF9CrLhamR0v8c+eUNM6z5u6DgzqPZbDFMmtfiCdikUTT1VueWXw==}
+    requiresBuild: true
+    dependencies:
+      '@arktype/util': 0.0.45
+    dev: false
+    optional: true
+
+  /@arktype/util@0.0.45:
+    resolution: {integrity: sha512-WPzoElBZK1NxYzT8PnoNsnulohgRU7PRKkJUoqeGvuFqP/Egv7tRNnvcJCE0MboHUnWaPTy/5Psjm/4iOvbWiw==}
+    requiresBuild: true
+    dev: false
+    optional: true
 
   /@aws-crypto/crc32@3.0.0:
     resolution: {integrity: sha512-IzSgsrxUcsrejQbPVilIKy16kAT52EwB6zSaI+M3xxIhKh5+aldEyvI+z6erM7TCLB2BJsFrtHjp6/4/sr+3dA==}
@@ -3003,9 +3017,12 @@ packages:
     dependencies:
       dequal: 2.0.3
 
-  /arktype@1.0.29-alpha:
-    resolution: {integrity: sha512-glMLgVhIQRSkR3tymiS+POAcWVJH09sfrgic0jHnyFL8BlhHAJZX2BzdImU9zYr1y9NBqy+U93ZNrRTHXsKRDw==}
+  /arktype@2.0.0-dev.15:
+    resolution: {integrity: sha512-V8/jyfU/ISl9uSzTNZMgj/sYOI1QNxhVaqcS+spWamF/jx4eDFMqBVdhAGysJhKyLC+Qi2yNw5f1YQuaOMEeGw==}
     requiresBuild: true
+    dependencies:
+      '@arktype/schema': 0.1.7
+      '@arktype/util': 0.0.45
     dev: false
     optional: true
 
@@ -4956,8 +4973,8 @@ packages:
       magic-string: 0.30.10
       periscopic: 3.1.0
 
-  /sveltekit-superforms@2.13.1(@sveltejs/kit@2.5.10)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.21.3)(svelte@4.2.17):
-    resolution: {integrity: sha512-kmwC3sNFAiHADLq7E46QBgDk4OEXLrhCQumwRbPcRAOQf/XvBzGBNmQGnIP62Rpiq+qLKbwo40c1gA4QA31bKg==}
+  /sveltekit-superforms@2.14.0(@sveltejs/kit@2.5.10)(@types/json-schema@7.0.15)(esbuild-runner@2.2.2)(esbuild@0.21.3)(svelte@4.2.17):
+    resolution: {integrity: sha512-TRN+x2+ENCnvDw70U5HLfmGQGFi4kpevpWaPpQ06AB0Wf5qCYxshbZBofMAXb8KOyetw8dhWpj86AQRPNwhzDg==}
     peerDependencies:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
@@ -4974,7 +4991,7 @@ packages:
       '@sinclair/typebox': 0.32.30
       '@sodaru/yup-to-json-schema': 2.0.1
       '@vinejs/vine': 1.8.0
-      arktype: 1.0.29-alpha
+      arktype: 2.0.0-dev.15
       joi: 17.13.1
       json-schema-to-ts: 3.1.0
       superstruct: 1.0.4
