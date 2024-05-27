@@ -38,7 +38,7 @@
 		"@aws-sdk/s3-request-presigner": "^3.577.0",
 		"@libsql/client": "^0.6.0",
 		"@lucia-auth/adapter-drizzle": "^1.0.7",
-		"arctic": "^1.8.1",
+		"arctic": "^1.9.0",
 		"compressorjs": "^1.2.1",
 		"dayjs": "^1.11.11",
 		"drizzle-orm": "^0.30.10",
