@@ -1,4 +1,5 @@
 <script>
+  import { dev } from "$app/environment";
   import { page } from "$app/stores";
   import Footer from "$lib/components/footer.svelte";
   import Loadbar from "$lib/components/loadbar.svelte";
@@ -10,11 +11,13 @@
 <svelte:head>
   <meta name="og:url" content={$page.url.toString()} />
 
-  <script
-    src="/meow/js/script.js"
-    data-api="/meow/api/event"
-    data-domain="animals.maxz.dev"
-  ></script>
+  {#if !dev}
+    <script
+      src="/meow/js/script.js"
+      data-api="/meow/api/event"
+      data-domain="animals.maxz.dev"
+    ></script>
+  {/if}
 </svelte:head>
 
 <Toaster />
