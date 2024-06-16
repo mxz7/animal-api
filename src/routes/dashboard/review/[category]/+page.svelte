@@ -20,7 +20,7 @@
 </script>
 
 <svelte:head>
-  <title>reviewing {$page.params.category} images / animals api</title>
+  <title>reviewing {$page.params.category} / dashboard / animals</title>
 </svelte:head>
 
 <dialog class="modal" bind:this={modal}>

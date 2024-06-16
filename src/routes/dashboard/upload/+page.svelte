@@ -92,7 +92,7 @@
 </script>
 
 <svelte:head>
-  <title>upload / dashboard / animals API</title>
+  <title>upload / dashboard / animals</title>
 </svelte:head>
 
 <input

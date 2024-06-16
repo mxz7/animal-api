@@ -5,7 +5,7 @@
 </script>
 
 <svelte:head>
-  <title>images / dashboard / animals API</title>
+  <title>images / dashboard / animals</title>
 </svelte:head>
 
 <div class="w-full">

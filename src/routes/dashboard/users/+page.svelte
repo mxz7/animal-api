@@ -5,6 +5,10 @@
   export let data;
 </script>
 
+<svelte:head>
+  <title>upload / dashboard / animals</title>
+</svelte:head>
+
 {#key data}
   <div class="overflow-x-auto">
     <table class="table">

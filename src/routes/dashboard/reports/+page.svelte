@@ -6,6 +6,10 @@
   export let data;
 </script>
 
+<svelte:head>
+  <title>reports / dashboard / animals</title>
+</svelte:head>
+
 <div class="grid w-full grid-cols-1 gap-4">
   {#each data.reports as report}
     <a

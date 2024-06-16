@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-  <title>review images / animals api</title>
+  <title>review / dashboard / animals</title>
 </svelte:head>
 
 {#if data.categories.length > 0}

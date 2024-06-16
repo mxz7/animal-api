@@ -30,7 +30,7 @@
 </script>
 
 <svelte:head>
-  <title>{data.image.name || data.image.id} / animals API</title>
+  <title>{data.image.name || data.image.id} / animals</title>
 
   <meta property="og:image" content="https://animalscdn.maxz.dev/{data.image.id}" />
   <meta property="og:type" content="image" />
