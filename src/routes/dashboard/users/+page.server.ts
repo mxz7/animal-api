@@ -1,10 +1,15 @@
 import db from "$lib/server/database/database.js";
 import { images, users } from "$lib/server/database/schema.js";
+import { redirect } from "@sveltejs/kit";
 import { count, desc, eq } from "drizzle-orm";
 
 const PER_PAGE = 15;
 
-export async function load({ url }) {
+export async function load({ url, parent }) {
+  const { auth } = await parent();
+
+  if (!auth.authenticated || auth.user.type !== "admin") return redirect(302, "/dashboard");
+
   let page = parseInt(url.searchParams.get("page") || "1") || 1;
 
   if (page < 1) page = 1;

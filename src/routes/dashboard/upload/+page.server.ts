@@ -7,8 +7,8 @@ import { error, redirect } from "@sveltejs/kit";
 import { fail, message, setError, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 
-export async function load({ locals, url }) {
-  const auth = await locals.validate(false);
+export async function load({ locals, url, parent }) {
+  const { auth } = await parent();
 
   if (!auth.authenticated) return redirect(302, `/login?next={${encodeURIComponent(url.pathname)}`);
 
