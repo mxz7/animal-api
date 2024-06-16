@@ -95,15 +95,15 @@
   <title>upload / dashboard / animals</title>
 </svelte:head>
 
-<input
-  type="file"
-  class="file-input file-input-bordered file-input-primary w-full"
-  accept="image/png, image/jpeg, image/gif"
-  bind:files={formFiles}
-/>
-
 <form method="POST" class="mt-2" use:enhance>
   <div class="flex w-full flex-col gap-2 md:w-3/4">
+    <input
+      type="file"
+      class="file-input file-input-bordered file-input-primary"
+      accept="image/png, image/jpeg, image/gif"
+      bind:files={formFiles}
+    />
+
     {#if files.length < 2}
       <input
         class="input input-bordered min-w-0"
