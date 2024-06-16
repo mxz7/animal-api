@@ -28,6 +28,6 @@ export async function load({ locals, url }) {
         .then((r) => r[0]?.reports || 0),
     };
   } else {
-    return { auth };
+    return { auth, reviewCount: 0, reportCount: 0 };
   }
 }

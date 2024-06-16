@@ -12,7 +12,15 @@
   <div class="drawer w-full p-3 pl-0 lg:drawer-open lg:max-w-6xl">
     <input id="my-drawer" type="checkbox" class="drawer-toggle" />
 
-    <Sidebar />
+    {#await data.reportCount}
+      <Sidebar />
+    {:then reportCount}
+      {#await data.reviewCount}
+        <Sidebar />
+      {:then reviewCount}
+        <Sidebar reports={reportCount} reviews={reviewCount} />
+      {/await}
+    {/await}
 
     <div class="drawer-content pl-3">
       <slot />

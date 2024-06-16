@@ -1,7 +1,7 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import { auth } from "$lib/stores";
-  import { Files, Home, ImageUp, SearchCheck, ShieldCheck } from "lucide-svelte";
+  import { FileWarning, Files, Home, ImageUp, SearchCheck, ShieldCheck } from "lucide-svelte";
 
   export let reviews = 0;
   export let reports = 0;
@@ -20,7 +20,7 @@
     <li>
       <a
         href="/dashboard/images"
-        class="{$page.url.pathname === '/dashboard/images'
+        class="{$page.url.pathname.startsWith('/dashboard/images')
           ? 'font-semibold text-secondary'
           : ''} flex items-center"
       >
@@ -44,7 +44,7 @@
     {#if $auth.authenticated && ["admin", "mod"].includes($auth.user.type)}
       <ul class="pl-2">
         <li>
-          <h2>
+          <h2 class="-ml-1 font-semibold">
             <ShieldCheck size={16} strokeWidth={2.5} />
             <span>Admin</span>
           </h2>
@@ -72,7 +72,7 @@
                 ? 'font-semibold text-secondary'
                 : ''} flex items-center"
             >
-              <SearchCheck size={16} strokeWidth={2.5} />
+              <FileWarning size={16} strokeWidth={2.5} />
               <span>Reports</span>
               {#if reports > 0}
                 <span>({reports})</span>
