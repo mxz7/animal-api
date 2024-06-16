@@ -25,19 +25,19 @@ export const handle = async ({ event, resolve }) => {
   // }
 
   event.locals.validate = async (useApi = true) => {
-    if (event.cookies.getAll().length === 0) return null;
-    if (event.request.headers.get("user-agent")?.toLowerCase().includes("bot")) return null;
+    if (event.cookies.getAll().length === 0) return {authenticated: false};
+    if (event.request.headers.get("user-agent")?.toLowerCase().includes("bot")) return {authenticated: false};
     if (useApi) {
       const res = await event.fetch("/api/auth").then((r) => r.json());
       const { user, session } = res;
 
-      if (!user || !session) return null;
+      if (!user || !session) return { authenticated: false };
 
-      return { user, session };
+      return { user, session, authenticated: true };
     } else {
       const sessionId = event.cookies.get(lucia.sessionCookieName);
       if (!sessionId) {
-        return null;
+        return { authenticated: false };
       }
 
       const { session, user } = await lucia.validateSession(sessionId);
@@ -59,9 +59,9 @@ export const handle = async ({ event, resolve }) => {
       }
 
       if (!user || !session) {
-        return null;
+        return { authenticated: false };
       }
-      return { user, session };
+      return { user, session, authenticated: true };
     }
   };
 

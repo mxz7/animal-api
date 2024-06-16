@@ -1,21 +1,35 @@
 <script lang="ts">
-  import { page } from "$app/stores";
-  import { ArrowLeft, ArrowRightFromLine } from "lucide-svelte";
+  import { auth } from "$lib/stores";
+  import Sidebar from "./sidebar.svelte";
 
   export let data;
   let showNav = true;
 
-  const routes: { href: string; text: string; perms?: ("mod" | "admin")[] }[] = [
-    { href: "/dashboard/images", text: "images" },
-    { href: "/dashboard/upload", text: "upload" },
-    { href: "/dashboard/review", text: "review", perms: ["mod", "admin"] },
-    { href: "/dashboard/reports", text: "reports", perms: ["mod", "admin"] },
-  ];
+  $auth = data.auth;
 </script>
 
-<div class="mt-14 flex w-full justify-center">
+<div class="flex w-full justify-center">
+  <div class="drawer w-full p-3 pl-0 lg:drawer-open lg:max-w-6xl">
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+
+    {#await data.reportCount}
+      <Sidebar />
+    {:then reportCount}
+      {#await data.reviewCount}
+        <Sidebar />
+      {:then reviewCount}
+        <Sidebar reports={reportCount} reviews={reviewCount} />
+      {/await}
+    {/await}
+
+    <div class="drawer-content pl-3">
+      <slot />
+    </div>
+  </div>
+</div>
+
+<!-- <div class="mt-14 flex w-full justify-center">
   <div class="w-full px-4 md:max-w-3xl md:px-0">
-    <!-- <h1 class="text-center text-3xl font-semibold text-primary">animals dashboard</h1> -->
     <div class=" flex w-full gap-8">
       <div
         class="{showNav
@@ -82,4 +96,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

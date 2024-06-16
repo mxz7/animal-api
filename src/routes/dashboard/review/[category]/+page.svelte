@@ -64,7 +64,7 @@
     class="btn btn-secondary {loading ? 'btn-disabled' : ''}">Change Type</button
   >
 
-  {#if data.user.type === "admin"}
+  {#if data.auth.user.type === "admin"}
     <form action="?/denyAll" method="POST" use:enhance={enhanceFunction}>
       <button class="btn btn-warning {loading ? 'btn-disabled' : ''}">Deny All</button>
     </form>

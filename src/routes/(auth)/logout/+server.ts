@@ -8,7 +8,7 @@ export const config = {
 export async function GET({ locals }) {
   const auth = await locals.validate(false);
 
-  if (!auth) return redirect(302, "/");
+  if (!auth.authenticated) return redirect(302, "/");
   lucia.invalidateSession(auth.session.id);
   return redirect(302, "/");
 }

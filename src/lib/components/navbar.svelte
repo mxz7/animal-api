@@ -1,21 +1,39 @@
 <script>
-  import { CircleUser, Home } from "lucide-svelte";
+  import { page } from "$app/stores";
+  import { auth } from "$lib/stores";
+  import { AlignLeft, CircleUser } from "lucide-svelte";
 </script>
 
-<header class="flex w-full justify-center pt-4">
-  <div class="w-full max-w-4xl px-4">
-    <nav
-      class="flex w-full items-center gap-8 rounded-full bg-secondary bg-opacity-15 p-4 text-lg shadow"
-    >
-      <a href="/" class="hidden pr-8 text-2xl font-bold text-primary sm:block">animals</a>
-      <a href="/" class="sm:hidden">
-        <Home class="text-primary" strokeWidth={2.5} size={28} />
+<header class="flex w-full justify-center">
+  <div class="navbar bg-base-200 lg:mt-3 lg:max-w-6xl lg:rounded-xl">
+    <div class="flex-1">
+      {#if $page.url.pathname.startsWith("/dashboard")}
+        <label for="my-drawer" class="btn btn-ghost drawer-button text-primary lg:hidden">
+          <AlignLeft strokeWidth={2.5} />
+        </label>
+      {/if}
+
+      <a
+        href="/"
+        class="btn btn-ghost {$page.url.pathname.startsWith('/dashboard')
+          ? 'hidden'
+          : ''} text-xl font-semibold text-primary lg:inline-flex"
+      >
+        <span>animals</span>
       </a>
-      <a href="/#usage">usage</a>
-      <div class="grow" />
-      <a href="/dashboard">
-        <CircleUser class="text-primary" strokeWidth={2.5} size={28} />
-      </a>
-    </nav>
+    </div>
+    <div class="flex-none">
+      {#if !$auth}
+        <div class="btn btn-ghost">
+          <span class="loading loading-spinner loading-md" />
+        </div>
+      {:else if !$auth.authenticated}
+        <a href="/login" class="btn btn-ghost text-lg text-primary">Log in</a>
+      {:else}
+        <a href="/dashboard" class="btn btn-ghost text-primary">
+          <CircleUser strokeWidth={2.5} />
+        </a>
+      {/if}
+    </div>
   </div>
 </header>

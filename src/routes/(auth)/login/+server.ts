@@ -7,7 +7,9 @@ export const config = {
 };
 
 export async function GET({ cookies, locals, url }) {
-  if (await locals.validate(false)) return redirect(302, "/");
+  const auth = await locals.validate(false);
+
+  if (auth.authenticated) return redirect(302, "/");
 
   const state = generateState();
   const oauthUrl = await discord.createAuthorizationURL(state, { scopes: ["identify"] });
