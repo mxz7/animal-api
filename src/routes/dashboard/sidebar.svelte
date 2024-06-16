@@ -60,7 +60,7 @@
         <li>
           <a
             href="/dashboard/review"
-            class="{$page.url.pathname === '/dashboard/review'
+            class="{$page.url.pathname.startsWith('/dashboard/review')
               ? 'font-semibold text-secondary'
               : ''} flex items-center"
           >
@@ -91,7 +91,7 @@
           <li>
             <a
               href="/dashboard/users"
-              class="{$page.url.pathname === '/dashboard/users'
+              class="{$page.url.pathname.startsWith('/dashboard/users')
                 ? 'font-semibold text-secondary'
                 : ''} flex items-center"
             >
