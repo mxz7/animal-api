@@ -3,22 +3,22 @@
   import Sidebar from "./sidebar.svelte";
 
   export let data;
-  let showNav = true;
+  let drawerToggle: HTMLInputElement;
 
   $auth = data.auth;
 </script>
 
 <div class="flex w-full justify-center">
   <div class="drawer w-full p-3 pl-0 lg:drawer-open lg:max-w-6xl">
-    <input id="my-drawer" type="checkbox" class="drawer-toggle" />
+    <input id="my-drawer" type="checkbox" class="drawer-toggle" bind:this={drawerToggle} />
 
     {#await data.reportCount}
-      <Sidebar />
+      <Sidebar {drawerToggle} />
     {:then reportCount}
       {#await data.reviewCount}
-        <Sidebar />
+        <Sidebar {drawerToggle} />
       {:then reviewCount}
-        <Sidebar reports={reportCount} reviews={reviewCount} />
+        <Sidebar {drawerToggle} reports={reportCount} reviews={reviewCount} />
       {/await}
     {/await}
 

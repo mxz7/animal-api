@@ -13,11 +13,15 @@
 
   export let reviews = 0;
   export let reports = 0;
+  export let drawerToggle: HTMLInputElement;
 </script>
 
 <div class="drawer-side z-10 rounded-lg lg:h-fit">
   <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
-  <ul class="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
+  <ul
+    class="menu min-h-full w-80 bg-base-200 p-4 text-base-content"
+    on:click={() => drawerToggle.click()}
+  >
     <li class="lg:hidden">
       <a href="/">
         <Home size={16} strokeWidth={2.5} />
