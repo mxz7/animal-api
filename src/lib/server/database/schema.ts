@@ -4,6 +4,7 @@ export const users = sqliteTable(
   "users",
   {
     id: text("id").primaryKey(),
+    username: text("username"),
     discordId: text("discord_id").notNull(),
     createdAt: integer("created_at").notNull(),
     createdIp: text("created_ip").notNull(),
