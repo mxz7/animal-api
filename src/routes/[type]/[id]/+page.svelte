@@ -1,17 +1,31 @@
 <script lang="ts">
+  import { auth } from "$lib/stores";
   import dayjs from "dayjs";
-  import { onMount } from "svelte";
+  import { onDestroy, onMount } from "svelte";
   import DeleteButton from "./deleteButton.svelte";
   import LikeButton from "./likeButton.svelte";
   import ReportButton from "./reportButton.svelte";
 
   export let data;
-  let user: { type: string };
+  let admin = false;
 
-  onMount(async () => {
-    const auth = await fetch("/api/auth").then((r) => r.json());
+  let interval: NodeJS.Timeout;
 
-    if (auth && auth.user) user = auth.user;
+  onMount(() => {
+    interval = setInterval(() => {
+      if ($auth) {
+        clearInterval(interval);
+        if ($auth.authenticated) {
+          if ($auth.user.type === "admin") {
+            admin = true;
+          }
+        }
+      }
+    }, 250);
+  });
+
+  onDestroy(() => {
+    clearInterval(interval);
   });
 </script>
 
@@ -46,7 +60,7 @@
           <LikeButton addLike={() => data.image.likes++} />
           <ReportButton reportForm={data.reportForm} />
 
-          {#if user?.type === "admin"}
+          {#if admin}
             <DeleteButton />
           {/if}
         </div>
