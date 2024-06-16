@@ -10,7 +10,7 @@ import { zod } from "sveltekit-superforms/adapters";
 export async function load({ locals, url }) {
   const auth = await locals.validate(false);
 
-  if (!auth) return redirect(302, `/login?next={${encodeURIComponent(url.pathname)}`);
+  if (!auth.authenticated) return redirect(302, `/login?next={${encodeURIComponent(url.pathname)}`);
 
   const form = await superValidate(zod(imageUpload));
 
@@ -21,7 +21,7 @@ export const actions = {
   default: async ({ locals, request, getClientAddress }) => {
     const auth = await locals.validate(false);
 
-    if (!auth) return error(402);
+    if (!auth.authenticated) return error(402);
 
     const form = await superValidate(request, zod(imageUpload));
 

@@ -22,7 +22,7 @@ export const actions = {
   delete: async ({ locals, params }) => {
     const auth = await locals.validate(false);
 
-    if (!auth || auth.user.type !== "admin") return fail(400);
+    if (!auth.authenticated || auth.user.type !== "admin") return fail(400);
 
     await db.delete(images).where(eq(images.id, params.id));
     await s3.send(

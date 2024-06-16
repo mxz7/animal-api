@@ -11,10 +11,10 @@ export const config = {
 };
 
 export async function load({ parent, params, depends }) {
-  const { user } = await parent();
+  const { auth } = await parent();
   depends("reviewimage");
 
-  if (user.type === "user") return redirect(302, "/dashboard");
+  if (auth.authenticated && auth.user.type === "user") return redirect(302, "/dashboard");
 
   const [image] = await db
     .select({
@@ -40,7 +40,8 @@ export const actions = {
   accept: async ({ request, locals, fetch, params }) => {
     const auth = await locals.validate(false);
 
-    if (!auth || !auth.user || auth.user.type === "user") return redirect(302, "/dashboard");
+    if (!auth.authenticated || !auth.user || auth.user.type === "user")
+      return redirect(302, "/dashboard");
 
     const data = await request.formData();
 
@@ -54,7 +55,8 @@ export const actions = {
   deny: async ({ request, locals, params }) => {
     const auth = await locals.validate(false);
 
-    if (!auth || !auth.user || auth.user.type === "user") return redirect(302, "/dashboard");
+    if (!auth.authenticated || !auth.user || auth.user.type === "user")
+      return redirect(302, "/dashboard");
 
     const data = await request.formData();
 
@@ -70,7 +72,8 @@ export const actions = {
   changeType: async ({ request, locals }) => {
     const auth = await locals.validate(false);
 
-    if (!auth || !auth.user || auth.user.type === "user") return redirect(302, "/dashboard");
+    if (!auth.authenticated || !auth.user || auth.user.type === "user")
+      return redirect(302, "/dashboard");
 
     const data = await request.formData();
 
@@ -99,7 +102,8 @@ export const actions = {
   denyAll: async ({ locals, params }) => {
     const auth = await locals.validate(false);
 
-    if (!auth || !auth.user || auth.user.type !== "admin") return redirect(302, "/dashboard");
+    if (!auth.authenticated || !auth.user || auth.user.type !== "admin")
+      return redirect(302, "/dashboard");
 
     const ids = await db
       .delete(images)
@@ -113,7 +117,8 @@ export const actions = {
   ban: async ({ locals, request }) => {
     const auth = await locals.validate(false);
 
-    if (!auth || !auth.user || auth.user.type !== "admin") return redirect(302, "/dashboard");
+    if (!auth.authenticated || !auth.user || auth.user.type !== "admin")
+      return redirect(302, "/dashboard");
 
     const data = await request.formData();
 
