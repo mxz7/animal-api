@@ -49,7 +49,7 @@ export const actions = {
 
     if (!id) return error(400);
 
-    await db.update(images).set({ verified: 1 }).where(eq(images.id, id));
+    await db.update(images).set({ verified: 1, acceptedBy: auth.user.id }).where(eq(images.id, id));
     await invalidateISR(fetch, `/api/${params.category}/count`);
   },
   deny: async ({ request, locals, params }) => {

@@ -34,6 +34,7 @@ export const images = sqliteTable(
     uploadedBy: text("uploaded_by").references(() => users.id, { onDelete: "set null" }),
     createdAt: integer("created_at").notNull(),
     uploadedIp: text("uploaded_ip").notNull(),
+    acceptedBy: text("accepted_by"),
   },
   (table) => ({
     typeIdx: index("type_idx").on(table.type),

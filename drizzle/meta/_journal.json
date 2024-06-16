@@ -15,6 +15,13 @@
       "when": 1718542663116,
       "tag": "0001_aberrant_terror",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1718546701420,
+      "tag": "0002_worried_tusk",
+      "breakpoints": true
     }
   ]
 }

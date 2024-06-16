@@ -1,0 +1,1 @@
+ALTER TABLE `images` ADD `accepted_by` text;
