@@ -1,16 +1,25 @@
 <script>
+  import { page } from "$app/stores";
   import { auth } from "$lib/stores";
-  import { CircleUser, Home } from "lucide-svelte";
+  import { AlignLeft, CircleUser } from "lucide-svelte";
 </script>
 
 <header class="flex w-full justify-center">
   <div class="navbar bg-base-200 lg:mt-3 lg:max-w-6xl lg:rounded-xl">
     <div class="flex-1">
-      <a href="/" class="btn btn-ghost text-xl font-semibold text-primary">
-        <span class="hidden lg:inline-block">animals</span>
-        <span class="lg:hidden">
-          <Home strokeWidth={2.5} />
-        </span>
+      {#if $page.url.pathname.startsWith("/dashboard")}
+        <label for="my-drawer" class="btn btn-ghost drawer-button text-primary lg:hidden">
+          <AlignLeft strokeWidth={2.5} />
+        </label>
+      {/if}
+
+      <a
+        href="/"
+        class="btn btn-ghost {$page.url.pathname.startsWith('/dashboard')
+          ? 'hidden'
+          : ''} text-xl font-semibold text-primary lg:inline-flex"
+      >
+        <span>animals</span>
       </a>
     </div>
     <div class="flex-none">
