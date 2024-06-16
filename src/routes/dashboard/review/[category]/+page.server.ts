@@ -22,10 +22,12 @@ export async function load({ parent, params, depends }) {
       ip: images.uploadedIp,
       createdAt: images.createdAt,
       name: images.name,
-      uploadedBy: images.uploadedBy,
+      uploadederUsername: users.username,
+      uploaderId: images.uploadedBy,
       type: images.type,
     })
     .from(images)
+    .leftJoin(users, eq(users.id, images.uploadedBy))
     .where(and(eq(images.verified, 0), eq(images.type, params.category)))
     .limit(1);
 

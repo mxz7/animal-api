@@ -70,7 +70,7 @@
     </form>
 
     <form action="?/deny" method="POST" use:enhance={enhanceFunction}>
-      <input type="hidden" name="userid" value={data.image.uploadedBy} />
+      <input type="hidden" name="userid" value={data.image.uploaderId} />
       <button class="btn btn-warning {loading ? 'btn-disabled' : ''}">Ban User</button>
     </form>
   {/if}
@@ -79,6 +79,7 @@
 <p>name: {data.image.name}</p>
 <p>created at: {dayjs(data.image.createdAt).format("YYYY-MM-DD")}</p>
 <p>ip address: {data.image.ip}</p>
+<p>username: {data.image.uploadederUsername}</p>
 
 <img
   loading="lazy"
