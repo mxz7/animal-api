@@ -12,6 +12,7 @@ export async function load({ fetch, params, data }) {
     likes: number;
     reports: number;
     createdAt: number;
+    uploaderUsername: string;
   } = await image.json();
 
   return { image: imageData, reportForm: data.reportForm };

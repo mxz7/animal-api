@@ -37,7 +37,7 @@
 </svelte:head>
 
 <div class="mt-8 flex w-full justify-center">
-  <div class="w-fit md:w-full md:max-w-4xl">
+  <div class="w-full md:w-full md:max-w-4xl">
     <div class="flex w-fit flex-col-reverse justify-center gap-4 md:w-full md:flex-row">
       <div class="px-4 md:w-2/5 md:px-0">
         <img
@@ -54,6 +54,10 @@
         >
           {data.image.name || data.image.id}
         </h1>
+        {#if data.image.uploaderUsername}
+          <h2 class="mb-3 text-sm">by {data.image.uploaderUsername}</h2>
+        {/if}
+
         <p>Uploaded: {dayjs(data.image.createdAt).format("YYYY-MM-DD")}</p>
         <p>{data.image.likes.toLocaleString()} like{data.image.likes === 1 ? "" : "s"}</p>
         <div class="mt-4 flex gap-4">
