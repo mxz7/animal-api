@@ -15,7 +15,7 @@
   export let reports = 0;
 </script>
 
-<div class="drawer-side rounded-lg lg:h-fit">
+<div class="drawer-side z-10 rounded-lg lg:h-fit">
   <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
   <ul class="menu min-h-full w-80 bg-base-200 p-4 text-base-content">
     <li class="lg:hidden">
