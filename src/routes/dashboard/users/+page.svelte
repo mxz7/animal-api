@@ -25,9 +25,9 @@
         {#each data.rows as row}
           <tr>
             <th>
-              <button class="link">
+              <a href="/dashboard/users/{row.id}" class="link">
                 {row.username}
-              </button>
+              </a>
             </th>
             <td>{row.type}</td>
             <td>{dayjs(row.createdAt).format("YYYY-MM-DD HH:mm:ss")}</td>
