@@ -1,8 +1,13 @@
 import db from "$lib/server/database/database";
 import { imageReports, images } from "$lib/server/database/schema";
+import { redirect } from "@sveltejs/kit";
 import { desc, eq } from "drizzle-orm";
 
-export async function load() {
+export async function load({ parent }) {
+  const { auth } = await parent();
+
+  if (!auth.authenticated && auth.user.type !== "admin") return redirect(302, "/dashboard");
+
   const reports = await db
     .select({
       id: imageReports.id,
