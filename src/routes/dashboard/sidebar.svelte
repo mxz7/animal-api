@@ -1,7 +1,15 @@
 <script lang="ts">
   import { page } from "$app/stores";
   import { auth } from "$lib/stores";
-  import { FileWarning, Files, Home, ImageUp, SearchCheck, ShieldCheck } from "lucide-svelte";
+  import {
+    FileWarning,
+    Files,
+    Home,
+    ImageUp,
+    SearchCheck,
+    ShieldCheck,
+    UserSearch,
+  } from "lucide-svelte";
 
   export let reviews = 0;
   export let reports = 0;
@@ -77,6 +85,18 @@
               {#if reports > 0}
                 <span>({reports})</span>
               {/if}
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="/dashboard/users"
+              class="{$page.url.pathname === '/dashboard/users'
+                ? 'font-semibold text-secondary'
+                : ''} flex items-center"
+            >
+              <UserSearch size={16} strokeWidth={2.5} />
+              <span>Users</span>
             </a>
           </li>
         {/if}
