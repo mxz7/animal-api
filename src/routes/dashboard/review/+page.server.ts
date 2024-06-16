@@ -4,9 +4,9 @@ import { redirect } from "@sveltejs/kit";
 import { count, eq } from "drizzle-orm";
 
 export async function load({ parent }) {
-  const { user } = await parent();
+  const { auth } = await parent();
 
-  if (user.type === "user") return redirect(302, "/dashboard");
+  if (auth.authenticated && auth.user.type === "user") return redirect(302, "/dashboard");
 
   return {
     categories: await db

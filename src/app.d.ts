@@ -1,13 +1,13 @@
 // See https://kit.svelte.dev/docs/types#app
+
+import type { Authed, Unauthed } from "$lib/types/auth";
+
 // for information about these interfaces
 declare global {
   namespace App {
     // interface Error {}
     interface Locals {
-      validate: (useApi = true) => Promise<{
-        user: import("lucia").User;
-        session: import("lucia").Session;
-      } | null>;
+      validate: (useApi = true) => Promise<Authed | Unauthed>;
     }
     // interface PageData {}
     // interface PageState {}
