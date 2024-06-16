@@ -4,16 +4,16 @@ import { redirect } from "@sveltejs/kit";
 import { and, eq } from "drizzle-orm";
 
 export async function load({ params, parent }) {
-  const { user } = await parent();
+  const { auth } = await parent();
 
-  if (!user) return redirect(302, "/dashboard");
+  if (!auth.authenticated) return redirect(302, "/dashboard");
 
   const query = db
     .select({ id: images.id, type: images.type })
     .from(images)
     .where(
       and(
-        eq(images.uploadedBy, user.id),
+        eq(images.uploadedBy, auth.user.id),
         eq(images.verified, parseInt(params.verified)),
         eq(images.type, params.type),
       ),
