@@ -48,6 +48,7 @@ export async function GET({ cookies, url, getClientAddress }) {
     if (banned.length > 0) return error(402);
 
     if (existingUser) {
+      await db.update(users).set({ username: user.username }).where(eq(users.id, existingUser.id));
       const session = await lucia.createSession(existingUser.id, {});
 
       const sessionCookie = lucia.createSessionCookie(session.id);
