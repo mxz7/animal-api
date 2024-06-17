@@ -22,7 +22,7 @@
       {/await}
     {/await}
 
-    <div class="drawer-content pl-3">
+    <div class="drawer-content pl-3 pt-3">
       <slot />
     </div>
   </div>
