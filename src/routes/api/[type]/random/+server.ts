@@ -8,7 +8,8 @@ export const config = {
   runtime: "edge",
 };
 
-export async function GET({ params, fetch }) {
+export async function GET({ params, fetch, url }) {
+  const start = performance.now();
   const res = await fetch(`/api/${params.type.toLowerCase()}/count`);
 
   if (res.status === 404)
@@ -45,6 +46,10 @@ export async function GET({ params, fetch }) {
       set: { served: sql`${requests.served} + 1` },
       target: requests.type,
     });
+
+  const end = performance.now();
+
+  console.log(`${url.pathname}: ${end - start}ms`);
 
   return json({
     ...query,
