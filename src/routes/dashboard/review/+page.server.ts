@@ -1,7 +1,7 @@
 import db from "$lib/server/database/database.js";
 import { images } from "$lib/server/database/schema.js";
 import { redirect } from "@sveltejs/kit";
-import { count, eq } from "drizzle-orm";
+import { and, count, eq, not } from "drizzle-orm";
 
 export async function load({ parent }) {
   const { auth } = await parent();
@@ -12,7 +12,7 @@ export async function load({ parent }) {
     categories: await db
       .select({ type: images.type, amount: count() })
       .from(images)
-      .where(eq(images.verified, 0))
+      .where(and(eq(images.verified, 0), not(eq(images.uploadedBy, auth.user.id))))
       .groupBy(images.type),
   };
 }

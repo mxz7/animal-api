@@ -21,5 +21,11 @@
     {/each}
   </div>
 {:else}
-  <p>No images to review</p>
+  <p>No images for you to review</p>
+
+  {#await data.reviewCount then reviewCount}
+    {#if reviewCount > 0}
+      <p class="text-sm opacity-50">You cannot review your own images</p>
+    {/if}
+  {/await}
 {/if}

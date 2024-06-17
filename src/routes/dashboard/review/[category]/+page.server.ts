@@ -4,7 +4,7 @@ import { images, users } from "$lib/server/database/schema.js";
 import { s3 } from "$lib/server/s3.js";
 import { CopyObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { error, fail, redirect } from "@sveltejs/kit";
-import { and, eq } from "drizzle-orm";
+import { and, eq, not } from "drizzle-orm";
 
 export const config = {
   runtime: "nodejs20.x",
@@ -28,7 +28,13 @@ export async function load({ parent, params, depends }) {
     })
     .from(images)
     .leftJoin(users, eq(users.id, images.uploadedBy))
-    .where(and(eq(images.verified, 0), eq(images.type, params.category)))
+    .where(
+      and(
+        eq(images.verified, 0),
+        eq(images.type, params.category),
+        not(eq(images.uploadedBy, auth.user.id)),
+      ),
+    )
     .limit(1);
 
   if (!image) return redirect(302, "/dashboard/review");
