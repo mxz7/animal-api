@@ -3,6 +3,7 @@
   import { invalidate } from "$app/navigation";
   import { page } from "$app/stores";
   import dayjs from "dayjs";
+  import { Ellipsis } from "lucide-svelte";
 
   export let data;
 
@@ -49,7 +50,7 @@
   </form>
 </dialog>
 
-<div class="flex w-fit justify-center gap-4 py-4">
+<div class="flex w-full justify-center gap-2 py-4">
   <form action="?/accept" method="POST" use:enhance={enhanceFunction}>
     <input type="hidden" name="id" value={data.image.id} />
     <button class="btn {loading ? 'btn-disabled' : ''} btn-success">Accept</button>
@@ -64,15 +65,28 @@
     class="btn btn-secondary {loading ? 'btn-disabled' : ''}">Change Type</button
   >
 
-  {#if data.auth.user.type === "admin"}
-    <form action="?/denyAll" method="POST" use:enhance={enhanceFunction}>
-      <button class="btn btn-warning {loading ? 'btn-disabled' : ''}">Deny All</button>
-    </form>
+  <span class="grow"></span>
 
-    <form action="?/deny" method="POST" use:enhance={enhanceFunction}>
-      <input type="hidden" name="userid" value={data.image.uploaderId} />
-      <button class="btn btn-warning {loading ? 'btn-disabled' : ''}">Ban User</button>
-    </form>
+  {#if data.auth.user.type === "admin"}
+    <div class="dropdown dropdown-hover">
+      <div tabindex="0" role="button" class="btn {loading ? 'btn-disabled' : ''} btn-ghost">
+        <Ellipsis strokeWidth={2.5} />
+      </div>
+      <ul tabindex="0" class="menu dropdown-content z-[1] w-52 rounded-box bg-base-200 p-2 shadow">
+        <li>
+          <form action="?/denyAll" method="POST" use:enhance={enhanceFunction}>
+            <button class="">Deny All</button>
+          </form>
+        </li>
+
+        <li>
+          <form action="?/deny" method="POST" use:enhance={enhanceFunction}>
+            <input type="hidden" name="userid" value={data.image.uploaderId} />
+            <button class="">Ban User</button>
+          </form>
+        </li>
+      </ul>
+    </div>
   {/if}
 </div>
 
