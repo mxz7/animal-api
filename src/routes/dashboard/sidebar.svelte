@@ -6,6 +6,7 @@
     Files,
     Home,
     ImageUp,
+    LogOut,
     SearchCheck,
     ShieldCheck,
     UserSearch,
@@ -106,5 +107,12 @@
         {/if}
       </ul>
     {/if}
+
+    <li>
+      <a href="/logout">
+        <LogOut size={16} strokeWidth={2.5} />
+        <span>Log out</span>
+      </a>
+    </li>
   </ul>
 </div>
