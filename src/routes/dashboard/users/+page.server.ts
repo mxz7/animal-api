@@ -23,6 +23,7 @@ export async function load({ url, parent }) {
         type: users.type,
         banned: users.banned,
         uploaded: count(images.id),
+        ip: users.createdIp,
       })
       .from(users)
       .leftJoin(images, eq(images.uploadedBy, users.id))

@@ -17,6 +17,7 @@
           <th>Username</th>
           <th>Type</th>
           <th>Created At</th>
+          <th>IP</th>
           <th>Banned</th>
           <th>Uploaded</th>
         </tr>
@@ -31,6 +32,7 @@
             </th>
             <td>{row.type}</td>
             <td>{dayjs(row.createdAt).format("YYYY-MM-DD HH:mm:ss")}</td>
+            <td>{row.ip}</td>
             <td>{Boolean(row.banned)}</td>
             <td>{row.uploaded.toLocaleString()}</td>
           </tr>
