@@ -64,6 +64,7 @@ export async function GET({ cookies, url, getClientAddress }) {
           discordId: user.id,
           createdAt: Date.now(),
           createdIp: getClientAddress(),
+          username: user.username,
         })
         .returning({ id: users.id });
 
