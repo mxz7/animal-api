@@ -40,12 +40,10 @@ export async function load({ params, parent, depends }) {
     })
     .filter((i) => Boolean(i)) as { type: string; count: number }[] | null;
 
-  const form = await superValidate(zod(userEdit), {
-    id: user.id,
-    // @ts-ignore cant get the type right
-    type: user.type,
-    banned: Boolean(user.banned),
-  });
+  const form = await superValidate(
+    { id: user.id, type: user.type as "user" | "mod" | "admin", banned: Boolean(user.banned) },
+    zod(userEdit),
+  );
 
   if (user.type === "user") {
     return { user, images: imageCounts, form };
@@ -72,6 +70,8 @@ export const actions = {
     const form = await superValidate(request, zod(userEdit));
 
     if (!form.valid) return fail(400, { form });
+
+    console.log(form);
 
     await db
       .update(users)
