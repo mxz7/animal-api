@@ -46,7 +46,7 @@
 		"lucia": "^3.2.0",
 		"nanoid": "^5.0.7",
 		"svelte-french-toast": "^1.2.0",
-		"sveltekit-superforms": "^2.14.0",
+		"sveltekit-superforms": "^2.15.1",
 		"zod": "^3.23.8"
 	}
 }
