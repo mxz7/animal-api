@@ -16,7 +16,7 @@
 
 <svelte:head>
   <meta name="og:url" content={$page.url.toString()} />
-  <meta name="theme-color" content="#0F172B" />
+  <meta name="theme-color" content="#1E1E2E" />
 
   {#if !dev}
     <script

@@ -17,9 +17,11 @@
         href="/"
         class="btn btn-ghost {$page.url.pathname.startsWith('/dashboard')
           ? 'hidden'
-          : ''} text-xl font-semibold text-primary lg:inline-flex"
+          : ''} text-xl font-semibold lg:inline-flex"
       >
-        <span>animals</span>
+        <span class="bg-gradient-to-r from-primary to-info bg-clip-text text-transparent"
+          >animals</span
+        >
       </a>
     </div>
     <div class="flex-none">

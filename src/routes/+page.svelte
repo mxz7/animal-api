@@ -14,13 +14,17 @@
   />
 </svelte:head>
 
-<h1 class="mt-16 w-full text-center text-5xl font-bold text-primary md:text-6xl">animals API</h1>
-<p class="text-center text-sm italic text-secondary">
+<h1
+  class="mt-16 w-full bg-gradient-to-r from-primary to-info bg-clip-text text-center text-5xl font-bold text-transparent md:text-8xl"
+>
+  animals API
+</h1>
+<p class="text-center text-xs italic text-accent md:text-sm">
   served {#await data.served}
     ...
   {:then served}
     {served.toLocaleString()}
-  {/await} random animals since {#await data.since}
+  {/await} images since {#await data.since}
     ...
   {:then since}
     {dayjs(since).format("YYYY-MM-DD")}
