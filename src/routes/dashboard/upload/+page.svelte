@@ -151,7 +151,7 @@
         formButton.click();
       }}
       bind:this={formButton}
-      class="{status === 'waiting' ? null : 'hidden'} {formFiles?.length === 0 || !$form.category
+      class="{status === 'waiting' ? null : 'hidden'} {!formFiles || !$form.category
         ? 'btn-disabled'
         : ''} btn btn-primary mt-4"
     >
