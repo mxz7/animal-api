@@ -48,7 +48,7 @@ dependencies:
 devDependencies:
   '@catppuccin/daisyui':
     specifier: ^1.0.0
-    version: 1.0.0(daisyui@4.12.6)(tailwindcss@3.4.4)
+    version: 1.0.0(daisyui@4.12.7)(tailwindcss@3.4.4)
   '@sveltejs/adapter-vercel':
     specifier: ^5.3.1
     version: 5.3.2(@sveltejs/kit@2.5.17)
@@ -65,8 +65,8 @@ devDependencies:
     specifier: ^10.4.16
     version: 10.4.19(postcss@8.4.38)
   daisyui:
-    specifier: ^4.11.1
-    version: 4.12.6(postcss@8.4.38)
+    specifier: ^4.12.7
+    version: 4.12.7(postcss@8.4.38)
   dotenv:
     specifier: ^16.4.5
     version: 16.4.5
@@ -791,13 +791,13 @@ packages:
     dev: false
     optional: true
 
-  /@catppuccin/daisyui@1.0.0(daisyui@4.12.6)(tailwindcss@3.4.4):
+  /@catppuccin/daisyui@1.0.0(daisyui@4.12.7)(tailwindcss@3.4.4):
     resolution: {integrity: sha512-Tilb+1AX1b1dYostSpUGIRd7QZPgBZvFYtNsAc5cW3LnmgNFnuoA9IyQObGjOiyDFB1umSUC9CySmAM+RXP8Sg==}
     peerDependencies:
       daisyui: ^4.10.2
       tailwindcss: ^3.4.3
     dependencies:
-      daisyui: 4.12.6(postcss@8.4.38)
+      daisyui: 4.12.7(postcss@8.4.38)
       tailwindcss: 3.4.4
     dev: true
 
@@ -3262,8 +3262,8 @@ packages:
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
     dev: true
 
-  /daisyui@4.12.6(postcss@8.4.38):
-    resolution: {integrity: sha512-Tz/rvi2ws7+7uh51JgGpsRqnASwI13t6Sz53ePaGkhLzhr4SQI4wwNxSypE8lj/d4gl/+lbHK1phIKUo+d2YNw==}
+  /daisyui@4.12.7(postcss@8.4.38):
+    resolution: {integrity: sha512-KQN3BFs+c5eaDN6xNYbVX9ob7b830PiRF8o5m6os7e4WDTgMg8S3o21CZ/gDttNAfLS2zz1esass9oDP6pv2WA==}
     engines: {node: '>=16.9.0'}
     dependencies:
       css-selector-tokenizer: 0.8.0
