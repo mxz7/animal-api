@@ -27,7 +27,7 @@ export async function GET({ params }) {
     .where(and(eq(images.verified, 1), eq(images.id, params.id), eq(images.type, params.type)))
     .leftJoin(imageLikes, eq(images.id, imageLikes.imageId))
     .leftJoin(imageReports, eq(images.id, imageReports.imageId))
-    .leftJoin(users, eq(images.id, users.id))
+    .leftJoin(users, eq(images.uploadedBy, users.id))
     .groupBy(images.id)
     .limit(1);
 
