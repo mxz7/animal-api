@@ -49,8 +49,8 @@ importers:
         version: 3.23.8
     devDependencies:
       '@catppuccin/daisyui':
-        specifier: ^1.0.0
-        version: 1.0.0(daisyui@4.12.10(postcss@8.4.38))(tailwindcss@3.4.4)
+        specifier: ^1.1.1
+        version: 1.1.1(daisyui@4.12.10(postcss@8.4.38))(tailwindcss@3.4.4)
       '@sveltejs/adapter-vercel':
         specifier: ^5.3.1
         version: 5.3.2(@sveltejs/kit@2.5.17(@sveltejs/vite-plugin-svelte@3.1.1(svelte@4.2.18)(vite@5.3.2(@types/node@20.14.9)))(svelte@4.2.18)(vite@5.3.2(@types/node@20.14.9)))
@@ -305,8 +305,8 @@ packages:
     resolution: {integrity: sha512-UwgBRMjJP+xv857DCngvqXI3Iq6J4v0wXmwc6sapg+zyhbwmQX67LUEFrkK5tbyJ30jGuG3ZvWpBiB9LCy1kWw==}
     engines: {node: '>=6.9.0'}
 
-  '@catppuccin/daisyui@1.0.0':
-    resolution: {integrity: sha512-Tilb+1AX1b1dYostSpUGIRd7QZPgBZvFYtNsAc5cW3LnmgNFnuoA9IyQObGjOiyDFB1umSUC9CySmAM+RXP8Sg==}
+  '@catppuccin/daisyui@1.1.1':
+    resolution: {integrity: sha512-Ytpt9bLoWZFm9ysrK6KAS0fWyx6E3pS4j/DzLfsUq+JkPptxtH9vYwCNrNkRpZQOTpU0TJUtsG3JYtFV6mXhzA==}
     peerDependencies:
       daisyui: ^4.10.2
       tailwindcss: ^3.4.3
@@ -3356,7 +3356,7 @@ snapshots:
       regenerator-runtime: 0.14.1
     optional: true
 
-  '@catppuccin/daisyui@1.0.0(daisyui@4.12.10(postcss@8.4.38))(tailwindcss@3.4.4)':
+  '@catppuccin/daisyui@1.1.1(daisyui@4.12.10(postcss@8.4.38))(tailwindcss@3.4.4)':
     dependencies:
       daisyui: 4.12.10(postcss@8.4.38)
       tailwindcss: 3.4.4
