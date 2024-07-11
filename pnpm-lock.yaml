@@ -30,8 +30,8 @@ importers:
         specifier: ^1.11.11
         version: 1.11.11
       drizzle-orm:
-        specifier: ^0.31.4
-        version: 0.31.4(@libsql/client@0.7.0)
+        specifier: ^0.32.0
+        version: 0.32.0(@libsql/client@0.7.0)
       lucia:
         specifier: ^3.2.0
         version: 3.2.0
@@ -1785,8 +1785,8 @@ packages:
     resolution: {integrity: sha512-VjI4wsJjk3hSqHSa3TwBf+uvH6M6pRHyxyoVbt935GUzP9tUR/BRZ+MhEJNgryqbzN2Za1KP0eJMTgKEPsalYQ==}
     hasBin: true
 
-  drizzle-orm@0.31.4:
-    resolution: {integrity: sha512-VGD9SH9aStF2z4QOTnVlVX/WghV/EnuEzTmsH3fSVp2E4fFgc8jl3viQrS/XUJx1ekW4rVVLJMH42SfGQdjX3Q==}
+  drizzle-orm@0.32.0:
+    resolution: {integrity: sha512-99IlfVGPNHzOFEXo9Phyu5At5TALLsY2t6WxFFy68rYd9Ej4cHX/7WjdPOn7JNRW69MNeNtP8XrDQg43SppuAA==}
     peerDependencies:
       '@aws-sdk/client-rds-data': '>=3'
       '@cloudflare/workers-types': '>=3'
@@ -4678,7 +4678,7 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  drizzle-orm@0.31.4(@libsql/client@0.7.0):
+  drizzle-orm@0.32.0(@libsql/client@0.7.0):
     optionalDependencies:
       '@libsql/client': 0.7.0
 
