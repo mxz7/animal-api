@@ -21,7 +21,7 @@
 		"daisyui": "^4.12.10",
 		"dotenv": "^16.4.5",
 		"drizzle-kit": "^0.23.0",
-		"lucide-svelte": "^0.441.0",
+		"lucide-svelte": "^0.445.0",
 		"postcss": "^8.4.41",
 		"postcss-load-config": "^5.1.0",
 		"prettier": "^3.3.3",
