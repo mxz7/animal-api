@@ -1,9 +1,13 @@
-import { TELEGRAM_CHAT_ID, TELEGRAM_TOKEN } from "$env/static/private";
+import { ISR_TOKEN, TELEGRAM_CHAT_ID, TELEGRAM_TOKEN } from "$env/static/private";
 import db from "$lib/server/database/database";
 import { images } from "$lib/server/database/schema";
+import { error } from "@sveltejs/kit";
 import { count, eq } from "drizzle-orm";
 
 export async function GET({ request }) {
+  if (!request.headers.get("authorization") || request.headers.get("authorization") !== ISR_TOKEN)
+    return error(401);
+
   const [{ amount }] = await db
     .select({ amount: count() })
     .from(images)
