@@ -5,7 +5,10 @@ import { error } from "@sveltejs/kit";
 import { count, eq } from "drizzle-orm";
 
 export async function GET({ request }) {
-  if (!request.headers.get("authorization") || request.headers.get("authorization") !== ISR_TOKEN)
+  if (
+    !request.headers.get("authorization") ||
+    request.headers.get("authorization") !== `Bearer ${CRON_SECRET}`
+  )
     return error(401);
 
   const [{ amount }] = await db
