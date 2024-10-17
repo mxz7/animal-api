@@ -1,4 +1,4 @@
-import { ISR_TOKEN, TELEGRAM_CHAT_ID, TELEGRAM_TOKEN } from "$env/static/private";
+import { CRON_SECRET, ISR_TOKEN, TELEGRAM_CHAT_ID, TELEGRAM_TOKEN } from "$env/static/private";
 import db from "$lib/server/database/database";
 import { images } from "$lib/server/database/schema";
 import { error } from "@sveltejs/kit";
