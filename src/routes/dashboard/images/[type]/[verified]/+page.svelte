@@ -10,7 +10,7 @@
       <a href="/{image.type}/{image.id}" class="block break-inside-avoid-column pb-2">
         <img
           class="w-full rounded-lg"
-          src="https://animalscdn.maxz.dev/{image.type}/{image.id}"
+          src="https://r2.animals.maxz.dev/{image.type}/{image.id}"
           alt="user uploaded {image.type}"
           loading="lazy"
         />

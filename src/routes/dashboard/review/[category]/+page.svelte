@@ -98,6 +98,6 @@
 <img
   loading="lazy"
   decoding="async"
-  src="https://animalscdn.maxz.dev/{data.image.type}/{data.image.id}"
+  src="https://r2.animals.maxz.dev/{data.image.type}/{data.image.id}"
   alt=""
 />
