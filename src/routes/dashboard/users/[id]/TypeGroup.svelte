@@ -1,8 +1,12 @@
 <script lang="ts">
   import AnimalCard from "$lib/components/AnimalCard.svelte";
 
-  export let images: { type: string; count: number }[];
-  export let route: string;
+  interface Props {
+    images: { type: string; count: number }[];
+    route: string;
+  }
+
+  let { images, route }: Props = $props();
 </script>
 
 <div class="grid w-full grid-cols-1 gap-4 md:grid-cols-3">

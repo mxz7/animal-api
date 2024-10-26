@@ -1,13 +1,19 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { PUBLIC_API_URL } from "$env/static/public";
   import type { Image, Types } from "$lib/types/api";
 
-  export let categories: Types | Promise<Types>;
 
-  let selected = "cat";
-  export let result: Promise<Image> | Image | undefined;
+  let selected = $state("cat");
+  interface Props {
+    categories: Types | Promise<Types>;
+    result: Promise<Image> | Image | undefined;
+  }
 
-  $: {
+  let { categories, result = $bindable() }: Props = $props();
+
+  run(() => {
     (async () => {
       if (typeof selected === "string") {
         if (result && (await result).type === selected) {
@@ -18,7 +24,7 @@
         }
       }
     })();
-  }
+  });
 </script>
 
 <h2 class="mt-14 text-2xl font-medium text-primary" id="usage">API Usage</h2>

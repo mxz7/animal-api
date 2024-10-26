@@ -3,11 +3,15 @@
   import toast from "svelte-french-toast";
   import { superForm, type SuperValidated } from "sveltekit-superforms";
 
-  let modal: HTMLDialogElement;
-  export let reportForm: SuperValidated<{
+  let modal: HTMLDialogElement = $state();
+  interface Props {
+    reportForm: SuperValidated<{
     id: string;
     text: string;
   }>;
+  }
+
+  let { reportForm }: Props = $props();
 
   const { form, constraints, enhance, errors, submitting } = superForm(reportForm, {
     onUpdated(event) {
@@ -42,14 +46,14 @@
       placeholder="Report reason"
       bind:value={$form.text}
       {...$constraints.text}
-    />
+></textarea>
     {#if $errors.text && $errors.text[0]}
       <p class="-mt-2 text-error">{$errors.text[0]}</p>
     {/if}
 
     {#if $submitting}
       <button class="btn btn-disabled" disabled>
-        <span class="loading loading-dots" />
+        <span class="loading loading-dots"></span>
       </button>
     {:else}
       <button class="btn btn-error">Report</button>
@@ -62,7 +66,7 @@
 </dialog>
 
 <button
-  on:click={() => modal.showModal()}
+  onclick={() => modal.showModal()}
   class="btn btn-ghost tooltip flex items-center"
   data-tip="Report"
 >

@@ -27,7 +27,7 @@
     <div class="flex-none">
       {#if !$auth}
         <div class="btn btn-ghost">
-          <span class="loading loading-spinner loading-md" />
+          <span class="loading loading-spinner loading-md"></span>
         </div>
       {:else if !$auth.authenticated}
         <a href="/login" class="btn btn-ghost text-lg text-primary">Log in</a>

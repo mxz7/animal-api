@@ -1,7 +1,7 @@
 <script>
   import TypeGroup from "./TypeGroup.svelte";
 
-  export let data;
+  let { data } = $props();
 </script>
 
 <svelte:head>

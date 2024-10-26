@@ -3,7 +3,11 @@
   import { ThumbsUp } from "lucide-svelte";
   import toast from "svelte-french-toast";
 
-  export let addLike: () => void;
+  interface Props {
+    addLike: () => void;
+  }
+
+  let { addLike }: Props = $props();
 </script>
 
 <form

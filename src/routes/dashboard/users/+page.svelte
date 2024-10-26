@@ -2,7 +2,7 @@
   import dayjs from "dayjs";
   import { ArrowLeft, ArrowRight } from "lucide-svelte";
 
-  export let data;
+  let { data } = $props();
 </script>
 
 <svelte:head>

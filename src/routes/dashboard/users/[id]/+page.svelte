@@ -6,8 +6,8 @@
   import { superForm } from "sveltekit-superforms";
   import TypeGroup from "./TypeGroup.svelte";
 
-  export let data;
-  let changed = 0;
+  let { data } = $props();
+  let changed = $state(0);
 
   const { form, enhance, constraints, delayed, message } = superForm(data.form);
 
@@ -35,7 +35,7 @@
 <p>Discord ID: {data.user.discordId}</p>
 
 {#if data.auth.user.id !== data.user.id && data.auth.user.type === "admin"}
-  <div class="divider" />
+  <div class="divider"></div>
 
   <form method="POST" class="form-control w-fit gap-4" use:enhance>
     <input type="text" name="id" id="id" class="hidden" bind:value={$form.id} />

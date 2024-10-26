@@ -8,6 +8,13 @@
   import { onMount } from "svelte";
   import { Toaster } from "svelte-french-toast";
   import "../app.css";
+  /**
+   * @typedef {Object} Props
+   * @property {import('svelte').Snippet} [children]
+   */
+
+  /** @type {Props} */
+  let { children } = $props();
 
   onMount(() => {
     getLocalAuth();
@@ -34,7 +41,7 @@
 <Navbar />
 
 <div class="min-h-screen pb-40">
-  <slot />
+  {@render children?.()}
 </div>
 
 <Footer />

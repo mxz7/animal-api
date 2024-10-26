@@ -6,8 +6,8 @@
   import LikeButton from "./likeButton.svelte";
   import ReportButton from "./reportButton.svelte";
 
-  export let data;
-  let admin = false;
+  let { data = $bindable() } = $props();
+  let admin = $state(false);
 
   let interval: NodeJS.Timeout;
 

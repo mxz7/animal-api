@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { run } from 'svelte/legacy';
+
   import { goto } from "$app/navigation";
   import { sleep } from "$lib/utils.js";
   import Compressor from "compressorjs";
@@ -6,14 +8,14 @@
   import { toast } from "svelte-french-toast";
   import { superForm } from "sveltekit-superforms";
 
-  export let data;
+  let { data } = $props();
 
-  let formButton: HTMLButtonElement;
-  let status: "waiting" | "compressing" | "uploading" | "posting" = "waiting";
-  let uploadCount = 0;
-  let files: File[] = [];
-  let formFiles: FileList;
-  let compressed = false;
+  let formButton: HTMLButtonElement = $state();
+  let status: "waiting" | "compressing" | "uploading" | "posting" = $state("waiting");
+  let uploadCount = $state(0);
+  let files: File[] = $state([]);
+  let formFiles: FileList = $state();
+  let compressed = $state(false);
   const { form, errors, enhance, message } = superForm(data.form, {
     onSubmit() {
       status = "posting";
@@ -85,10 +87,10 @@
     }
   });
 
-  $: {
+  run(() => {
     $form.sizes = files.map((file) => file.size).join("||");
     $form.types = files.map((file) => file.type).join("||");
-  }
+  });
 </script>
 
 <svelte:head>
@@ -141,7 +143,7 @@
     {/if}
 
     <button
-      on:click={async (event) => {
+      onclick={async (event) => {
         if (formFiles.length === 0) return event.preventDefault();
         if (!compressed) event.preventDefault();
         else return;
