@@ -1,9 +1,6 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import { PUBLIC_API_URL } from "$env/static/public";
   import type { Image, Types } from "$lib/types/api";
-
 
   let selected = $state("cat");
   interface Props {
@@ -13,25 +10,29 @@
 
   let { categories, result = $bindable() }: Props = $props();
 
-  run(() => {
-    (async () => {
-      if (typeof selected === "string") {
-        if (result && (await result).type === selected) {
-          // do nothing
-        } else {
-          console.log("fetching new result");
-          result = fetch(`/api/${selected}/random`).then((r) => r.json());
-        }
+  async function updateResult() {
+    if (typeof selected === "string") {
+      if (result && (await result).type === selected) {
+        // do nothing
+      } else {
+        console.log("fetching new result");
+        result = fetch(`/api/${selected}/random`).then((r) => r.json());
       }
-    })();
-  });
+    }
+  }
 </script>
 
 <h2 class="mt-14 text-2xl font-medium text-primary" id="usage">API Usage</h2>
 {#await categories}
   <span class="loading loading-spinner"></span>
 {:then categories}
-  <select class="select select-bordered select-sm mt-2 max-w-xs" bind:value={selected}>
+  <select
+    class="select select-bordered select-sm mt-2 max-w-xs"
+    oninput={(e) => {
+      selected = e.currentTarget.value;
+      updateResult();
+    }}
+  >
     {#each categories as category}
       {#if category.type === "cat"}
         <option selected value={category.type}>{category.type}</option>

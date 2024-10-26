@@ -1,6 +1,4 @@
 <script lang="ts">
-  import { run } from 'svelte/legacy';
-
   import { goto } from "$app/navigation";
   import { sleep } from "$lib/utils.js";
   import Compressor from "compressorjs";
@@ -10,12 +8,13 @@
 
   let { data } = $props();
 
-  let formButton: HTMLButtonElement = $state();
+  let formButton: HTMLButtonElement | undefined = $state();
   let status: "waiting" | "compressing" | "uploading" | "posting" = $state("waiting");
   let uploadCount = $state(0);
   let files: File[] = $state([]);
-  let formFiles: FileList = $state();
+  let formFiles: FileList | undefined = $state();
   let compressed = $state(false);
+
   const { form, errors, enhance, message } = superForm(data.form, {
     onSubmit() {
       status = "posting";
@@ -26,6 +25,10 @@
   });
 
   async function compress() {
+    if (!formFiles) {
+      toast.error("invalid form");
+      return;
+    }
     console.log("compressing");
     status = "compressing";
     for (const file of formFiles) {
@@ -87,7 +90,7 @@
     }
   });
 
-  run(() => {
+  $effect(() => {
     $form.sizes = files.map((file) => file.size).join("||");
     $form.types = files.map((file) => file.type).join("||");
   });
@@ -144,13 +147,13 @@
 
     <button
       onclick={async (event) => {
-        if (formFiles.length === 0) return event.preventDefault();
+        if (formFiles?.length === 0) return event.preventDefault();
         if (!compressed) event.preventDefault();
         else return;
         await compress();
 
         console.log("posting");
-        formButton.click();
+        formButton?.click();
       }}
       bind:this={formButton}
       class="{status === 'waiting' ? null : 'hidden'} {!formFiles || !$form.category
