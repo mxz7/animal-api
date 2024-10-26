@@ -65,18 +65,27 @@ export const actions = {
     );
     promises.push(invalidateISR(fetch, `/api/${params.category}/count`));
 
-    const [{ count: imageCount }] = await db
-      .select({ count: count() })
+    const [uploader] = await db
+      .select({ id: users.id, discordId: users.discordId })
       .from(images)
-      .where(and(eq(images.uploadedBy, auth.user.id), not(eq(images.id, id))));
+      .where(eq(images.id, id))
+      .leftJoin(users, eq(users.id, images.uploadedBy))
+      .limit(1);
 
-    promises.push(
-      fetch(`${NYPSI_API}/achievement/animal_lover/progress/${auth.user.discordId}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", authorization: NYPSI_API_AUTH },
-        body: JSON.stringify({ progress: imageCount }),
-      }),
-    );
+    if (uploader.id) {
+      const [{ count: imageCount }] = await db
+        .select({ count: count() })
+        .from(images)
+        .where(and(eq(images.uploadedBy, uploader.id), not(eq(images.id, id))));
+
+      promises.push(
+        fetch(`${NYPSI_API}/achievement/animal_lover/progress/${uploader.discordId}`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json", authorization: NYPSI_API_AUTH },
+          body: JSON.stringify({ progress: imageCount }),
+        }),
+      );
+    }
 
     await Promise.all(promises);
   },
