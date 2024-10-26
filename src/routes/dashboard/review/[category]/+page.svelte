@@ -4,20 +4,35 @@
   import { page } from "$app/stores";
   import dayjs from "dayjs";
   import { Ellipsis } from "lucide-svelte";
+  import { mount, unmount } from "svelte";
+  import ReviewImage from "./ReviewImage.svelte";
 
   let { data } = $props();
 
   let loading = $state(false);
-  let modal: HTMLDialogElement = $state();
+  let modal: HTMLDialogElement | undefined = $state();
 
   function enhanceFunction() {
     loading = true;
-    if (modal.open) modal.close();
+    if (modal?.open) modal?.close();
     return async () => {
       await invalidate("reviewimage");
       loading = false;
     };
   }
+
+  // image disappears between reviews
+  let mountPoint: HTMLDivElement;
+  let meow: any;
+
+  $effect(() => {
+    if (meow) unmount(meow);
+
+    meow = mount(ReviewImage, {
+      props: { url: `https://r2.animals.maxz.dev/${data.image.type}/${data.image.id}` },
+      target: mountPoint,
+    });
+  });
 </script>
 
 <svelte:head>
@@ -61,7 +76,7 @@
   </form>
 
   <button
-    onclick={() => modal.showModal()}
+    onclick={() => modal?.showModal()}
     class="btn btn-secondary {loading ? 'btn-disabled' : ''}">Change Type</button
   >
 
@@ -95,9 +110,4 @@
 <p>ip address: {data.image.ip}</p>
 <p>username: {data.image.uploadederUsername}</p>
 
-<img
-  loading="lazy"
-  decoding="async"
-  src="https://r2.animals.maxz.dev/{data.image.type}/{data.image.id}"
-  alt=""
-/>
+<div bind:this={mountPoint}></div>
