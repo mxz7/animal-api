@@ -3,7 +3,7 @@
   import Usage from "$lib/components/usage.svelte";
   import dayjs from "dayjs";
 
-  export let data;
+  let { data } = $props();
 </script>
 
 <svelte:head>

@@ -2,22 +2,23 @@
   import { PUBLIC_API_URL } from "$env/static/public";
   import type { Image, Types } from "$lib/types/api";
 
-  export let categories: Types | Promise<Types>;
+  let selected = $state("cat");
+  interface Props {
+    categories: Types | Promise<Types>;
+    result: Promise<Image> | Image | undefined;
+  }
 
-  let selected = "cat";
-  export let result: Promise<Image> | Image | undefined;
+  let { categories, result = $bindable() }: Props = $props();
 
-  $: {
-    (async () => {
-      if (typeof selected === "string") {
-        if (result && (await result).type === selected) {
-          // do nothing
-        } else {
-          console.log("fetching new result");
-          result = fetch(`/api/${selected}/random`).then((r) => r.json());
-        }
+  async function updateResult() {
+    if (typeof selected === "string") {
+      if (result && (await result).type === selected) {
+        // do nothing
+      } else {
+        console.log("fetching new result");
+        result = fetch(`/api/${selected}/random`).then((r) => r.json());
       }
-    })();
+    }
   }
 </script>
 
@@ -25,7 +26,13 @@
 {#await categories}
   <span class="loading loading-spinner"></span>
 {:then categories}
-  <select class="select select-bordered select-sm mt-2 max-w-xs" bind:value={selected}>
+  <select
+    class="select select-bordered select-sm mt-2 max-w-xs"
+    oninput={(e) => {
+      selected = e.currentTarget.value;
+      updateResult();
+    }}
+  >
     {#each categories as category}
       {#if category.type === "cat"}
         <option selected value={category.type}>{category.type}</option>

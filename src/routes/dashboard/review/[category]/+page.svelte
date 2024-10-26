@@ -5,10 +5,10 @@
   import dayjs from "dayjs";
   import { Ellipsis } from "lucide-svelte";
 
-  export let data;
+  let { data } = $props();
 
-  let loading = false;
-  let modal: HTMLDialogElement;
+  let loading = $state(false);
+  let modal: HTMLDialogElement = $state();
 
   function enhanceFunction() {
     loading = true;
@@ -61,7 +61,7 @@
   </form>
 
   <button
-    on:click={() => modal.showModal()}
+    onclick={() => modal.showModal()}
     class="btn btn-secondary {loading ? 'btn-disabled' : ''}">Change Type</button
   >
 

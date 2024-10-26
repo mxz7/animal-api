@@ -6,14 +6,15 @@
   import { toast } from "svelte-french-toast";
   import { superForm } from "sveltekit-superforms";
 
-  export let data;
+  let { data } = $props();
 
-  let formButton: HTMLButtonElement;
-  let status: "waiting" | "compressing" | "uploading" | "posting" = "waiting";
-  let uploadCount = 0;
-  let files: File[] = [];
-  let formFiles: FileList;
-  let compressed = false;
+  let formButton: HTMLButtonElement | undefined = $state();
+  let status: "waiting" | "compressing" | "uploading" | "posting" = $state("waiting");
+  let uploadCount = $state(0);
+  let files: File[] = $state([]);
+  let formFiles: FileList | undefined = $state();
+  let compressed = $state(false);
+
   const { form, errors, enhance, message } = superForm(data.form, {
     onSubmit() {
       status = "posting";
@@ -24,6 +25,10 @@
   });
 
   async function compress() {
+    if (!formFiles) {
+      toast.error("invalid form");
+      return;
+    }
     console.log("compressing");
     status = "compressing";
     for (const file of formFiles) {
@@ -85,10 +90,10 @@
     }
   });
 
-  $: {
+  $effect(() => {
     $form.sizes = files.map((file) => file.size).join("||");
     $form.types = files.map((file) => file.type).join("||");
-  }
+  });
 </script>
 
 <svelte:head>
@@ -141,14 +146,14 @@
     {/if}
 
     <button
-      on:click={async (event) => {
-        if (formFiles.length === 0) return event.preventDefault();
+      onclick={async (event) => {
+        if (formFiles?.length === 0) return event.preventDefault();
         if (!compressed) event.preventDefault();
         else return;
         await compress();
 
         console.log("posting");
-        formButton.click();
+        formButton?.click();
       }}
       bind:this={formButton}
       class="{status === 'waiting' ? null : 'hidden'} {!formFiles || !$form.category

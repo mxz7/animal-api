@@ -2,13 +2,17 @@
   import type { Types } from "$lib/types/api";
   import AnimalCard from "./AnimalCard.svelte";
 
-  export let categories: Types | Promise<Types>;
+  interface Props {
+    categories: Types | Promise<Types>;
+  }
+
+  let { categories }: Props = $props();
 </script>
 
 <h2 class="text-2xl font-medium text-primary" id="supported">Supported Animal Types</h2>
 {#await categories}
   <div class="flex w-full justify-center">
-    <span class="loading-spinner" />
+    <span class="loading-spinner"></span>
   </div>
 {:then categories}
   <div class="mt-4 grid grid-cols-2 gap-4 md:grid-cols-3">

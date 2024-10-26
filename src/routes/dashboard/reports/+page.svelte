@@ -3,7 +3,7 @@
   import dayjs from "dayjs";
   import { Trash } from "lucide-svelte";
 
-  export let data;
+  let { data = $bindable() } = $props();
 </script>
 
 <svelte:head>

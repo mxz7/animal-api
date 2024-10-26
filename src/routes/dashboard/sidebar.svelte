@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { auth } from "$lib/stores";
+  import { auth } from "$lib/state.svelte";
   import {
     FileWarning,
     Files,
@@ -12,16 +12,20 @@
     UserSearch,
   } from "lucide-svelte";
 
-  export let reviews = 0;
-  export let reports = 0;
-  export let drawerToggle: HTMLInputElement;
+  interface Props {
+    reviews?: number;
+    reports?: number;
+    drawerToggle: HTMLInputElement;
+  }
+
+  let { reviews = 0, reports = 0, drawerToggle }: Props = $props();
 </script>
 
 <div class="drawer-side z-10 rounded-lg lg:h-fit">
   <label for="my-drawer" aria-label="close sidebar" class="drawer-overlay"></label>
   <ul
     class="menu min-h-full w-80 bg-base-200 p-4 text-base-content"
-    on:click={() => drawerToggle.click()}
+    onclick={() => drawerToggle.click()}
   >
     <li class="lg:hidden">
       <a href="/">
@@ -54,7 +58,7 @@
       </a>
     </li>
 
-    {#if $auth.authenticated && ["admin", "mod"].includes($auth.user.type)}
+    {#if auth.value?.authenticated && ["admin", "mod"].includes(auth.value.user.type)}
       <ul class="pl-2">
         <li>
           <h2 class="-ml-1 font-semibold">
@@ -77,7 +81,7 @@
           </a>
         </li>
 
-        {#if $auth.user.type === "admin"}
+        {#if auth.value.user.type === "admin"}
           <li>
             <a
               href="/dashboard/reports"

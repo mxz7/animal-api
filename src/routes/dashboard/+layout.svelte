@@ -1,11 +1,14 @@
 <script lang="ts">
-  import { auth } from "$lib/stores";
+  import { auth } from "$lib/state.svelte";
+  import { onMount } from "svelte";
   import Sidebar from "./sidebar.svelte";
 
-  export let data;
-  let drawerToggle: HTMLInputElement;
+  let { data, children } = $props();
+  let drawerToggle: HTMLInputElement | undefined = $state();
 
-  $auth = data.auth;
+  onMount(() => {
+    auth.value = data.auth;
+  });
 </script>
 
 <div class="flex w-full justify-center">
@@ -23,7 +26,7 @@
     {/await}
 
     <div class="drawer-content pl-3 pt-3">
-      <slot />
+      {@render children?.()}
     </div>
   </div>
 </div>
