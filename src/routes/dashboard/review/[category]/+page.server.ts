@@ -1,10 +1,11 @@
+import { NYPSI_API, NYPSI_API_AUTH } from "$env/static/private";
 import { invalidateISR } from "$lib/server/cache.js";
 import db from "$lib/server/database/database.js";
 import { images, users } from "$lib/server/database/schema.js";
 import { s3 } from "$lib/server/s3.js";
 import { CopyObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { error, fail, redirect } from "@sveltejs/kit";
-import { and, eq, not } from "drizzle-orm";
+import { and, count, eq, not } from "drizzle-orm";
 
 export const config = {
   runtime: "nodejs20.x",
@@ -57,8 +58,27 @@ export const actions = {
 
     if (!id) return error(400);
 
-    await db.update(images).set({ verified: 1, acceptedBy: auth.user.id }).where(eq(images.id, id));
-    await invalidateISR(fetch, `/api/${params.category}/count`);
+    const promises: Promise<any>[] = [];
+
+    promises.push(
+      db.update(images).set({ verified: 1, acceptedBy: auth.user.id }).where(eq(images.id, id)),
+    );
+    promises.push(invalidateISR(fetch, `/api/${params.category}/count`));
+
+    const [{ count: imageCount }] = await db
+      .select({ count: count() })
+      .from(images)
+      .where(and(eq(images.uploadedBy, auth.user.id), not(eq(images.id, id))));
+
+    promises.push(
+      fetch(`${NYPSI_API}/achievement/animal_lover/progress/${auth.user.discordId}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", authorization: NYPSI_API_AUTH },
+        body: JSON.stringify({ progress: imageCount }),
+      }),
+    );
+
+    await Promise.all(promises);
   },
   deny: async ({ request, locals, params }) => {
     const auth = await locals.validate(false);
