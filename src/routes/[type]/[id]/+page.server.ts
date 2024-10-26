@@ -1,3 +1,4 @@
+import { NYPSI_API, NYPSI_API_AUTH } from "$env/static/private";
 import { nanoid } from "$lib/nanoid.js";
 import db from "$lib/server/database/database.js";
 import { imageLikes, imageReports, images, users } from "$lib/server/database/schema.js";
@@ -6,7 +7,7 @@ import { imageReport } from "$lib/zod.js";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { fail, redirect } from "@sveltejs/kit";
 import dayjs from "dayjs";
-import { and, eq, gt } from "drizzle-orm";
+import { and, count, eq, gt } from "drizzle-orm";
 import { message, setError, superValidate } from "sveltekit-superforms";
 import { zod } from "sveltekit-superforms/adapters";
 
@@ -24,10 +25,34 @@ export const actions = {
 
     if (!auth.authenticated || auth.user.type !== "admin") return fail(400);
 
+    const [imageData] = await db
+      .select({ uploader: { discordId: users.discordId, id: users.id } })
+      .from(images)
+      .leftJoin(users, eq(users.id, images.uploadedBy))
+      .where(eq(images.id, params.id))
+      .limit(1);
     await db.delete(images).where(eq(images.id, params.id));
     await s3.send(
       new DeleteObjectCommand({ Bucket: "maxzdev-animals", Key: `${params.type}/${params.id}` }),
     );
+
+    const [{ count: uploadCount }] = await db
+      .select({ count: count() })
+      .from(images)
+      .where(eq(images.uploadedBy, imageData.uploader!.id))
+      .limit(1);
+
+    await fetch(`${NYPSI_API}/achievement/animal_lover/progress/${imageData.uploader!.discordId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: NYPSI_API_AUTH,
+      },
+      body: JSON.stringify({
+        progress: uploadCount,
+      }),
+    });
+
     return redirect(302, "/");
   },
   like: async ({ getClientAddress, params }) => {
