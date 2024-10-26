@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores";
-  import { auth } from "$lib/stores";
+  import { auth } from "$lib/state.svelte";
   import {
     FileWarning,
     Files,
@@ -58,7 +58,7 @@
       </a>
     </li>
 
-    {#if $auth.authenticated && ["admin", "mod"].includes($auth.user.type)}
+    {#if auth.value?.authenticated && ["admin", "mod"].includes(auth.value.user.type)}
       <ul class="pl-2">
         <li>
           <h2 class="-ml-1 font-semibold">
@@ -81,7 +81,7 @@
           </a>
         </li>
 
-        {#if $auth.user.type === "admin"}
+        {#if auth.value.user.type === "admin"}
           <li>
             <a
               href="/dashboard/reports"

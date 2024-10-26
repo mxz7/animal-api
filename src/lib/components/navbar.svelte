@@ -1,6 +1,6 @@
 <script>
   import { page } from "$app/stores";
-  import { auth } from "$lib/stores";
+  import { auth } from "$lib/state.svelte";
   import { AlignLeft, CircleUser } from "lucide-svelte";
 </script>
 
@@ -25,11 +25,11 @@
       </a>
     </div>
     <div class="flex-none">
-      {#if !$auth}
+      {#if !auth.value}
         <div class="btn btn-ghost">
           <span class="loading loading-spinner loading-md"></span>
         </div>
-      {:else if !$auth.authenticated}
+      {:else if !auth.value.authenticated}
         <a href="/login" class="btn btn-ghost text-lg text-primary">Log in</a>
       {:else}
         <a href="/dashboard" class="btn btn-ghost text-primary">

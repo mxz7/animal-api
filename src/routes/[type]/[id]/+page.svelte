@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { auth } from "$lib/stores";
+  import { auth } from "$lib/state.svelte";
   import dayjs from "dayjs";
   import { onDestroy, onMount } from "svelte";
   import DeleteButton from "./deleteButton.svelte";
@@ -13,10 +13,10 @@
 
   onMount(() => {
     interval = setInterval(() => {
-      if ($auth) {
+      if (auth.value) {
         clearInterval(interval);
-        if ($auth.authenticated) {
-          if ($auth.user.type === "admin") {
+        if (auth.value.authenticated) {
+          if (auth.value.user.type === "admin") {
             admin = true;
           }
         }

@@ -1,11 +1,14 @@
 <script lang="ts">
-  import { auth } from "$lib/stores";
+  import { auth } from "$lib/state.svelte";
+  import { onMount } from "svelte";
   import Sidebar from "./sidebar.svelte";
 
   let { data, children } = $props();
-  let drawerToggle: HTMLInputElement = $state();
+  let drawerToggle: HTMLInputElement | undefined = $state();
 
-  $auth = data.auth;
+  onMount(() => {
+    auth.value = data.auth;
+  });
 </script>
 
 <div class="flex w-full justify-center">
