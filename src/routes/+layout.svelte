@@ -28,8 +28,8 @@
   {#if !dev}
     <script
       defer
-      data-domain="animals.maxz.dev"
-      src="https://analytics.maxz.dev/js/script.js"
+      src="https://analytics.maxz.dev/script.js"
+      data-website-id="318e2912-2ceb-4989-a81e-0f0b3451c6a8"
     ></script>
   {/if}
 
