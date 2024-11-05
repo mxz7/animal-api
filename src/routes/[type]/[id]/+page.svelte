@@ -44,6 +44,9 @@
           class="w-full rounded-lg"
           src="https://r2.animals.maxz.dev/{data.image.type}/{data.image.id}"
           alt={data.image.name}
+          decoding="async"
+          fetchpriority="high"
+          loading="eager"
         />
       </div>
       <div class="px-4">
