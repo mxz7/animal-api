@@ -1,7 +1,7 @@
 import db from "$lib/server/database/database.js";
 import { images } from "$lib/server/database/schema.js";
 import { redirect } from "@sveltejs/kit";
-import { and, eq } from "drizzle-orm";
+import { and, desc, eq } from "drizzle-orm";
 
 export async function load({ params, parent }) {
   const { auth } = await parent();
@@ -9,7 +9,7 @@ export async function load({ params, parent }) {
   if (!auth.authenticated) return redirect(302, "/dashboard");
 
   const query = db
-    .select({ id: images.id, type: images.type })
+    .select({ id: images.id, type: images.type, name: images.name, createdAt: images.createdAt })
     .from(images)
     .where(
       and(
@@ -17,7 +17,8 @@ export async function load({ params, parent }) {
         eq(images.verified, parseInt(params.verified)),
         eq(images.type, params.type),
       ),
-    );
+    )
+    .orderBy(desc(images.createdAt));
 
   return { images: query };
 }
