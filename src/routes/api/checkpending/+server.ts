@@ -1,4 +1,4 @@
-import { CRON_SECRET, ISR_TOKEN, TELEGRAM_CHAT_ID, TELEGRAM_TOKEN } from "$env/static/private";
+import { CRON_SECRET, TELEGRAM_CHAT_ID, TELEGRAM_TOKEN } from "$env/static/private";
 import db from "$lib/server/database/database";
 import { images } from "$lib/server/database/schema";
 import { error } from "@sveltejs/kit";
@@ -24,6 +24,7 @@ export async function GET({ request }) {
       body: JSON.stringify({
         chat_id: TELEGRAM_CHAT_ID,
         text: `There are ${amount} images waiting to be verified`,
+        disable_notification: true,
       }),
     });
 
