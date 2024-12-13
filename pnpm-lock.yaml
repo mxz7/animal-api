@@ -36,8 +36,8 @@ importers:
         specifier: ^3.2.2
         version: 3.2.2
       nanoid:
-        specifier: ^5.0.8
-        version: 5.0.8
+        specifier: ^5.0.9
+        version: 5.0.9
       svelte-french-toast:
         specifier: ^1.2.0
         version: 1.2.0(svelte@5.1.13)
@@ -50,7 +50,7 @@ importers:
     devDependencies:
       '@catppuccin/daisyui':
         specifier: ^1.1.2
-        version: 1.1.2(daisyui@4.12.14(postcss@8.4.49))
+        version: 1.1.2(daisyui@4.12.22(postcss@8.4.49))
       '@sveltejs/adapter-vercel':
         specifier: ^5.4.7
         version: 5.4.7(@sveltejs/kit@2.8.1(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.1.13)(vite@5.4.11(@types/node@22.9.0)))(svelte@5.1.13)(vite@5.4.11(@types/node@22.9.0)))
@@ -67,11 +67,11 @@ importers:
         specifier: ^10.4.20
         version: 10.4.20(postcss@8.4.49)
       daisyui:
-        specifier: ^4.12.14
-        version: 4.12.14(postcss@8.4.49)
+        specifier: ^4.12.22
+        version: 4.12.22(postcss@8.4.49)
       dotenv:
-        specifier: ^16.4.5
-        version: 16.4.5
+        specifier: ^16.4.7
+        version: 16.4.7
       drizzle-kit:
         specifier: ^0.27.1
         version: 0.27.1
@@ -83,7 +83,7 @@ importers:
         version: 8.4.49
       postcss-load-config:
         specifier: ^6.0.1
-        version: 6.0.1(jiti@1.21.6)(postcss@8.4.49)(yaml@2.6.0)
+        version: 6.0.1(jiti@1.21.6)(postcss@8.4.49)(yaml@2.6.1)
       prettier:
         specifier: ^3.3.3
         version: 3.3.3
@@ -91,8 +91,8 @@ importers:
         specifier: ^3.2.8
         version: 3.2.8(prettier@3.3.3)(svelte@5.1.13)
       prettier-plugin-tailwindcss:
-        specifier: ^0.6.8
-        version: 0.6.8(prettier-plugin-svelte@3.2.8(prettier@3.3.3)(svelte@5.1.13))(prettier@3.3.3)
+        specifier: ^0.6.9
+        version: 0.6.9(prettier-plugin-svelte@3.2.8(prettier@3.3.3)(svelte@5.1.13))(prettier@3.3.3)
       svelte:
         specifier: ^5.1.13
         version: 5.1.13
@@ -100,8 +100,8 @@ importers:
         specifier: ^4.0.7
         version: 4.0.7(svelte@5.1.13)(typescript@5.6.3)
       tailwindcss:
-        specifier: ^3.4.15
-        version: 3.4.15
+        specifier: ^3.4.16
+        version: 3.4.16
       tslib:
         specifier: ^2.8.1
         version: 2.8.1
@@ -916,6 +916,10 @@ packages:
     resolution: {integrity: sha512-IzL8ZoEDIBRWEzlCcRhOaCupYyN5gdIK+Q6fbFdPDg6HqX6jpkItn7DFIpW9LQzXG6Df9sA7+OKnq0qlz/GaQg==}
     engines: {node: '>=6.0.0'}
 
+  '@jridgewell/gen-mapping@0.3.8':
+    resolution: {integrity: sha512-imAbBGkb+ebQyxKgzv5Hu2nmROxoDOXHh80evxdoXNOrvAnVx7zimzc1Oo5h9RlfV4vPXaE2iM5pOFbvOCClWA==}
+    engines: {node: '>=6.0.0'}
+
   '@jridgewell/resolve-uri@3.1.2':
     resolution: {integrity: sha512-bRISgCIjP20/tbWSPWMEi54QVPRZExkuD9lJL+UIxUKtwVJA8wW1Trb1jMs1RFXo1CBTNZ/5hpC9QvmKWdopKw==}
     engines: {node: '>=6.0.0'}
@@ -1588,8 +1592,8 @@ packages:
     resolution: {integrity: sha512-U71cyTamuh1CRNCfpGY6to28lxvNwPG4Guz/EVjgf3Jmzv0vlDp1atT9eS5dDjMYHucpHbWns6Lwf3BKz6svdw==}
     engines: {node: '>= 0.6'}
 
-  cross-spawn@7.0.5:
-    resolution: {integrity: sha512-ZVJrKKYunU38/76t0RMOulHOnUcbU9GbpWKAOZ0mhjr7CX6FVrH+4FrAapSOekrgFQ3f/8gwMEuIft0aKq6Hug==}
+  cross-spawn@7.0.6:
+    resolution: {integrity: sha512-uV2QOWP2nWzsy2aMp8aRibhi9dlzF5Hgh5SHaB9OiTGEyDTiJJyx0uy51QXdyWbtAHNua4XJzUKca3OzKUd3vA==}
     engines: {node: '>= 8'}
 
   css-selector-tokenizer@0.8.0:
@@ -1604,8 +1608,8 @@ packages:
     resolution: {integrity: sha512-pHJg+jbuFsCjz9iclQBqyL3B2HLCBF71BwVNujUYEvCeQMvV97R59MNK3R2+jgJ3a1fcZgI9B3vYgz8lzr/BFQ==}
     engines: {node: ^12.20.0 || ^14.13.1 || >=16.0.0}
 
-  daisyui@4.12.14:
-    resolution: {integrity: sha512-hA27cdBasdwd4/iEjn+aidoCrRroDuo3G5W9NDKaVCJI437Mm/3eSL/2u7MkZ0pt8a+TrYF3aT2pFVemTS3how==}
+  daisyui@4.12.22:
+    resolution: {integrity: sha512-HDLWbmTnXxhE1MrMgSWjVgdRt+bVYHvfNbW3GTsyIokRSqTHonUTrxV3RhpPDjGIWaHt+ELtDCTYCtUFgL2/Nw==}
     engines: {node: '>=16.9.0'}
 
   data-uri-to-buffer@4.0.1:
@@ -1648,8 +1652,8 @@ packages:
   dlv@1.1.3:
     resolution: {integrity: sha512-+HlytyjlPKnIG8XuRG8WvmBP8xs8P71y+SKKS6ZXWoEgLuePxtDoUEiH7WkdePWrQ5JBpE6aoVqfZfJUQkjXwA==}
 
-  dotenv@16.4.5:
-    resolution: {integrity: sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==}
+  dotenv@16.4.7:
+    resolution: {integrity: sha512-47qPchRCykZC03FhkYAhrvwU4xDBFIj1QPqaarj6mdM/hgUzfPHcpkHJOn3mJAufFeeAxAzeGsr5X0M4k6fLZQ==}
     engines: {node: '>=12'}
 
   drizzle-kit@0.27.1:
@@ -1987,12 +1991,12 @@ packages:
     cpu: [x64, arm64, wasm32]
     os: [darwin, linux, win32]
 
-  lilconfig@2.1.0:
-    resolution: {integrity: sha512-utWOt/GHzuUxnLKxB6dk81RoOeoNeHgbrXiuGk4yyF5qlRz+iIVWu56E2fqGHFrXz0QNUhLB/8nKqvRH66JKGQ==}
-    engines: {node: '>=10'}
-
   lilconfig@3.1.2:
     resolution: {integrity: sha512-eop+wDAvpItUys0FWkHIKeC9ybYrTGbU41U5K7+bttZZeohvnY7M9dZ5kB21GNWiFT2q1OoPTvncPCgSOVO5ow==}
+    engines: {node: '>=14'}
+
+  lilconfig@3.1.3:
+    resolution: {integrity: sha512-/vlFKAoH5Cgt3Ie+JLhRbwOsCQePABiU3tJ1egGvyQ+33R/vcwM2Zl2QR/LzjsBeItPt3oSVXapn+m4nQDvpzw==}
     engines: {node: '>=14'}
 
   lines-and-columns@1.2.4:
@@ -2072,13 +2076,13 @@ packages:
   mz@2.7.0:
     resolution: {integrity: sha512-z81GNO7nnYMEhrGh9LeymoE4+Yr0Wn5McHIZMK5cfQCl+NDX08sCZgUc9/6MHni9IWuFLm1Z3HTCXu2z9fN62Q==}
 
-  nanoid@3.3.7:
-    resolution: {integrity: sha512-eSRppjcPIatRIMC1U6UngP8XFcz8MQWGQdt1MTBQ7NaAmvXDfvNxbvWV3x2y6CdEUciCSsDHDQZbhYaB8QEo2g==}
+  nanoid@3.3.8:
+    resolution: {integrity: sha512-WNLf5Sd8oZxOm+TzppcYk8gVOgP+l58xNy58D0nbUnOxOWRWvlcCV4kUF7ltmI6PsrLl/BgKEyS4mqsGChFN0w==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
 
-  nanoid@5.0.8:
-    resolution: {integrity: sha512-TcJPw+9RV9dibz1hHUzlLVy8N4X9TnwirAjrU08Juo6BNKggzVfP2ZJ/3ZUSq15Xl5i85i+Z89XBO90pB2PghQ==}
+  nanoid@5.0.9:
+    resolution: {integrity: sha512-Aooyr6MXU6HpvvWXKoVoXwKMs/KyVakWwg7xQfv5/S/RIgJMy0Ifa45H9qqYy7pTCszrHzP21Uk4PZq2HpEM8Q==}
     engines: {node: ^18 || >=20}
     hasBin: true
 
@@ -2239,8 +2243,8 @@ packages:
       prettier: ^3.0.0
       svelte: ^3.2.0 || ^4.0.0-next.0 || ^5.0.0-next.0
 
-  prettier-plugin-tailwindcss@0.6.8:
-    resolution: {integrity: sha512-dGu3kdm7SXPkiW4nzeWKCl3uoImdd5CTZEJGxyypEPL37Wj0HT2pLqjrvSei1nTeuQfO4PUfjeW5cTUNRLZ4sA==}
+  prettier-plugin-tailwindcss@0.6.9:
+    resolution: {integrity: sha512-r0i3uhaZAXYP0At5xGfJH876W3HHGHDp+LCRUJrs57PBeQ6mYHMwr25KH8NPX44F2yGTvdnH7OqCshlQx183Eg==}
     engines: {node: '>=14.21.3'}
     peerDependencies:
       '@ianvs/prettier-plugin-sort-imports': '*'
@@ -2472,8 +2476,8 @@ packages:
       '@sveltejs/kit': 1.x || 2.x
       svelte: 3.x || 4.x || >=5.0.0-next.51
 
-  tailwindcss@3.4.15:
-    resolution: {integrity: sha512-r4MeXnfBmSOuKUWmXe6h2CcyfzJCEk4F0pptO5jlnYSIViUkVmsawj80N5h2lO3gwcmSb4n3PuN+e+GC1Guylw==}
+  tailwindcss@3.4.16:
+    resolution: {integrity: sha512-TI4Cyx7gDiZ6r44ewaJmt0o6BrMCT5aK5e0rmJ/G9Xq3w7CX/5VXl/zIPEJZFUK5VEqwByyhqNPycPlvcK4ZNw==}
     engines: {node: '>=14.0.0'}
     hasBin: true
 
@@ -2647,8 +2651,8 @@ packages:
   yallist@4.0.0:
     resolution: {integrity: sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==}
 
-  yaml@2.6.0:
-    resolution: {integrity: sha512-a6ae//JvKDEra2kdi1qzCyrJW/WZCgFi8ydDV+eXExl95t+5R+ijnqHJbz9tmMh8FUjx3iv2fCQ4dclAQlO2UQ==}
+  yaml@2.6.1:
+    resolution: {integrity: sha512-7r0XPzioN/Q9kXBro/XPnA6kznR73DHq+GXh5ON7ZozRO6aMjbmiBuKste2wslTFkC5d1dw0GooOCepZXJ2SAg==}
     engines: {node: '>= 14'}
     hasBin: true
 
@@ -3258,10 +3262,10 @@ snapshots:
       regenerator-runtime: 0.14.1
     optional: true
 
-  '@catppuccin/daisyui@1.1.2(daisyui@4.12.14(postcss@8.4.49))':
+  '@catppuccin/daisyui@1.1.2(daisyui@4.12.22(postcss@8.4.49))':
     dependencies:
       '@catppuccin/palette': 1.4.0
-      daisyui: 4.12.14(postcss@8.4.49)
+      daisyui: 4.12.22(postcss@8.4.49)
 
   '@catppuccin/palette@1.4.0': {}
 
@@ -3589,6 +3593,12 @@ snapshots:
       wrap-ansi-cjs: wrap-ansi@7.0.0
 
   '@jridgewell/gen-mapping@0.3.5':
+    dependencies:
+      '@jridgewell/set-array': 1.2.1
+      '@jridgewell/sourcemap-codec': 1.5.0
+      '@jridgewell/trace-mapping': 0.3.25
+
+  '@jridgewell/gen-mapping@0.3.8':
     dependencies:
       '@jridgewell/set-array': 1.2.1
       '@jridgewell/sourcemap-codec': 1.5.0
@@ -4399,7 +4409,7 @@ snapshots:
 
   cookie@0.6.0: {}
 
-  cross-spawn@7.0.5:
+  cross-spawn@7.0.6:
     dependencies:
       path-key: 3.1.1
       shebang-command: 2.0.0
@@ -4414,7 +4424,7 @@ snapshots:
 
   culori@3.3.0: {}
 
-  daisyui@4.12.14(postcss@8.4.49):
+  daisyui@4.12.22(postcss@8.4.49):
     dependencies:
       css-selector-tokenizer: 0.8.0
       culori: 3.3.0
@@ -4445,7 +4455,7 @@ snapshots:
 
   dlv@1.1.3: {}
 
-  dotenv@16.4.5: {}
+  dotenv@16.4.7: {}
 
   drizzle-kit@0.27.1:
     dependencies:
@@ -4641,7 +4651,7 @@ snapshots:
 
   foreground-child@3.3.0:
     dependencies:
-      cross-spawn: 7.0.5
+      cross-spawn: 7.0.6
       signal-exit: 4.1.0
 
   formdata-polyfill@4.0.10:
@@ -4802,9 +4812,9 @@ snapshots:
       '@libsql/linux-x64-musl': 0.4.6
       '@libsql/win32-x64-msvc': 0.4.6
 
-  lilconfig@2.1.0: {}
-
   lilconfig@3.1.2: {}
+
+  lilconfig@3.1.3: {}
 
   lines-and-columns@1.2.4: {}
 
@@ -4873,9 +4883,9 @@ snapshots:
       object-assign: 4.1.1
       thenify-all: 1.6.0
 
-  nanoid@3.3.7: {}
+  nanoid@3.3.8: {}
 
-  nanoid@5.0.8: {}
+  nanoid@5.0.9: {}
 
   node-domexception@1.0.0: {}
 
@@ -4956,18 +4966,18 @@ snapshots:
 
   postcss-load-config@4.0.2(postcss@8.4.49):
     dependencies:
-      lilconfig: 3.1.2
-      yaml: 2.6.0
+      lilconfig: 3.1.3
+      yaml: 2.6.1
     optionalDependencies:
       postcss: 8.4.49
 
-  postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.49)(yaml@2.6.0):
+  postcss-load-config@6.0.1(jiti@1.21.6)(postcss@8.4.49)(yaml@2.6.1):
     dependencies:
       lilconfig: 3.1.2
     optionalDependencies:
       jiti: 1.21.6
       postcss: 8.4.49
-      yaml: 2.6.0
+      yaml: 2.6.1
 
   postcss-nested@6.2.0(postcss@8.4.49):
     dependencies:
@@ -4983,7 +4993,7 @@ snapshots:
 
   postcss@8.4.49:
     dependencies:
-      nanoid: 3.3.7
+      nanoid: 3.3.8
       picocolors: 1.1.1
       source-map-js: 1.2.1
 
@@ -4992,7 +5002,7 @@ snapshots:
       prettier: 3.3.3
       svelte: 5.1.13
 
-  prettier-plugin-tailwindcss@0.6.8(prettier-plugin-svelte@3.2.8(prettier@3.3.3)(svelte@5.1.13))(prettier@3.3.3):
+  prettier-plugin-tailwindcss@0.6.9(prettier-plugin-svelte@3.2.8(prettier@3.3.3)(svelte@5.1.13))(prettier@3.3.3):
     dependencies:
       prettier: 3.3.3
     optionalDependencies:
@@ -5140,7 +5150,7 @@ snapshots:
 
   sucrase@3.35.0:
     dependencies:
-      '@jridgewell/gen-mapping': 0.3.5
+      '@jridgewell/gen-mapping': 0.3.8
       commander: 4.1.1
       glob: 10.4.5
       lines-and-columns: 1.2.4
@@ -5219,7 +5229,7 @@ snapshots:
       - '@types/json-schema'
       - typescript
 
-  tailwindcss@3.4.15:
+  tailwindcss@3.4.16:
     dependencies:
       '@alloc/quick-lru': 5.2.0
       arg: 5.0.2
@@ -5230,7 +5240,7 @@ snapshots:
       glob-parent: 6.0.2
       is-glob: 4.0.3
       jiti: 1.21.6
-      lilconfig: 2.1.0
+      lilconfig: 3.1.3
       micromatch: 4.0.8
       normalize-path: 3.0.0
       object-hash: 3.0.0
@@ -5370,7 +5380,7 @@ snapshots:
 
   yallist@4.0.0: {}
 
-  yaml@2.6.0: {}
+  yaml@2.6.1: {}
 
   yup@1.4.0:
     dependencies:
