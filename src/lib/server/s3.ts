@@ -5,6 +5,8 @@ import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 export const s3 = new S3Client({
   endpoint: S3_ENDPOINT,
   region: "auto",
+  requestChecksumCalculation: "WHEN_REQUIRED",
+  responseChecksumValidation: "WHEN_REQUIRED",
   credentials: {
     accessKeyId: S3_KEY_ID,
     secretAccessKey: S3_ACCESS_KEY,
