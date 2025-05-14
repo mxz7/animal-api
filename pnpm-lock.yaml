@@ -45,8 +45,8 @@ importers:
         specifier: ^2.20.1
         version: 2.20.1(@sveltejs/kit@2.20.6(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.1.13)(vite@5.4.18(@types/node@22.9.0)))(svelte@5.1.13)(vite@5.4.18(@types/node@22.9.0)))(@types/json-schema@7.0.15)(svelte@5.1.13)(typescript@5.6.3)
       zod:
-        specifier: ^3.23.8
-        version: 3.23.8
+        specifier: ^3.24.4
+        version: 3.24.4
     devDependencies:
       '@catppuccin/daisyui':
         specifier: ^1.1.2
@@ -2109,6 +2109,7 @@ packages:
   node-domexception@1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
+    deprecated: Use your platform's native DOMException instead
 
   node-fetch@2.7.0:
     resolution: {integrity: sha512-c4FRfUm/dbcWZ7U+1Wq0AwCyFL+3nt2bEw05wfxSz+DWpWsitgmSgYmy2dQdWyKC1694ELPqMs/YzUSNozLt8A==}
@@ -2681,8 +2682,8 @@ packages:
     peerDependencies:
       zod: ^3.23.3
 
-  zod@3.23.8:
-    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+  zod@3.24.4:
+    resolution: {integrity: sha512-OdqJE9UDRPwWsrHjLN2F8bPxvwJBK22EHLWtanu0LSYr5YqzsaaW3RMgmjwr8Rypg5k+meEJdSPXJZXE/yqOMg==}
 
 snapshots:
 
@@ -5250,8 +5251,8 @@ snapshots:
       superstruct: 2.0.2
       valibot: 1.0.0-beta.6(typescript@5.6.3)
       yup: 1.4.0
-      zod: 3.23.8
-      zod-to-json-schema: 3.23.3(zod@3.23.8)
+      zod: 3.24.4
+      zod-to-json-schema: 3.23.3(zod@3.24.4)
     transitivePeerDependencies:
       - '@types/json-schema'
       - typescript
@@ -5414,9 +5415,9 @@ snapshots:
 
   zimmerframe@1.1.2: {}
 
-  zod-to-json-schema@3.23.3(zod@3.23.8):
+  zod-to-json-schema@3.23.3(zod@3.24.4):
     dependencies:
-      zod: 3.23.8
+      zod: 3.24.4
     optional: true
 
-  zod@3.23.8: {}
+  zod@3.24.4: {}
