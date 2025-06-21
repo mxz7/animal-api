@@ -81,7 +81,10 @@ export const actions = {
       promises.push(
         fetch(`${NYPSI_API}/achievement/animal_lover/progress/${uploader.discordId}`, {
           method: "POST",
-          headers: { "Content-Type": "application/json", authorization: NYPSI_API_AUTH },
+          headers: {
+            "Content-Type": "application/json",
+            authorization: `Bearer ${NYPSI_API_AUTH}`,
+          },
           body: JSON.stringify({ progress: imageCount }),
         }),
       );

@@ -1,4 +1,4 @@
-import { NYPSI_API, NYPSI_API_AUTH } from "$env/static/private";
+import { NYPSI_API } from "$env/static/private";
 import { nanoid } from "$lib/nanoid.js";
 import db from "$lib/server/database/database.js";
 import { imageLikes, imageReports, images, users } from "$lib/server/database/schema.js";
@@ -46,7 +46,7 @@ export const actions = {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: NYPSI_API_AUTH,
+        Authorization: `Bearer ${NYPSI_API_AUTH}`,
       },
       body: JSON.stringify({
         progress: uploadCount,
