@@ -41,7 +41,7 @@
           quality: 0.95,
           retainExif: false,
           maxWidth: 2560,
-          maxHeight: 1440,n
+          maxHeight: 1440,
           success(file: File) {
             resolve(file);
           },
