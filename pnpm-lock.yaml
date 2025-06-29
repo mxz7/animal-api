@@ -45,8 +45,8 @@ importers:
         specifier: ^2.20.1
         version: 2.20.1(@sveltejs/kit@2.20.6(@sveltejs/vite-plugin-svelte@4.0.0(svelte@5.1.13)(vite@5.4.18(@types/node@22.9.0)))(svelte@5.1.13)(vite@5.4.18(@types/node@22.9.0)))(@types/json-schema@7.0.15)(svelte@5.1.13)(typescript@5.6.3)
       zod:
-        specifier: ^3.23.8
-        version: 3.23.8
+        specifier: ^3.25.67
+        version: 3.25.67
     devDependencies:
       '@catppuccin/daisyui':
         specifier: ^1.1.2
@@ -2684,8 +2684,8 @@ packages:
     peerDependencies:
       zod: ^3.23.3
 
-  zod@3.23.8:
-    resolution: {integrity: sha512-XBx9AXhXktjUqnepgTiE5flcKIYWi/rme0Eaj+5Y0lftuGBq+jyRu/md4WnuxqgP1ubdpNCsYEYPxrzVHD8d6g==}
+  zod@3.25.67:
+    resolution: {integrity: sha512-idA2YXwpCdqUSKRCACDE6ItZD9TZzy3OZMtpfLoh6oPR47lipysRrJfjzMqFxQ3uJuUPyUeWe1r9vLH33xO/Qw==}
 
 snapshots:
 
@@ -5253,8 +5253,8 @@ snapshots:
       superstruct: 2.0.2
       valibot: 1.0.0-beta.6(typescript@5.6.3)
       yup: 1.4.0
-      zod: 3.23.8
-      zod-to-json-schema: 3.23.3(zod@3.23.8)
+      zod: 3.25.67
+      zod-to-json-schema: 3.23.3(zod@3.25.67)
     transitivePeerDependencies:
       - '@types/json-schema'
       - typescript
@@ -5417,9 +5417,9 @@ snapshots:
 
   zimmerframe@1.1.2: {}
 
-  zod-to-json-schema@3.23.3(zod@3.23.8):
+  zod-to-json-schema@3.23.3(zod@3.25.67):
     dependencies:
-      zod: 3.23.8
+      zod: 3.25.67
     optional: true
 
-  zod@3.23.8: {}
+  zod@3.25.67: {}
