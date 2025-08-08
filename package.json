@@ -13,7 +13,7 @@
 	},
 	"devDependencies": {
 		"@catppuccin/daisyui": "^1.2.1",
-		"@sveltejs/adapter-vercel": "^5.4.7",
+		"@sveltejs/adapter-vercel": "^5.8.2",
 		"@sveltejs/kit": "^2.22.2",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
 		"@types/node": "^22.9.0",
