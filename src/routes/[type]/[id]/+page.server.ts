@@ -39,7 +39,7 @@ export const actions = {
     const [{ count: uploadCount }] = await db
       .select({ count: count() })
       .from(images)
-      .where(eq(images.uploadedBy, imageData.uploader!.id))
+      .where(and(eq(images.uploadedBy, imageData.uploader!.id), eq(images.verified, 1)))
       .limit(1);
 
     await fetch(`${NYPSI_API}/achievement/animal_lover/progress/${imageData.uploader!.discordId}`, {
