@@ -2,7 +2,7 @@
   import { page } from "$app/stores";
   import dayjs from "dayjs";
   import { onMount } from "svelte";
-  import toast from "svelte-french-toast";
+  import { toast } from "svelte-sonner";
   import { superForm } from "sveltekit-superforms";
   import TypeGroup from "./TypeGroup.svelte";
 

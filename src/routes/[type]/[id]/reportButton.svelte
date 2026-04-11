@@ -1,14 +1,14 @@
 <script lang="ts">
   import { Flag } from "lucide-svelte";
-  import toast from "svelte-french-toast";
+  import { toast } from "svelte-sonner";
   import { superForm, type SuperValidated } from "sveltekit-superforms";
 
   let modal: HTMLDialogElement = $state();
   interface Props {
     reportForm: SuperValidated<{
-    id: string;
-    text: string;
-  }>;
+      id: string;
+      text: string;
+    }>;
   }
 
   let { reportForm }: Props = $props();
@@ -46,7 +46,7 @@
       placeholder="Report reason"
       bind:value={$form.text}
       {...$constraints.text}
-></textarea>
+    ></textarea>
     {#if $errors.text && $errors.text[0]}
       <p class="-mt-2 text-error">{$errors.text[0]}</p>
     {/if}

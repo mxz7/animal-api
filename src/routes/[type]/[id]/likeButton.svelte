@@ -1,7 +1,7 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
   import { ThumbsUp } from "lucide-svelte";
-  import toast from "svelte-french-toast";
+  import { toast } from "svelte-sonner";
 
   interface Props {
     addLike: () => void;

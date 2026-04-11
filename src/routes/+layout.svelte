@@ -6,7 +6,7 @@
   import Navbar from "$lib/components/navbar.svelte";
   import { getLocalAuth } from "$lib/state.svelte";
   import { onMount } from "svelte";
-  import { Toaster } from "svelte-french-toast";
+  import { Toaster } from "svelte-sonner";
   import "../app.css";
   /**
    * @typedef {Object} Props

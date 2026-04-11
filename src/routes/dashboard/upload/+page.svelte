@@ -3,7 +3,7 @@
   import { sleep } from "$lib/utils.js";
   import Compressor from "compressorjs";
   import { Loader2 } from "lucide-svelte";
-  import { toast } from "svelte-french-toast";
+  import { toast } from "svelte-sonner";
   import { superForm } from "sveltekit-superforms";
 
   let { data } = $props();
