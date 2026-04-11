@@ -43,7 +43,7 @@
 		"arctic": "^2.2.2",
 		"compressorjs": "^1.2.1",
 		"dayjs": "^1.11.19",
-		"drizzle-orm": "^0.44.7",
+		"drizzle-orm": "^0.45.2",
 		"lucia": "^3.2.2",
 		"nanoid": "^5.0.9",
 		"svelte-french-toast": "^1.2.0",
