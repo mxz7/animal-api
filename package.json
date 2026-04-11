@@ -47,7 +47,7 @@
 		"lucia": "^3.2.2",
 		"nanoid": "^5.0.9",
 		"svelte-sonner": "^1.1.0",
-		"sveltekit-superforms": "^2.20.1",
+		"sveltekit-superforms": "^2.30.1",
 		"zod": "^3.25.67"
 	}
 }
