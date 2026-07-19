@@ -21,6 +21,13 @@ pnpm drizzle-kit generate   # Generate SQL migration from schema changes
 pnpm drizzle-kit migrate    # Apply pending migrations to Turso DB
 ```
 
+## Svelte MCP Workflow
+
+Use the Svelte MCP server for Svelte and SvelteKit work:
+
+- Call `list-sections` first to discover the available documentation and identify relevant sections from their `use_cases`.
+- Call `get-documentation` for every section relevant to the task before making framework-specific decisions.
+
 ## Architecture
 
 ```
