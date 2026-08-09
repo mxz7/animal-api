@@ -45,7 +45,7 @@
 		"dayjs": "^1.11.20",
 		"drizzle-orm": "^0.45.2",
 		"lucia": "^3.2.2",
-		"nanoid": "^5.0.9",
+		"nanoid": "^5.1.16",
 		"svelte-sonner": "^1.1.0",
 		"sveltekit-superforms": "^2.30.1",
 		"zod": "^3.25.67"
